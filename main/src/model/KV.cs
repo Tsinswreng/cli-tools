@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace model;
 
 [Table("KV")]
-public class KVEntity : IdBlCtUt {
+public class KV : IdBlCtUt {
 	public str Key {get; set;} = "";
 	//public str KeyType {get; set;} = "";
 

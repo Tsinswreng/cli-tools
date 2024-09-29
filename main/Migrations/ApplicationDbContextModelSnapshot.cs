@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using model;
+using model.db;
 
 #nullable disable
 
@@ -17,7 +17,7 @@ namespace main.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("model.KVEntity", b =>
+            modelBuilder.Entity("model.KV", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,6 +60,16 @@ namespace main.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Bl");
+
+                    b.HasIndex("Ct");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("KeyDesc");
+
+                    b.HasIndex("Ut");
 
                     b.ToTable("KV");
                 });

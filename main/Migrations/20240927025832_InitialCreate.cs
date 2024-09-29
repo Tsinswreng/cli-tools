@@ -31,6 +31,31 @@ namespace main.Migrations
                 {
                     table.PrimaryKey("PK_KV", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KV_Bl",
+                table: "KV",
+                column: "Bl");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KV_Ct",
+                table: "KV",
+                column: "Ct");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KV_Key",
+                table: "KV",
+                column: "Key");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KV_KeyDesc",
+                table: "KV",
+                column: "KeyDesc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KV_Ut",
+                table: "KV",
+                column: "Ut");
         }
 
         /// <inheritdoc />

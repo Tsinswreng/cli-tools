@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using model;
+using model.db;
 
 #nullable disable
 
 namespace main.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240926034213_InitialCreate")]
+    [Migration("20240927025832_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace main.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("model.KVEntity", b =>
+            modelBuilder.Entity("model.KV", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,6 +63,16 @@ namespace main.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Bl");
+
+                    b.HasIndex("Ct");
+
+                    b.HasIndex("Key");
+
+                    b.HasIndex("KeyDesc");
+
+                    b.HasIndex("Ut");
 
                     b.ToTable("KV");
                 });

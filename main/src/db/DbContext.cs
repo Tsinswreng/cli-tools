@@ -1,19 +1,23 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace model;
+namespace model.db;
 
-public class ApplicationDbContext : DbContext
-{
-	public DbSet<KVEntity> KVEntities { get; set; }
+public class ApplicationDbContext : DbContext{
+	public DbSet<KV> KVEntities { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder modelBuilder)
-	{
-		base.OnModelCreating(modelBuilder);
+	protected override void OnModelCreating(ModelBuilder mb){
+		base.OnModelCreating(mb);
 		// 這裡可以進行進一步的配置，例如設置主鍵、索引等
+		mb.Entity<KV>().HasIndex(e => e.Bl);
+		mb.Entity<KV>().HasIndex(e => e.Ct);
+		mb.Entity<KV>().HasIndex(e => e.Ut);
+		mb.Entity<KV>().HasIndex(e => e.Key);
+		mb.Entity<KV>().HasIndex(e => e.KeyDesc);
+		//var N = (n)=>{return nameof(N)};
+
 	}
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
 		// 在這裡配置您的數據庫連接字符串
 		optionsBuilder.UseSqlite("Data Source=./db.sqlite");
 	}
