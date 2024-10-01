@@ -5,6 +5,7 @@ namespace model;
 
 [Table("KV")]
 public class KV : IdBlCtUt {
+	
 	public str Key {get; set;} = "";
 	//public str KeyType {get; set;} = "";
 
