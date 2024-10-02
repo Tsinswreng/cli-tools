@@ -8,11 +8,11 @@ public class ApplicationDbContext : DbContext{
 	protected override void OnModelCreating(ModelBuilder mb){
 		base.OnModelCreating(mb);
 		// 這裡可以進行進一步的配置，例如設置主鍵、索引等
-		mb.Entity<KV>().HasIndex(e => e.Bl);
-		mb.Entity<KV>().HasIndex(e => e.Ct);
-		mb.Entity<KV>().HasIndex(e => e.Ut);
-		mb.Entity<KV>().HasIndex(e => e.Key);
-		mb.Entity<KV>().HasIndex(e => e.KeyDesc);
+		mb.Entity<KV>().HasIndex(e => e.bl);
+		mb.Entity<KV>().HasIndex(e => e.ct);
+		mb.Entity<KV>().HasIndex(e => e.ut);
+		mb.Entity<KV>().HasIndex(e => e.kStr);
+		mb.Entity<KV>().HasIndex(e => e.kDesc);
 		//var N = (n)=>{return nameof(N)};
 
 	}

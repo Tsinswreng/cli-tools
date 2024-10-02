@@ -11,9 +11,19 @@ public class UnitTest1{
 		//TestParseDictMetadata.Main_();
 		// List<int> a = [1,2,3];
 		// System.Console.WriteLine();
-		await TestDictYamlParser._Main();
-		System.Console.WriteLine("done");
+		//await TestDictYamlParser._Main();
+
+		//System.Console.WriteLine("done");
 		//System.Console.WriteLine("漢漢漢一二三四五六七八九十");
+		if(double.TryParse("5%", out double result)){
+			System.Console.WriteLine(result);
+		}else{
+			System.Console.WriteLine("parse failed");
+		}
+
+
+		
+		System.Console.WriteLine("____________________________________________________");
 	}
 }
 

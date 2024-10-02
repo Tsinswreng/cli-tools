@@ -7,12 +7,12 @@ public class IdBlCtUt{
 	[Key]
 	
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-	public i64 Id {get; set;}
+	public i64 id {get; set;}
 	[Required]
-	public str Bl {get; set;} = "";
+	public str bl {get; set;} = "";
 	
-	public i64 Ct {get; set;} = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-	public i64 Ut {get; set;} = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+	public i64 ct {get; set;} = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+	public i64 ut {get; set;} = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 }
 
 //It is just difficult at the beginning
