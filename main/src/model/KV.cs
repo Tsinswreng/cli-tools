@@ -21,36 +21,8 @@ public class KV : IdBlCtUt {
 	//[Column("str")]
 	public str vStr {get; set;} = "";
 	//[Column("int")]
-	public i64? vInt {get; set;}
+	public i64? vI64 {get; set;}
 
-	public f64? vReal {get; set;}
+	public f64? vF64 {get; set;}
 }
 
-
-/* 
-
-少	stewʔ	90%
-少	stews	10%
-
-->
-
-{
-	id: 0
-	,bl: "dict.yaml:dks"
-	,key: "少"
-	,keyDesc: "text"
-	,vauleType: "TEXT"
-	,str: "stewʔ"
-	,valueDesc: "code"
-}
-
-{
-	id: 1
-	,bl: "dict.yaml:dks"
-	,key: ""
-}
-
-#
-
-辣	rˁat	99999999
- */
