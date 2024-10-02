@@ -38,4 +38,16 @@ public class UnitTest1{
 }
 
 
+// class Person{
+// 	string name = "name";
+// 	void testRef(ref Person p){
+// 		p.name = "new name";
+// 	}
+
+// 	void testNoRef(Person p){
+// 		p.name = "new name";
+// 	}
+// }
+
+
 

@@ -18,3 +18,4 @@ public struct DictLine{
 	public str code{get;set;}="";
 	public str weight{get;set;}="";
 }
+

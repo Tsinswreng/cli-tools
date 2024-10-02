@@ -38,7 +38,7 @@ public class DictLineToModel
 	,vDesc: "code"
 }
 	 */
-	protected KV toText__codeKV(DictLine line){
+	protected KV toText__codeKV(in DictLine line){
 		var text__code = new KV();
 		text__code.kStr = line.text;
 		text__code.vType = VT.STR.ToString();
@@ -66,7 +66,7 @@ public class DictLineToModel
 	,vDesc: "weight"
 }
  */
-	protected KV? toFKey__WeightKV(DictLine line){
+	protected KV? toFKey__WeightKV(in DictLine line){
 		if(line.weight == ""){
 			return null;
 		}
@@ -96,13 +96,14 @@ public class DictLineToModel
 	// 	return null;//TODO
 	// }
 
-	public KV?[] parseLineObj(DictLine line){
+	//ref readonly 
+	public KV?[] parseLineObj(in DictLine line){
 		var text__code = toText__codeKV(line);
 		var fKey__weight = toFKey__WeightKV(line);
 		if(fKey__weight == null){
-			return new KV[]{text__code};
+			return [text__code];
 		}
-		return new KV[]{text__code, fKey__weight};
+		return [text__code, fKey__weight];
 	}
 
 	public DictLine parseLineStr(str line){

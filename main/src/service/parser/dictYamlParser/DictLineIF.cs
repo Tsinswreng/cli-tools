@@ -2,7 +2,7 @@ using model;
 namespace service.parser.dictYamlParser;
 
 public interface I_parseLineObj{
-	KV?[] parseLineObj(DictLine line);
+	KV?[] parseLineObj(in DictLine line);
 }
 
 public interface I_parseLineStr{
