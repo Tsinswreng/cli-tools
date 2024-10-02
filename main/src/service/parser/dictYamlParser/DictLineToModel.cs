@@ -1,6 +1,6 @@
 using model;
 using model.consts;
-using VT = model.consts.VType;
+using VT = model.consts.KVType;
 namespace service.parser.dictYamlParser;
 
 

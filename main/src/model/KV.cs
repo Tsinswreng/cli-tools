@@ -1,15 +1,17 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using model.consts;
+
 namespace model;
 
 [Table("KV")]
 public class KV : IdBlCtUt {
 	
 	/** TEXT, INT */
-	public str kType {get; set;} = "TEXT"; 
+	public str kType {get; set;} = KVType.STR.ToString(); 
 	public str kStr {get; set;} = "";
-	public i64? kInt {get; set;}
+	public i64? kI64 {get; set;}
 	//public str KeyType {get; set;} = "";
 
 	public str kDesc {get; set;} = "";

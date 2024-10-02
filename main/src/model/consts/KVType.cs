@@ -1,9 +1,10 @@
 /** =數據庫KV表值類型 */
 namespace model.consts;
 
-public enum VType{
+public enum KVType{
 	STR
 	,I64
+	/** only for value */
 	,F64
 }
 

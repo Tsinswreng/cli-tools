@@ -1,25 +1,30 @@
 using Microsoft.EntityFrameworkCore;
+using model;
 
-namespace model.db;
+namespace db;
 
-public class ApplicationDbContext : DbContext{
+public class RimeDbContext : DbContext
+{
 	public DbSet<KV> KVEntities { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder mb){
+	protected override void OnModelCreating(ModelBuilder mb)
+	{
 		base.OnModelCreating(mb);
 		// 這裡可以進行進一步的配置，例如設置主鍵、索引等
 		mb.Entity<KV>().HasIndex(e => e.bl);
 		mb.Entity<KV>().HasIndex(e => e.ct);
 		mb.Entity<KV>().HasIndex(e => e.ut);
 		mb.Entity<KV>().HasIndex(e => e.kStr);
+		mb.Entity<KV>().HasIndex(e => e.kI64);
 		mb.Entity<KV>().HasIndex(e => e.kDesc);
 		//var N = (n)=>{return nameof(N)};
 
 	}
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
 		// 在這裡配置您的數據庫連接字符串
-		optionsBuilder.UseSqlite("Data Source=./db.sqlite");
+		optionsBuilder.UseSqlite("Data Source=./db/db.sqlite");
 	}
 }
 
@@ -38,7 +43,7 @@ class User {
 }
 
 c#的映射庫是怎麼做的?
- */
+*/
 
 //AutoMapper:
 
@@ -47,24 +52,24 @@ using AutoMapper;
 
 public class User
 {
-    public DateTime Time { get; set; }
+	public DateTime Time { get; set; }
 }
 
 public class UserDto
 {
-    public string Time { get; set; }
+	public string Time { get; set; }
 }
 
 public class MappingProfile : Profile
 {
-    public MappingProfile()
-    {
-        CreateMap<User, UserDto>()
-            .ForMember(
+	public MappingProfile()
+	{
+		CreateMap<User, UserDto>()
+			.ForMember(
 				dest => dest.Time
 				, opt => opt.MapFrom(src => src.Time.ToString("o"))
 			); // ISO 8601 格式
-    }
+	}
 }
 
 // 使用示例
@@ -74,7 +79,7 @@ var mapper = config.CreateMapper();
 var user = new User { Time = DateTime.Now };
 var userDto = mapper.Map<UserDto>(user);
 
- */
+*/
 
 
 /* 
@@ -83,28 +88,28 @@ using System;
 
 public class User
 {
-    [JsonConverter(typeof(CustomDateTimeConverter))]
-    public DateTime Time { get; set; }
+	[JsonConverter(typeof(CustomDateTimeConverter))]
+	public DateTime Time { get; set; }
 }
 
 public class CustomDateTimeConverter : JsonConverter
 {
-    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-    {
-        var dateTime = (DateTime)value;
-        writer.WriteValue(dateTime.ToString("o")); // ISO 8601 格式
-    }
+	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+	{
+		var dateTime = (DateTime)value;
+		writer.WriteValue(dateTime.ToString("o")); // ISO 8601 格式
+	}
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-    {
-        var dateTimeString = (string)reader.Value;
-        return DateTime.Parse(dateTimeString);
-    }
+	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+	{
+		var dateTimeString = (string)reader.Value;
+		return DateTime.Parse(dateTimeString);
+	}
 
-    public override bool CanConvert(Type objectType)
-    {
-        return objectType == typeof(DateTime);
-    }
+	public override bool CanConvert(Type objectType)
+	{
+		return objectType == typeof(DateTime);
+	}
 }
 
 // 使用示例
@@ -112,4 +117,4 @@ var user = new User { Time = DateTime.Now };
 var json = JsonConvert.SerializeObject(user);
 var deserializedUser = JsonConvert.DeserializeObject<User>(json);
 
- */
+*/

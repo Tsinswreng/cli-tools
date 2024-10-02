@@ -2,77 +2,83 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using model.db;
+using db;
 
 #nullable disable
 
 namespace main.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240927025832_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(RimeDbContext))]
+    partial class RimeDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
             modelBuilder.Entity("model.KV", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Bl")
+                    b.Property<string>("bl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<long>("Ct")
+                    b.Property<long>("ct")
                         .HasColumnType("INTEGER");
 
-                    b.Property<long?>("Int")
+                    b.Property<string>("kDesc")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<long?>("kI64")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Key")
+                    b.Property<string>("kStr")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("KeyDesc")
+                    b.Property<string>("kType")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double?>("Real")
+                    b.Property<long>("ut")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("vDesc")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("vF64")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("Str")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("Ut")
+                    b.Property<long?>("vI64")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ValueDesc")
+                    b.Property<string>("vStr")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("VauleType")
+                    b.Property<string>("vType")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
-                    b.HasIndex("Bl");
+                    b.HasIndex("bl");
 
-                    b.HasIndex("Ct");
+                    b.HasIndex("ct");
 
-                    b.HasIndex("Key");
+                    b.HasIndex("kDesc");
 
-                    b.HasIndex("KeyDesc");
+                    b.HasIndex("kI64");
 
-                    b.HasIndex("Ut");
+                    b.HasIndex("kStr");
+
+                    b.HasIndex("ut");
 
                     b.ToTable("KV");
                 });
