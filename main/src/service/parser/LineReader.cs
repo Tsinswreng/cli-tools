@@ -4,10 +4,16 @@ namespace service.parser;
 
 public class LineReader: I_LineReader{
 
+	public LineReader(str path):this(path, Encoding.UTF8){
+		
+	}
+
 	public LineReader(str path, Encoding encoding){
 		this.path = path;
 		reader = new StreamReader(path, encoding);
 	}
+
+	//protected
 
 	public str path{get;set;}
 

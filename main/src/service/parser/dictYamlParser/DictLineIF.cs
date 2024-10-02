@@ -9,3 +9,6 @@ public interface I_parseLineStr{
 	DictLine parseLineStr(str line);
 }
 
+public interface I_lineStrToKVs{
+	KV[] lineStrToKVs(str line);
+}
