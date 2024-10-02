@@ -3,7 +3,8 @@ using model;
 namespace service.parser.dictYamlParser;
 
 public class ParseState{
-	/** from 0 */
+	public str? curLine{get; set;}
+	/// from 0
 	public int lineNum {get; set;} = -1;
 	public State state {get; set;} = State.start;
 
@@ -38,11 +39,11 @@ function(
 public class DictYamlParser{
 	public DictYamlParser(
 		I_LineReader lineReader
-		,Func<str, object> lineHandler
+		,Func<ParseState, object> bodyLineHandler
 	){
 		//this.src = src;
 		this.lineReader = lineReader;
-		this.lineHandler = lineHandler;
+		this.bodyLineHandler = bodyLineHandler;
 	}
 
 	//public str src {get; set;}
@@ -51,20 +52,13 @@ public class DictYamlParser{
 
 	public ParseState state {get; set;} = new ParseState();
 
-	public Func<str, object> lineHandler {get; set;} = (txt)=>{return "";};
+	public Func<ParseState, object> bodyLineHandler {get; set;} = (txt)=>{return "";};
 
-	// public void testHook(){
-	// 	var fn = (Func<object, str> hook)=>{
-	// 		var ttxt = "asd";
-	// 		hook(ttxt);
-	// 	};
-	// 	var hookVoid = (str txt)=>{
-	// 		System.Console.WriteLine(txt);
-	// 		return 0;
-	// 	};
-	// 	fn(hookVoid);
-	// }
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="line"></param>
+	/// <returns></returns>
 	public static str rmLineComment(str line){
 		int index = line.IndexOf("#");
 		if(index >= 0){
@@ -73,6 +67,11 @@ public class DictYamlParser{
 		return line;
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="metadataStr"></param>
+	/// <returns></returns>
 	public DictMetadata parseMetadata(str metadataStr){
 		var deserializer = new YamlDotNet.Serialization.DeserializerBuilder().Build();
 		var metadata = deserializer.Deserialize<DictMetadata>(metadataStr);
@@ -82,6 +81,7 @@ public class DictYamlParser{
 
 	protected async Task<str?> ReadLine(){
 		str? line = await lineReader.ReadLine();
+		state.curLine = line;
 		if(line == null){
 			return null;
 		}
@@ -128,8 +128,8 @@ public class DictYamlParser{
 				state.state = State.end;
 				break;
 			}
-			var noComment = rmLineComment(line);
-			lineHandler(noComment);
+			//var noComment = rmLineComment(line);
+			bodyLineHandler(state);
 		}
 	}
 

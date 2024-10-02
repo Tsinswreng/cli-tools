@@ -5,11 +5,16 @@ namespace service.parser.dictYamlParser;
 
 
 
-public class DictLineToModel 
-: I_parseLineStr, I_parseLineObj{
+public class DictLineParser
+: I_parseLineStr, I_parseLineObj, I_lineStrToKVs{
 	//需要 metadata
 
-	public DictMetadata? metadata {get;set;}
+	public DictLineParser(DictMetadata metadata){
+		this.metadata = metadata;
+	}
+
+
+	public DictMetadata metadata {get;set;}
 
 	public i32 setMetadata(DictMetadata metadata){
 		this.metadata = metadata;
@@ -97,13 +102,13 @@ public class DictLineToModel
 	// }
 
 	//ref readonly 
-	public KV?[] parseLineObj(in DictLine line){
+	public DictLineKVs parseLineObj(in DictLine line){
 		var text__code = toText__codeKV(line);
 		var fKey__weight = toFKey__WeightKV(line);
 		if(fKey__weight == null){
-			return [text__code];
+			return new DictLineKVs(text__code);
 		}
-		return [text__code, fKey__weight];
+		return new DictLineKVs(text__code, fKey__weight);
 	}
 
 	public DictLine parseLineStr(str line){
@@ -118,6 +123,12 @@ public class DictLineToModel
 			//TODO
 			throw new NotImplementedException();
 		}
+	}
+
+	public DictLineKVs lineStrToKVs(str line){
+		var lineObj = parseLineStr(line);
+		var kvs = parseLineObj(lineObj);
+		return kvs;
 	}
 
 }

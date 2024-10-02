@@ -13,4 +13,19 @@ public static class G {
 		return refEq(s1, s2);
 	}
 
+	/// <summary>
+	/// notNull
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="v"></param>
+	/// <param name="errMsg"></param>
+	/// <returns></returns>
+	/// <exception cref="NullReferenceException"></exception>
+	public static T nn<T>(T? v, str errMsg=""){
+		if(v == null){
+			throw new NullReferenceException(errMsg);
+		}
+		return v;
+	}
+
 }
