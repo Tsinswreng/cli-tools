@@ -70,6 +70,10 @@ public class DictYamlParser{
 		return line;
 	}
 
+	public str _rmLineComment(str line){
+		return rmLineComment(line);
+	}
+
 	/// <summary>
 	/// 
 	/// </summary>

@@ -33,4 +33,28 @@ public static class G {
 		return s;
 	}
 
+// 	public static str getCsprojDir(){
+// 		string currentDirectory = Directory.GetCurrentDirectory();
+// #if DEBUG
+// 		string projectDirectory = Path.GetFullPath(Path.Combine(currentDirectory, @"..\..\")); // 向上两级目录
+// 		return projectDirectory;
+// #else
+// 		return currentDirectory;
+// #endif
+// 	}
+
+	/// <summary>
+	/// get base dir of project
+	/// the same as the dir of .gitignored file
+	/// posix style path
+	/// </summary>
+	/// <returns></returns>
+	public static str getBaseDir(){
+		//dotnet run -> E:\_code\rime-tools\main\bin\Debug\net8.0\
+		//dotnet test -> E:\_code\rime-tools\test\bin\Debug\net8.0\
+		string domainDir = AppDomain.CurrentDomain.BaseDirectory;
+		string baseDir = Path.GetFullPath(Path.Combine(domainDir, @"../../../../"));
+		return baseDir.Replace("\\", "/");
+	}
+
 }

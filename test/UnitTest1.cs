@@ -1,3 +1,4 @@
+#define DEBUG
 namespace test;
 
 
@@ -8,11 +9,11 @@ public class UnitTest1{
 	[Fact] 
 	public async void Test1(){
 		Console.OutputEncoding = std.Text.Encoding.UTF8;
-		//TestParseDictMetadata.Main_();
-		// List<int> a = [1,2,3];
-		// System.Console.WriteLine();
-		//await TestDictYamlParser._Main();
-
+		//await test.ctrler.TestAddDksToDb._Main();
+		System.Console.WriteLine(
+			G.getBaseDir()
+			//E:\_code\rime-tools\test\bin\Debug\net8.0\
+		);
 		//System.Console.WriteLine("done");
 		//System.Console.WriteLine("漢漢漢一二三四五六七八九十");
 		// if(double.TryParse("5%", out double result)){

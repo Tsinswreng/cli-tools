@@ -9,10 +9,10 @@ namespace ctrler;
 
 public class DictLineKVsAdder{
 	
-	public RimeDbContext dbCtx = new RimeDbContext();
-	public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans;
+	public RimeDbContext dbCtx {get;set;} = new RimeDbContext();
+	public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans{get;set;}
 
-	DictLineKVsAdder(){
+	public DictLineKVsAdder(){
 
 	}
 
@@ -48,8 +48,12 @@ public class DictLineKVsAdder{
 
 public class AddDictInDb{
 
+	
+
 	protected DictMetadata? metadata {get;set;}
 	protected I_lineStrToKVs? lineStrToKVs;
+
+	protected DictLineKVsAdder dictLineKVsAdder {get;set;} = new DictLineKVsAdder();
 
 	protected i32 _initDeps(DictMetadata metadata){
 		this.metadata = metadata;
@@ -61,28 +65,32 @@ public class AddDictInDb{
 		return G.nn(lineStrToKVs).lineStrToKVs(line);
 	}
 
-	
-
-	public async Task AddKVs(DictLineKVs kvs){
-		
+	public async Task AddLineStr(str line){
+		var kvs = lineStrToKVs!.lineStrToKVs(line);
+		await dictLineKVsAdder.Add(kvs);
 	}
-	
+
 	public async Task Run(string dictPath){
 		I_LineReader lineReader = new LineReader(dictPath);
 		var dictYamlParser = new DictYamlParser(
 			lineReader
 			, (state) => {
-				//TODO add in db
-				if(metadata == null){
-					_initDeps(G.nn(state.metadata));
+				var line = state.curLine;
+				if(line == null || line.Trim() == ""){
+					return 0;
 				}
-				
+				line = DictYamlParser.rmLineComment(line);
+				AddLineStr(line);
 				return 0;
 			}
 		);
 
-		
-
+		dictYamlParser.onMetadata = (meta) => {
+			_initDeps(meta);
+			return 0;
+		};
+		await dictLineKVsAdder.Begin();
+		await dictYamlParser.Parse();
 	}
 
 }
