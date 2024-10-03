@@ -6,6 +6,9 @@ global using u64 = System.UInt64;
 global using f32 = System.Single;
 global using f64 = System.Double;
 global using str = System.String;
+global using unknown = System.Object;
+global using any = System.Dynamic.ExpandoObject;
+
 /* 
 用str表示相當于js之string
 用String表示相當於js之String

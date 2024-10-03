@@ -39,11 +39,11 @@ function(
 public class DictYamlParser{
 	public DictYamlParser(
 		I_LineReader lineReader
-		,Func<I_ParseState, object> bodyLineHandler
+		,Func<I_ParseState, object> onBodyLine
 	){
 		//this.src = src;
 		this.lineReader = lineReader;
-		this.bodyLineHandler = bodyLineHandler;
+		this.onBodyLine = onBodyLine;
 	}
 
 	//public str src {get; set;}
@@ -52,7 +52,10 @@ public class DictYamlParser{
 
 	public ParseState state {get; set;} = new ParseState();
 
-	public Func<ParseState, object> bodyLineHandler {get; set;} = (txt)=>{return "";};
+	public Func<ParseState, unknown> onBodyLine {get; set;} = (parseState)=>{return 0;};
+
+	public Func<DictMetadata, unknown> onMetadata {get; set;} = (meta)=>{return 0;};
+
 
 	/// <summary>
 	/// 
@@ -76,6 +79,7 @@ public class DictYamlParser{
 		var deserializer = new YamlDotNet.Serialization.DeserializerBuilder().Build();
 		var metadata = deserializer.Deserialize<DictMetadata>(metadataStr);
 		state.metadata = metadata;
+		onMetadata(metadata);
 		return metadata;
 	}
 
@@ -133,7 +137,7 @@ public class DictYamlParser{
 				break;
 			}
 			//var noComment = rmLineComment(line);
-			bodyLineHandler(state);
+			onBodyLine(state);
 		}
 	}
 
