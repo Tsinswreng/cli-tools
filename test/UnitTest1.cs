@@ -10,17 +10,9 @@ public class UnitTest1{
 	public async void Test1(){
 		Console.OutputEncoding = std.Text.Encoding.UTF8;
 		//await test.ctrler.TestAddDksToDb._Main();
-		System.Console.WriteLine(
-			G.getBaseDir()
-			//E:\_code\rime-tools\test\bin\Debug\net8.0\
-		);
-		//System.Console.WriteLine("done");
-		//System.Console.WriteLine("漢漢漢一二三四五六七八九十");
-		// if(double.TryParse("5%", out double result)){
-		// 	System.Console.WriteLine(result);
-		// }else{
-		// 	System.Console.WriteLine("parse failed");
-		// }
+
+		await test.db.TestEfCoreBatchAdd.AddRange();
+		
 	
 		System.Console.WriteLine("____________________________________________________");
 	}

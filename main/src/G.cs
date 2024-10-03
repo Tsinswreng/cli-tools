@@ -1,6 +1,9 @@
 /** =Global functions */
 public static class G {
 
+	public const str main = "main";
+	public const str test = "test";
+
 	public static bool refEq(object? o1, object? o2){
 		return object.ReferenceEquals(o1, o2);
 	}
@@ -44,9 +47,9 @@ public static class G {
 // 	}
 
 	/// <summary>
-	/// get base dir of project
+	/// get base dir of project  E:/_code/rime-tools
 	/// the same as the dir of .gitignored file
-	/// posix style path
+	/// posix style path, not ends with "/"
 	/// </summary>
 	/// <returns></returns>
 	public static str getBaseDir(){
@@ -54,7 +57,25 @@ public static class G {
 		//dotnet test -> E:\_code\rime-tools\test\bin\Debug\net8.0\
 		string domainDir = AppDomain.CurrentDomain.BaseDirectory;
 		string baseDir = Path.GetFullPath(Path.Combine(domainDir, @"../../../../"));
+		if(baseDir.EndsWith("/")){
+			baseDir = baseDir.Substring(0, baseDir.Length-1);
+		}
 		return baseDir.Replace("\\", "/");
 	}
+
+	public static str log(){
+		#if DEBUG
+		System.Console.WriteLine();
+		#endif
+		return "";
+	}
+
+	public static str log<T>(T s){
+		#if DEBUG
+		System.Console.WriteLine(s);
+		#endif
+		return s?.ToString()??"";
+	}
+
 
 }

@@ -113,16 +113,15 @@ public class DictLineParser
 
 	public DictLine parseLineStr(str line){
 		var items = line.Split("\t");
-		if(metadata == null){
-			var ans = new DictLine();
-			ans.text = items[0]??"";
-			ans.code = items[1]??"";
-			ans.weight = items[2]??"";
-			return ans;
-		}else{
+		if(metadata?.columns != null){
 			//TODO
 			throw new NotImplementedException();
 		}
+		var ans = new DictLine();
+		ans.text = items[0]??"";
+		ans.code = items[1]??"";
+		ans.weight = items[2]??"";
+		return ans;
 	}
 
 	public DictLineKVs lineStrToKVs(str line){

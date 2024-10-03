@@ -1,4 +1,5 @@
 using db;
+using Microsoft.EntityFrameworkCore;
 using model;
 using service;
 using service.parser;
@@ -6,7 +7,7 @@ using service.parser.dictYamlParser;
 
 namespace ctrler;
 
-
+//TODO 製 專加KV之adder
 public class DictLineKVsAdder{
 	
 	public RimeDbContext dbCtx {get;set;} = new RimeDbContext();
@@ -18,6 +19,9 @@ public class DictLineKVsAdder{
 
 	public async Task Begin(){
 		trans = await dbCtx.BeginTrans();
+		//await dbCtx.Database.ExecuteSqlRawAsync("BEGIN TRANSACTION;");
+		// dbCtx.KVEntities.FromSqlRaw("BEGIN TRANSACTION;"); //t
+		// dbCtx.KVEntities.FromSqlRaw("BEGIN TRANSACTION;"); //t
 	}
 
 	public async Task Commit(){
@@ -27,8 +31,15 @@ public class DictLineKVsAdder{
 		}
 	}
 
+	protected i64 cnt = 0; //t
+
 	public async Task Add(DictLineKVs kvs){
 		var text__code = kvs.text__code;
+		//G.log(text__code.kStr);//t
+		cnt++;
+		if(cnt % 1000 == 0){
+			G.log(cnt);//t
+		}
 		var fKey__weight = kvs.fKey__weight;
 		await dbCtx.KVEntities.AddAsync(text__code);
 		await dbCtx.SaveChangesAsync();
@@ -72,15 +83,20 @@ public class AddDictInDb{
 
 	public async Task Run(string dictPath){
 		I_LineReader lineReader = new LineReader(dictPath);
+		var tasks = new List<Task>();
 		var dictYamlParser = new DictYamlParser(
 			lineReader
-			, (state) => {
+			,(state) => {
 				var line = state.curLine;
 				if(line == null || line.Trim() == ""){
 					return 0;
 				}
+				if(state.lineNum % 1000 == 0){
+					G.log(state.lineNum+"lines");//t
+				}
 				line = DictYamlParser.rmLineComment(line);
-				AddLineStr(line);
+				var t = AddLineStr(line);
+				tasks.Add(t);
 				return 0;
 			}
 		);
@@ -91,6 +107,8 @@ public class AddDictInDb{
 		};
 		await dictLineKVsAdder.Begin();
 		await dictYamlParser.Parse();
+		await Task.WhenAll(tasks); //t
+		await dictLineKVsAdder.Commit();
 	}
 
 }
