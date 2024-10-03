@@ -2,7 +2,7 @@ using model;
 
 namespace service.parser.dictYamlParser;
 
-public class ParseState{
+public class ParseState: I_ParseState{
 	public str? curLine{get; set;}
 	/// from 0
 	public int lineNum {get; set;} = -1;
@@ -21,7 +21,7 @@ public class ParseState{
 
 	public List<str> metadataLines {get; set;} = new List<str>();
 
-	public DictMetadata? metadata;
+	public DictMetadata? metadata {get;set;}
 }
 
 /* 
@@ -39,7 +39,7 @@ function(
 public class DictYamlParser{
 	public DictYamlParser(
 		I_LineReader lineReader
-		,Func<ParseState, object> bodyLineHandler
+		,Func<I_ParseState, object> bodyLineHandler
 	){
 		//this.src = src;
 		this.lineReader = lineReader;
@@ -72,13 +72,17 @@ public class DictYamlParser{
 	/// </summary>
 	/// <param name="metadataStr"></param>
 	/// <returns></returns>
-	public DictMetadata parseMetadata(str metadataStr){
+	protected DictMetadata parseMetadata(str metadataStr){
 		var deserializer = new YamlDotNet.Serialization.DeserializerBuilder().Build();
 		var metadata = deserializer.Deserialize<DictMetadata>(metadataStr);
 		state.metadata = metadata;
 		return metadata;
 	}
 
+	/// <summary>
+	/// get next line and update state
+	/// </summary>
+	/// <returns></returns>
 	protected async Task<str?> ReadLine(){
 		str? line = await lineReader.ReadLine();
 		state.curLine = line;
