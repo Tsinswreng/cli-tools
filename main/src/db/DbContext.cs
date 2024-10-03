@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using model;
 
 namespace db;
@@ -7,8 +8,7 @@ public class RimeDbContext : DbContext
 {
 	public DbSet<KV> KVEntities { get; set; }
 
-	protected override void OnModelCreating(ModelBuilder mb)
-	{
+	protected override void OnModelCreating(ModelBuilder mb){
 		base.OnModelCreating(mb);
 		// 這裡可以進行進一步的配置，例如設置主鍵、索引等
 		mb.Entity<KV>().HasIndex(e => e.bl);
@@ -21,10 +21,13 @@ public class RimeDbContext : DbContext
 
 	}
 
-	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-	{
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
 		// 在這裡配置您的數據庫連接字符串
 		optionsBuilder.UseSqlite("Data Source=./db/db.sqlite");
+	}
+
+	public Task<IDbContextTransaction> BeginTrans(){
+		return Database.BeginTransactionAsync();
 	}
 }
 

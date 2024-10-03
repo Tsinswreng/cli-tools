@@ -8,7 +8,7 @@ public class TestDictYamlParser{
 		var path = "E:/_code/ngaq/src/backend/dict/原表/dkp.dict.yaml";
 		var parser = new DictYamlParser(
 			new LineReader(path, std.Text.Encoding.UTF8)
-			, (str txt) => {
+			, (txt) => {
 				System.Console.WriteLine(txt);
 				return 0;
 			}

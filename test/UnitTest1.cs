@@ -20,19 +20,7 @@ public class UnitTest1{
 		// }else{
 		// 	System.Console.WriteLine("parse failed");
 		// }
-		var s1 = new String("abc");
-		var s2 = "abc";
-		string s3 = "abc";
-		System.Console.WriteLine(s1 == s2); //O(n)、比較值 true
-
-		System.Console.WriteLine(
-			object.ReferenceEquals(s1, s2) //O(1)、比較引用 false
-		);
-
-		System.Console.WriteLine(
-			object.ReferenceEquals(s2, s3) //O(1)、比較引用 true
-		);
-
+	
 		System.Console.WriteLine("____________________________________________________");
 	}
 }
