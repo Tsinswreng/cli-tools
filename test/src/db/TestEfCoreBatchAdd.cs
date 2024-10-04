@@ -1,6 +1,11 @@
 using model;
 using db;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Data.Sqlite; // 对于 SQLite
+using System.Data;
+
 namespace test.db;
 
 public class TestEfCoreBatchAdd{
@@ -89,6 +94,72 @@ public class TestEfCoreBatchAdd{
 		;sw.Stop();
 		;dbCtx.Dispose();
 		;Console.WriteLine("Add KV entities in {0} ms", sw.ElapsedMilliseconds);
+	}
+
+	public static async Task AddWithRawSql(){
+		RimeDbContext dbCtx = new();
+		var conn = dbCtx.Database.GetDbConnection();
+		//var insertSql = "INSERT INTO KV (kStr, kType, vStr, bl) VALUES (?, ?, ?, ?)";
+		var insertSql = "INSERT INTO KV (kStr, kType, vStr, bl) VALUES (@kStr, @kType, @vStr, @bl)";
+		var sql_lastId = "SELECT last_insert_rowid()";
+		await conn.OpenAsync();
+
+		var cmd_add = conn.CreateCommand();
+		cmd_add.CommandText = insertSql;
+		cmd_add.CommandType = System.Data.CommandType.Text;
+
+		var cmd_lastId = conn.CreateCommand();
+		cmd_lastId.CommandText = sql_lastId;
+		cmd_lastId.CommandType = System.Data.CommandType.Text;
+
+		// 执行命令
+		//await cmd_add.ExecuteNonQueryAsync();
+		//var result = await cmd.ExecuteScalarAsync();
+		;var sw = new Stopwatch();
+		;var trans = await dbCtx.BeginTrans();
+		;var kvs = geneKVs(9999);
+
+		cmd_add.Transaction = trans.GetDbTransaction();
+		cmd_lastId.Transaction = trans.GetDbTransaction();
+		
+		cmd_add.Parameters.Add(new SqliteParameter("@kStr", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter("@kType", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter("@vStr", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter("@bl", DbType.String));
+
+		;sw.Start();
+		for(var i = 0; i<kvs.Length; i++){
+			;var cur = kvs[i];
+			cmd_add.Parameters["@kStr"].Value = cur.kStr;
+			cmd_add.Parameters["@kType"].Value = cur.kType;
+			cmd_add.Parameters["@vStr"].Value = cur.vStr;
+			cmd_add.Parameters["@bl"].Value = cur.bl;
+			await cmd_add.ExecuteNonQueryAsync(); // 执行命令
+			var result = await cmd_lastId.ExecuteScalarAsync(); // 獲取lastId
+			G.log(result);//t
+		}
+		;trans.Commit();
+		;sw.Stop();
+		;dbCtx.Dispose();
+		;Console.WriteLine("Add KV entities in {0} ms", sw.ElapsedMilliseconds);
+
+
+		//uncorrect
+					// cmd_add.Parameters.Add(cur.kStr); // 替换为实际值
+			// cmd_add.Parameters.Add(cur.kType);   // 替换为实际值
+			// cmd_add.Parameters.Add(cur.vStr); // 替换为实际值
+			// cmd_add.Parameters.Add(cur.bl); // 替换为实际值，假设 bl 是布尔类型
+
+			// cmd_add.Parameters.Add(new SqliteParameter("kStr", cur.kStr));
+			// cmd_add.Parameters.Add(new SqliteParameter("kType", cur.kType));
+			// cmd_add.Parameters.Add(new SqliteParameter("vStr", cur.vStr));
+			// cmd_add.Parameters.Add(new SqliteParameter("bl", cur.bl));
+
+			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.kStr });
+			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.kType });
+			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.vStr });
+			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.bl });
+
 	}
 }
 

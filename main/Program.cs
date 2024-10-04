@@ -3,3 +3,28 @@ Console.OutputEncoding = std.Text.Encoding.UTF8;
 System.Console.WriteLine(
 	G.getBaseDir()
 );
+
+
+/* 
+in Person.d.ts:
+export interface Person{
+	name: string;
+	age: number;
+	sayHello():number
+}
+
+in c#:
+//@type{Person}
+Dictionary<string, object> person = new();
+
+person["name"] = "John";
+person["age"] = 30;
+person["sayHello"] = (Dictionary<string, object> self)=>{
+	G.log("Hello, " + self["name"] + "!");
+	return 0;
+};
+
+
+int age = (int)person["age"];
+
+ */

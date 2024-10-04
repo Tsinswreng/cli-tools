@@ -8,6 +8,11 @@ global using f64 = System.Double;
 global using str = System.String;
 global using unknown = System.Object;
 global using any = System.Dynamic.ExpandoObject;
+//global using Map = System.Collections.Generic.Dictionary;
+//global using Map<K,V> = System.Collections.Generic.Dictionary<K,V>;
+
+
+
 
 /* 
 用str表示相當于js之string

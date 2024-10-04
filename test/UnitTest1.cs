@@ -12,7 +12,7 @@ public class UnitTest1{
 		//await test.ctrler.TestAddDksToDb._Main();
 
 		//await test.db.TestEfCoreBatchAdd.AddRange();
-		;await test.db.TestEfCoreBatchAdd.AddWithLastId3();
+		;await test.db.TestEfCoreBatchAdd.AddWithRawSql();
 		
 	
 		System.Console.WriteLine("____________________________________________________");
