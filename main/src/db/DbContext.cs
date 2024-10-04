@@ -12,6 +12,12 @@ public class RimeDbContext : DbContext
 	protected override void OnModelCreating(ModelBuilder mb){
 		base.OnModelCreating(mb);
 		// 這裡可以進行進一步的配置，例如設置主鍵、索引等
+
+//DatabaseGenerated(DatabaseGeneratedOption.Identity)
+		mb.Entity<KV>().HasKey(e=>e.id);
+		mb.Entity<KV>().Property(e=>e.id).ValueGeneratedOnAdd();
+		
+
 		mb.Entity<KV>().HasIndex(e => e.bl);
 		mb.Entity<KV>().HasIndex(e => e.ct);
 		mb.Entity<KV>().HasIndex(e => e.ut);
@@ -20,7 +26,13 @@ public class RimeDbContext : DbContext
 		mb.Entity<KV>().HasIndex(e => e.kDesc);
 
 		mb.Entity<KV>().Property(e=>e.kType).HasDefaultValue(KVType.STR.ToString());
+		mb.Entity<KV>().Property(e=>e.vType).HasDefaultValue(KVType.STR.ToString());
+
 		
+
+		mb.Entity<KV>().Property(e=>e.ct).HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
+		mb.Entity<KV>().Property(e=>e.ut).HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
+
 		//var N = (n)=>{return nameof(N)};
 
 	}

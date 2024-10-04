@@ -8,7 +8,6 @@ namespace model;
 
 [Table("KV")]
 public class KV : IdBlCtUt {
-	
 	/** TEXT, INT */
 	public str kType {get; set;} = KVType.STR.ToString(); 
 	public str? kStr {get; set;}

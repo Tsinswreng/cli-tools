@@ -20,14 +20,14 @@ namespace main.Migrations
                     kStr = table.Column<string>(type: "TEXT", nullable: true),
                     kI64 = table.Column<long>(type: "INTEGER", nullable: true),
                     kDesc = table.Column<string>(type: "TEXT", nullable: true),
-                    vType = table.Column<string>(type: "TEXT", nullable: false),
+                    vType = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "STR"),
                     vDesc = table.Column<string>(type: "TEXT", nullable: true),
                     vStr = table.Column<string>(type: "TEXT", nullable: true),
                     vI64 = table.Column<long>(type: "INTEGER", nullable: true),
                     vF64 = table.Column<double>(type: "REAL", nullable: true),
                     bl = table.Column<string>(type: "TEXT", nullable: true),
-                    ct = table.Column<long>(type: "INTEGER", nullable: false),
-                    ut = table.Column<long>(type: "INTEGER", nullable: false)
+                    ct = table.Column<long>(type: "INTEGER", nullable: false, defaultValueSql: "(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))"),
+                    ut = table.Column<long>(type: "INTEGER", nullable: false, defaultValueSql: "(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))")
                 },
                 constraints: table =>
                 {

@@ -11,7 +11,7 @@ using db;
 namespace main.Migrations
 {
     [DbContext(typeof(RimeDbContext))]
-    [Migration("20241004074117_InitialCreate")]
+    [Migration("20241004080241_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -30,7 +30,9 @@ namespace main.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<long>("ct")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
 
                     b.Property<string>("kDesc")
                         .HasColumnType("TEXT");
@@ -48,7 +50,9 @@ namespace main.Migrations
                         .HasDefaultValue("STR");
 
                     b.Property<long>("ut")
-                        .HasColumnType("INTEGER");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
 
                     b.Property<string>("vDesc")
                         .HasColumnType("TEXT");
@@ -64,7 +68,9 @@ namespace main.Migrations
 
                     b.Property<string>("vType")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("STR");
 
                     b.HasKey("id");
 
