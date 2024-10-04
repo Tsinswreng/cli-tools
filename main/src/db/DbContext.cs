@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using model;
+using model.consts;
 
 namespace db;
 
@@ -17,6 +18,9 @@ public class RimeDbContext : DbContext
 		mb.Entity<KV>().HasIndex(e => e.kStr);
 		mb.Entity<KV>().HasIndex(e => e.kI64);
 		mb.Entity<KV>().HasIndex(e => e.kDesc);
+
+		mb.Entity<KV>().Property(e=>e.kType).HasDefaultValue(KVType.STR.ToString());
+		
 		//var N = (n)=>{return nameof(N)};
 
 	}

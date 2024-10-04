@@ -16,16 +16,16 @@ namespace main.Migrations
                 {
                     id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    kType = table.Column<string>(type: "TEXT", nullable: false),
-                    kStr = table.Column<string>(type: "TEXT", nullable: false),
+                    kType = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "STR"),
+                    kStr = table.Column<string>(type: "TEXT", nullable: true),
                     kI64 = table.Column<long>(type: "INTEGER", nullable: true),
-                    kDesc = table.Column<string>(type: "TEXT", nullable: false),
+                    kDesc = table.Column<string>(type: "TEXT", nullable: true),
                     vType = table.Column<string>(type: "TEXT", nullable: false),
-                    vDesc = table.Column<string>(type: "TEXT", nullable: false),
-                    vStr = table.Column<string>(type: "TEXT", nullable: false),
+                    vDesc = table.Column<string>(type: "TEXT", nullable: true),
+                    vStr = table.Column<string>(type: "TEXT", nullable: true),
                     vI64 = table.Column<long>(type: "INTEGER", nullable: true),
                     vF64 = table.Column<double>(type: "REAL", nullable: true),
-                    bl = table.Column<string>(type: "TEXT", nullable: false),
+                    bl = table.Column<string>(type: "TEXT", nullable: true),
                     ct = table.Column<long>(type: "INTEGER", nullable: false),
                     ut = table.Column<long>(type: "INTEGER", nullable: false)
                 },

@@ -11,7 +11,7 @@ using db;
 namespace main.Migrations
 {
     [DbContext(typeof(RimeDbContext))]
-    [Migration("20241002094811_InitialCreate")]
+    [Migration("20241004074117_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,32 +27,30 @@ namespace main.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("bl")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<long>("ct")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("kDesc")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<long?>("kI64")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("kStr")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("kType")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("STR");
 
                     b.Property<long>("ut")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("vDesc")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<double?>("vF64")
@@ -62,7 +60,6 @@ namespace main.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("vStr")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("vType")

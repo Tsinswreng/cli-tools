@@ -8,8 +8,8 @@ public class IdBlCtUt{
 	
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public i64 id {get; set;}
-	[Required]
-	public str bl {get; set;} = "";
+	
+	public str? bl {get; set;}
 	
 	public i64 ct {get; set;} = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 	public i64 ut {get; set;} = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();

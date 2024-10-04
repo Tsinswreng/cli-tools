@@ -11,7 +11,8 @@ public class UnitTest1{
 		Console.OutputEncoding = std.Text.Encoding.UTF8;
 		//await test.ctrler.TestAddDksToDb._Main();
 
-		await test.db.TestEfCoreBatchAdd.AddRange();
+		//await test.db.TestEfCoreBatchAdd.AddRange();
+		;await test.db.TestEfCoreBatchAdd.AddWithLastId3();
 		
 	
 		System.Console.WriteLine("____________________________________________________");
