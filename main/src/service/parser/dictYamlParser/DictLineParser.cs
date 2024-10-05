@@ -47,6 +47,7 @@ public class DictLineParser
 		var text__code = new KV();
 		text__code.kStr = line.text;
 		text__code.vType = VT.STR.ToString();
+		text__code.vStr = line.code;
 		// if(metadata?.name == null){
 		// 	throw new Exception("metadata.name is null");
 		// }

@@ -9,26 +9,30 @@ namespace ctrler;
 
 //TODO 製 專加KV之adder
 public class DictLineKVsAdder{
+
+	public I_Adder<KV> kvAdder {get;set;} = new KVAdder();
 	
 	public RimeDbContext dbCtx {get;set;} = new RimeDbContext();
-	public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans{get;set;}
+	//public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans{get;set;}
 
 	public DictLineKVsAdder(){
 
 	}
 
 	public async Task Begin(){
-		trans = await dbCtx.BeginTrans();
+		await kvAdder.Begin();
+		//trans = await dbCtx.BeginTrans();
 		//await dbCtx.Database.ExecuteSqlRawAsync("BEGIN TRANSACTION;");
 		// dbCtx.KVEntities.FromSqlRaw("BEGIN TRANSACTION;"); //t
 		// dbCtx.KVEntities.FromSqlRaw("BEGIN TRANSACTION;"); //t
 	}
 
 	public async Task Commit(){
-		if(trans != null){
-			await trans.CommitAsync();
-			trans.Dispose();
-		}
+		await kvAdder.Commit();
+		// if(trans != null){
+		// 	await trans.CommitAsync();
+		// 	trans.Dispose();
+		// }
 	}
 
 	protected i64 cnt = 0; //t
@@ -41,15 +45,16 @@ public class DictLineKVsAdder{
 			G.log(cnt);//t
 		}
 		var fKey__weight = kvs.fKey__weight;
-		await dbCtx.KVEntities.AddAsync(text__code);
-		await dbCtx.SaveChangesAsync();
-		var lastId = text__code.id;
+		var ua = await kvAdder.Add(text__code);
+		//var lastId = text__code.id;
+		var lastId = ua.lastId;
 		if(fKey__weight == null){
 			return;
 		}
 		fKey__weight.kI64 = lastId;
-		await dbCtx.KVEntities.AddAsync(fKey__weight);
-		await dbCtx.SaveChangesAsync();
+		await kvAdder.Add(fKey__weight);
+		// await dbCtx.KVEntities.AddAsync(fKey__weight);
+		// await dbCtx.SaveChangesAsync();
 	}
 
 	~DictLineKVsAdder(){
@@ -87,16 +92,33 @@ public class AddDictInDb{
 		var dictYamlParser = new DictYamlParser(
 			lineReader
 			,(state) => {
-				var line = state.curLine;
-				if(line == null || line.Trim() == ""){
-					return 0;
+				try{
+					var line = state.curLine;
+					if(line == null || line.Trim() == ""){
+						return 0;
+					}
+					if(state.lineNum % 1000 == 0){
+						G.log(state.lineNum+"lines");//t
+					}
+					line = DictYamlParser.rmLineComment(line);
+					var t = AddLineStr(line);
+					// .ContinueWith((t)=>{
+					// 	if (t.IsFaulted) {
+					// 		var exception = t.Exception;
+					// 		if (exception != null) {
+					// 			// foreach (var innerException in exception.InnerExceptions) {
+					// 			// 	Console.Error.WriteLine($"Exception: {innerException.GetType().Name}: {innerException.Message}");
+					// 			// 	Console.Error.WriteLine($"Stack Trace: {innerException.StackTrace}");
+					// 			// }
+					// 			Console.Error.WriteLine($"Line Number: {state.lineNum}");
+					// 		}
+					// 	}
+					// });
+					tasks.Add(t);
+				}catch (Exception ex){
+					Console.Error.WriteLine(ex);
+					Console.Error.WriteLine(state.lineNum);
 				}
-				if(state.lineNum % 1000 == 0){
-					G.log(state.lineNum+"lines");//t
-				}
-				line = DictYamlParser.rmLineComment(line);
-				var t = AddLineStr(line);
-				tasks.Add(t);
 				return 0;
 			}
 		);

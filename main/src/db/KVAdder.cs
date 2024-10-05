@@ -79,31 +79,58 @@ public class KVAdder : I_Adder<KV>, IDisposable{
 		cmd_add.Transaction = trans.GetDbTransaction();
 		cmd_lastId.Transaction = trans.GetDbTransaction();
 
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.bl)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.kType)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.kStr)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.kI64)}", DbType.Int64));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.kDesc)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.vType)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.vStr)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.vI64)}", DbType.Int64));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.vF64)}", DbType.Single));
-		cmd_add.Parameters.Add(new SqliteParameter($"{nameof(KV.vDesc)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.bl)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kType)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kStr)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kI64)}", DbType.Int64));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kDesc)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vType)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vStr)}", DbType.String));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vI64)}", DbType.Int64));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vF64)}", DbType.Single));
+		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vDesc)}", DbType.String));
 
+	}
+
+	protected i32 _cnt = 0; //t
+
+	/// <summary>
+	/// null convert to DBNull.Value
+	/// </summary>
+	/// <param name="v"></param>
+	/// <returns></returns>
+	protected unknown nc<T>(T? v){
+		if(v == null){
+			return DBNull.Value;
+		}
+		return v;
 	}
 
 	public async Task<I_lastId> Add(KV e){
 
-		cmd_add.Parameters[$"{nameof(KV.bl)}"].Value = e.bl;
-		cmd_add.Parameters[$"{nameof(KV.kType)}"].Value = e.kType;
-		cmd_add.Parameters[$"{nameof(KV.kStr)}"].Value = e.kStr;
-		cmd_add.Parameters[$"{nameof(KV.kI64)}"].Value = e.kI64;
-		cmd_add.Parameters[$"{nameof(KV.kDesc)}"].Value = e.kDesc;
-		cmd_add.Parameters[$"{nameof(KV.vType)}"].Value = e.vType;
-		cmd_add.Parameters[$"{nameof(KV.vStr)}"].Value = e.vStr;
-		cmd_add.Parameters[$"{nameof(KV.vI64)}"].Value = e.vI64;
-		cmd_add.Parameters[$"{nameof(KV.vF64)}"].Value = e.vF64;
-		cmd_add.Parameters[$"{nameof(KV.vDesc)}"].Value = e.vDesc;
+		//t
+		// Serialize to JSON string
+		// var myObj = e;
+		// string jsonString = std.Text.Json.JsonSerializer.Serialize(myObj);
+
+		// // Serialize to JSON with formatting options
+		// var options = new std.Text.Json.JsonSerializerOptions { WriteIndented = true };
+		// string formattedJsonString = std.Text.Json.JsonSerializer.Serialize(myObj, options);
+		//G.log(formattedJsonString); //t
+		//G.log(_cnt++);
+		//t~
+
+
+		cmd_add.Parameters[$"@{nameof(KV.bl)}"].Value = nc(e.bl);
+		cmd_add.Parameters[$"@{nameof(KV.kType)}"].Value = nc(e.kType);
+		cmd_add.Parameters[$"@{nameof(KV.kStr)}"].Value = nc(e.kStr);
+		cmd_add.Parameters[$"@{nameof(KV.kI64)}"].Value = nc(e.kI64);
+		cmd_add.Parameters[$"@{nameof(KV.kDesc)}"].Value = nc(e.kDesc);
+		cmd_add.Parameters[$"@{nameof(KV.vType)}"].Value = nc(e.vType);
+		cmd_add.Parameters[$"@{nameof(KV.vStr)}"].Value = nc(e.vStr);
+		cmd_add.Parameters[$"@{nameof(KV.vI64)}"].Value = nc(e.vI64);
+		cmd_add.Parameters[$"@{nameof(KV.vF64)}"].Value = nc(e.vF64);
+		cmd_add.Parameters[$"@{nameof(KV.vDesc)}"].Value = nc(e.vDesc);
 
 		await cmd_add.ExecuteNonQueryAsync(); // 执行命令
 		var result = await cmd_lastId.ExecuteScalarAsync(); // 獲取lastId
