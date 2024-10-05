@@ -1,6 +1,6 @@
 using model;
 using model.consts;
-using VT = model.consts.KVType;
+using KVT = model.consts.KVType;
 namespace service.parser.dictYamlParser;
 
 
@@ -46,8 +46,10 @@ public class DictLineParser
 	protected KV toText__codeKV(in DictLine line){
 		var text__code = new KV();
 		text__code.kStr = line.text;
-		text__code.vType = VT.STR.ToString();
+		text__code.vType = KVT.STR.ToString();
 		text__code.vStr = line.code;
+		
+		//text__code.kDesc = KDesc.
 		// if(metadata?.name == null){
 		// 	throw new Exception("metadata.name is null");
 		// }
@@ -87,7 +89,7 @@ public class DictLineParser
 		fKey__weight.kType = KVType.I64.ToString();
 		fKey__weight.kDesc = KDesc.fKey.ToString();
 		fKey__weight.vDesc = VDesc.weight.ToString();
-		fKey__weight.vType = VT.STR.ToString();
+		fKey__weight.vType = KVT.STR.ToString();
 		return fKey__weight;
 	}
 

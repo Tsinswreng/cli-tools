@@ -106,7 +106,7 @@ public class KVAdder : I_Adder<KV>, IDisposable{
 		return v;
 	}
 
-	public async Task<I_lastId> Add(KV e){
+	public async Task<I_lastId?> Add(KV e){
 
 		//t
 		// Serialize to JSON string
@@ -120,6 +120,11 @@ public class KVAdder : I_Adder<KV>, IDisposable{
 		//G.log(_cnt++);
 		//t~
 
+		//t 可在事務中用efcore查詢
+		// var ryt = await dbCtx.KVEntities.Where(e=>e.kStr == "辣").ToListAsync();
+		// if(ryt.Count > 0 && e.kStr == "辣"){
+		// 	return null;//t
+		// }
 
 		cmd_add.Parameters[$"@{nameof(KV.bl)}"].Value = nc(e.bl);
 		cmd_add.Parameters[$"@{nameof(KV.kType)}"].Value = nc(e.kType);

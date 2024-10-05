@@ -8,11 +8,8 @@ using service.parser.dictYamlParser;
 namespace ctrler;
 
 //TODO 製 專加KV之adder
-public class DictLineKVsAdder{
-
+public class DictLineKVsAdder : I_Adder<DictLineKVs>{
 	public I_Adder<KV> kvAdder {get;set;} = new KVAdder();
-	
-	public RimeDbContext dbCtx {get;set;} = new RimeDbContext();
 	//public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans{get;set;}
 
 	public DictLineKVsAdder(){
@@ -21,51 +18,37 @@ public class DictLineKVsAdder{
 
 	public async Task Begin(){
 		await kvAdder.Begin();
-		//trans = await dbCtx.BeginTrans();
-		//await dbCtx.Database.ExecuteSqlRawAsync("BEGIN TRANSACTION;");
-		// dbCtx.KVEntities.FromSqlRaw("BEGIN TRANSACTION;"); //t
-		// dbCtx.KVEntities.FromSqlRaw("BEGIN TRANSACTION;"); //t
 	}
 
 	public async Task Commit(){
 		await kvAdder.Commit();
-		// if(trans != null){
-		// 	await trans.CommitAsync();
-		// 	trans.Dispose();
-		// }
 	}
 
-	protected i64 cnt = 0; //t
-
-	public async Task Add(DictLineKVs kvs){
+	public async Task<I_lastId?> Add(DictLineKVs kvs){
 		var text__code = kvs.text__code;
-		//G.log(text__code.kStr);//t
-		cnt++;
-		if(cnt % 1000 == 0){
-			G.log(cnt);//t
-		}
+
 		var fKey__weight = kvs.fKey__weight;
 		var ua = await kvAdder.Add(text__code);
 		//var lastId = text__code.id;
+		if(ua == null){
+			return null;
+		}
 		var lastId = ua.lastId;
 		if(fKey__weight == null){
-			return;
+			return ua;
 		}
 		fKey__weight.kI64 = lastId;
-		await kvAdder.Add(fKey__weight);
+		return await kvAdder.Add(fKey__weight);
 		// await dbCtx.KVEntities.AddAsync(fKey__weight);
 		// await dbCtx.SaveChangesAsync();
 	}
 
 	~DictLineKVsAdder(){
-		dbCtx.Dispose();
+		
 	}
 }
 
 public class AddDictInDb{
-
-	
-
 	protected DictMetadata? metadata {get;set;}
 	protected I_lineStrToKVs? lineStrToKVs;
 
@@ -86,7 +69,7 @@ public class AddDictInDb{
 		await dictLineKVsAdder.Add(kvs);
 	}
 
-	public async Task Run(string dictPath){
+	public async Task AddFromPath(string dictPath){
 		I_LineReader lineReader = new LineReader(dictPath);
 		var tasks = new List<Task>();
 		var dictYamlParser = new DictYamlParser(
@@ -96,9 +79,6 @@ public class AddDictInDb{
 					var line = state.curLine;
 					if(line == null || line.Trim() == ""){
 						return 0;
-					}
-					if(state.lineNum % 1000 == 0){
-						G.log(state.lineNum+"lines");//t
 					}
 					line = DictYamlParser.rmLineComment(line);
 					var t = AddLineStr(line);
@@ -129,7 +109,7 @@ public class AddDictInDb{
 		};
 		await dictLineKVsAdder.Begin();
 		await dictYamlParser.Parse();
-		await Task.WhenAll(tasks); //t
+		await Task.WhenAll(tasks);
 		await dictLineKVsAdder.Commit();
 	}
 

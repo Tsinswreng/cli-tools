@@ -6,6 +6,6 @@ public class TestAddDksToDb{
 		var dksPath = "d:/Program Files/Rime/User_Data/dks_v.dict.yaml";
 		var addDictInDb = new AddDictInDb();
 		
-		await addDictInDb.Run(dksPath);
+		await addDictInDb.AddFromPath(dksPath);
 	}
 }
