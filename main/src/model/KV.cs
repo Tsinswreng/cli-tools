@@ -28,3 +28,37 @@ public class KV : IdBlCtUt {
 	public f64? vF64 {get; set;}
 }
 
+
+/* 
+能不能寫一個源生成器、把類或結構體轉成Dictionary<string, object>
+
+比如
+public class Rectangle{
+	public string Name {get; set;}
+	public int x {get; set;}
+	public int y {get; set;}
+	public int square(){
+		return x * y;
+	}
+}
+
+變成->
+public class Dict{
+	public static Dictionary<string, object> toDict(Rectangle rect){
+		Dictionary<string, object> dict = new Dictionary<string, object>();
+		dict["Name"] = rect.Name;
+		dict["x"] = rect.x;
+		dict["y"] = rect.y;
+		rect["square"] = (Dictionary<string, object> self) => {return self["x"] * self["y"];}
+		return dict;
+	}
+}
+
+
+Dictionary<string, object> rect = new Dictionary<string, object>();
+rect["Name"] = "Rectangle";
+rect["x"] = 10;
+rect["y"] = 20;
+//rect["square"] = new Func<int>(rect.square);
+rect["square"] = (Dictionary<string, object> self) => {return self["x"] * self["y"];}
+ */

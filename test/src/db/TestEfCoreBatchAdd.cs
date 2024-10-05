@@ -159,7 +159,7 @@ public class TestEfCoreBatchAdd{
 			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.kType });
 			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.vStr });
 			// cmd_add.Parameters.Add(new SqliteParameter { Value = cur.bl });
-
+		
 	}
 }
 
