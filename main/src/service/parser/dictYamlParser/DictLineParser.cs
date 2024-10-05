@@ -84,6 +84,7 @@ public class DictLineParser
 			fKey__weight.vStr = line.weight;
 		}
 		setBl(fKey__weight);
+		fKey__weight.kType = KVType.I64.ToString();
 		fKey__weight.kDesc = KDesc.fKey.ToString();
 		fKey__weight.vDesc = VDesc.weight.ToString();
 		fKey__weight.vType = VT.STR.ToString();
