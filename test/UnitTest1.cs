@@ -9,7 +9,8 @@ public class UnitTest1{
 	[Fact] 
 	public async void Test1(){
 		Console.OutputEncoding = std.Text.Encoding.UTF8;
-		await test.ctrler.TestAddDksToDb._Main();
+		//await test.ctrler.TestAddDksToDb._Main();
+		TestLevelDb._Main();
 
 		//await test.db.TestEfCoreBatchAdd.AddRange();
 		//;await test.db.TestEfCoreBatchAdd.AddWithRawSql();
@@ -17,6 +18,7 @@ public class UnitTest1{
 	
 		System.Console.WriteLine("____________________________________________________");
 	}
+
 }
 
 

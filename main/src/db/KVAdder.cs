@@ -92,7 +92,7 @@ public class KVAdder : I_Adder<KV>, IDisposable{
 
 	}
 
-	protected i32 _cnt = 0; //t
+	
 
 	/// <summary>
 	/// null convert to DBNull.Value

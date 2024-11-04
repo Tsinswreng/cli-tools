@@ -9,32 +9,39 @@ public class RimeDbContext : DbContext
 {
 	public DbSet<KV> KVEntities { get; set; }
 
+
+	protected code _configKV<T>(ModelBuilder mb) where T : class, I_KV {
+
+		mb.Entity<T>().HasIndex(e => e.kStr);
+		mb.Entity<T>().HasIndex(e => e.kI64);
+		mb.Entity<T>().HasIndex(e => e.kDesc);
+
+		mb.Entity<T>().Property(e=>e.kType).HasDefaultValue(KVType.STR.ToString());
+		mb.Entity<T>().Property(e=>e.vType).HasDefaultValue(KVType.STR.ToString());
+		return 0;
+	}
+
+	protected code _configIdBlCtUt<T>(ModelBuilder mb) where T : class, I_IdBlCtUt {
+		mb.Entity<T>().HasKey(e=>e.id);
+		mb.Entity<T>().Property(e=>e.id).ValueGeneratedOnAdd();
+		mb.Entity<T>().HasIndex(e => e.bl);
+		mb.Entity<T>().HasIndex(e => e.ct);
+		mb.Entity<T>().HasIndex(e => e.ut);
+		mb.Entity<T>().Property(e=>e.ct).HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
+		mb.Entity<T>().Property(e=>e.ut).HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
+		return 0;
+	}
+
 	protected override void OnModelCreating(ModelBuilder mb){
 		base.OnModelCreating(mb);
 		// 這裡可以進行進一步的配置，例如設置主鍵、索引等
 
 //DatabaseGenerated(DatabaseGeneratedOption.Identity)
-		mb.Entity<KV>().HasKey(e=>e.id);
-		mb.Entity<KV>().Property(e=>e.id).ValueGeneratedOnAdd();
-		
 
-		mb.Entity<KV>().HasIndex(e => e.bl);
-		mb.Entity<KV>().HasIndex(e => e.ct);
-		mb.Entity<KV>().HasIndex(e => e.ut);
-		mb.Entity<KV>().HasIndex(e => e.kStr);
-		mb.Entity<KV>().HasIndex(e => e.kI64);
-		mb.Entity<KV>().HasIndex(e => e.kDesc);
-
-		mb.Entity<KV>().Property(e=>e.kType).HasDefaultValue(KVType.STR.ToString());
-		mb.Entity<KV>().Property(e=>e.vType).HasDefaultValue(KVType.STR.ToString());
-
-		
-
-		mb.Entity<KV>().Property(e=>e.ct).HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
-		mb.Entity<KV>().Property(e=>e.ut).HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
-
-		//var N = (n)=>{return nameof(N)};
-
+		mb.Entity<KV>().ToTable("KV");
+		_configIdBlCtUt<KV>(mb);
+		_configKV<KV>(mb);
+	
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
