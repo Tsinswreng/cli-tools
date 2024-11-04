@@ -26,13 +26,11 @@ public interface I_KV{
 	public i64? vI64 {get; set;}
 
 	public f64? vF64 {get; set;}
-
-
 }
 
 
 //[Table("KV")]
-public class KV : IdBlCtUt, I_KV {
+public class KVBase : IdBlCtUt, I_KV {
 	/** TEXT, INT */
 	public str kType {get; set;} = KVType.STR.ToString(); 
 	public str? kStr {get; set;}
@@ -51,6 +49,11 @@ public class KV : IdBlCtUt, I_KV {
 	public i64? vI64 {get; set;}
 
 	public f64? vF64 {get; set;}
+}
+
+
+public class KV : KVBase {
+	
 }
 
 

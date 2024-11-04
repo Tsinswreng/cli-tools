@@ -31,7 +31,7 @@ public class TestEfCoreBatchAdd{
 		var trans = await dbCtx.BeginTrans();
 		sw.Start();
 		var kvs = geneKVs(9999);
-		await dbCtx.KVEntities.AddRangeAsync(kvs);
+		await dbCtx.KV.AddRangeAsync(kvs);
 		dbCtx.SaveChanges();
 		sw.Stop();
 		await trans.CommitAsync();
@@ -48,7 +48,7 @@ public class TestEfCoreBatchAdd{
 		;var kvs = geneKVs(9999);
 		for(var i = 0; i<kvs.Length; i++){
 			;var cur = kvs[i];
-			;await dbCtx.KVEntities.AddRangeAsync(cur);
+			;await dbCtx.KV.AddRangeAsync(cur);
 			;G.log(cur.id); //取不到新分配之自增id
 		}
 		;dbCtx.SaveChanges();
@@ -67,7 +67,7 @@ public class TestEfCoreBatchAdd{
 		;var kvs = geneKVs(9999);
 		for(var i = 0; i<kvs.Length; i++){
 			;var cur = kvs[i];
-			;await dbCtx.KVEntities.AddRangeAsync(cur);
+			;await dbCtx.KV.AddRangeAsync(cur);
 			;await dbCtx.SaveChangesAsync();
 			;G.log(cur.id); //能取到新分配之自增id
 		}
@@ -86,7 +86,7 @@ public class TestEfCoreBatchAdd{
 		;sw.Start();
 		for(var i = 0; i<kvs.Length; i++){
 			;var cur = kvs[i];
-			;await dbCtx.KVEntities.AddAsync(cur); //
+			;await dbCtx.KV.AddAsync(cur); //
 			;await dbCtx.SaveChangesAsync();
 			;G.log(cur.id); //能取到新分配之自增id
 		}

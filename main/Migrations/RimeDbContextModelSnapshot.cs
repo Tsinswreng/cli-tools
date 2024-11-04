@@ -83,7 +83,76 @@ namespace main.Migrations
 
                     b.HasIndex("ut");
 
-                    b.ToTable("KV");
+                    b.ToTable("KV", (string)null);
+                });
+
+            modelBuilder.Entity("model.WordFreq", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("bl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long>("ct")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
+
+                    b.Property<string>("kDesc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<long?>("kI64")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("kStr")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("kType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("STR");
+
+                    b.Property<long>("ut")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasDefaultValueSql("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))");
+
+                    b.Property<string>("vDesc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double?>("vF64")
+                        .HasColumnType("REAL");
+
+                    b.Property<long?>("vI64")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("vStr")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("vType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("STR");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("bl");
+
+                    b.HasIndex("ct");
+
+                    b.HasIndex("kDesc");
+
+                    b.HasIndex("kI64");
+
+                    b.HasIndex("kStr");
+
+                    b.HasIndex("ut");
+
+                    b.ToTable("WordFreq", (string)null);
                 });
 #pragma warning restore 612, 618
         }

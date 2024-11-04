@@ -5,10 +5,9 @@ using model.consts;
 
 namespace db;
 
-public class RimeDbContext : DbContext
-{
-	public DbSet<KV> KVEntities { get; set; }
-
+public class RimeDbContext : DbContext{
+	public DbSet<KV> KV { get; set; }
+	public DbSet<WordFreq> WordFreq { get; set; }
 
 	protected code _configKV<T>(ModelBuilder mb) where T : class, I_KV {
 
@@ -38,10 +37,16 @@ public class RimeDbContext : DbContext
 
 //DatabaseGenerated(DatabaseGeneratedOption.Identity)
 
+		//KV
 		mb.Entity<KV>().ToTable("KV");
 		_configIdBlCtUt<KV>(mb);
 		_configKV<KV>(mb);
-	
+		// 以上三句 都不會報錯
+
+		//WordFreq
+		mb.Entity<WordFreq>().ToTable("WordFreq");
+		_configIdBlCtUt<WordFreq>(mb);
+		_configKV<WordFreq>(mb);
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
@@ -59,7 +64,15 @@ public class RimeDbContext : DbContext
 
 //dotnet ef migrations add InitialCreate
 //dotnet ef database update
+;
+// 創建遷移
+// dotnet ef migrations add _20241104214647_add_WordFreq
 
+// 移除未使用的遷移
+// dotnet ef migrations remove
+
+// 回滾到指定遷移
+// dotnet ef database update InitialCreate
 
 /* 
 ts的class-transformer庫是直接把轉換邏輯函數寫進裝飾器裏的
