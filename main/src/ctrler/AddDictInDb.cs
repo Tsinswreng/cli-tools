@@ -70,7 +70,7 @@ public class AddDictInDb{
 	}
 
 	public async Task AddFromPath(string dictPath){
-		I_LineReader lineReader = new LineReader(dictPath);
+		I_ReadLine lineReader = new LineReader(dictPath);
 		var tasks = new List<Task>();
 		var dictYamlParser = new DictYamlParser(
 			lineReader

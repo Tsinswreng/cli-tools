@@ -2,7 +2,7 @@
 using System.Text;
 namespace service.parser;
 
-public class LineReader: I_LineReader{
+public class LineReader: I_ReadLine{
 
 	public LineReader(str path):this(path, Encoding.UTF8){
 		

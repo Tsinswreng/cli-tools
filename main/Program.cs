@@ -1,9 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Text;
+
 Console.OutputEncoding = std.Text.Encoding.UTF8;
 
 
+var adder = new ctrler.AddWordFreq(
+	"c:/Users/lenovo/AppData/Roaming/plum/package/rime/essay/essay.txt"
+	, Encoding.UTF8
+);
 
-
+await adder.Add();
+G.log("done");
 
 
 

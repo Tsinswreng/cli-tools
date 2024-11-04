@@ -2,6 +2,7 @@ using model;
 
 namespace service.parser.dictYamlParser;
 
+// TODO 叶 #no comment
 public class ParseState: I_ParseState{
 	public str? curLine{get; set;}
 	/// from 0
@@ -38,7 +39,7 @@ function(
 
 public class DictYamlParser{
 	public DictYamlParser(
-		I_LineReader lineReader
+		I_ReadLine lineReader
 		,Func<I_ParseState, object> onBodyLine
 	){
 		//this.src = src;
@@ -48,7 +49,7 @@ public class DictYamlParser{
 
 	//public str src {get; set;}
 
-	public I_LineReader lineReader {get; set;}
+	public I_ReadLine lineReader {get; set;}
 
 	public ParseState state {get; set;} = new ParseState();
 
