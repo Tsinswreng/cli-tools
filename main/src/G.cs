@@ -1,4 +1,10 @@
 /** =Global functions */
+using System;
+using System.IO;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 public static class G {
 
 	public const str main = "main";
@@ -75,6 +81,42 @@ public static class G {
 		System.Console.WriteLine(s);
 		#endif
 		return s?.ToString()??"";
+	}
+
+	public static str toJson<T>(T o){
+		var opt = new JsonSerializerOptions{
+			WriteIndented = false
+			,Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping // 允許原樣輸出字符
+		};
+		var ans = JsonSerializer.Serialize(o, opt);
+		return ans;
+	}
+
+	public static str logJson(params unknown[] s){
+		
+		var sb = new StringBuilder();
+		var ans = "";
+		if(s == null){
+			ans = "\n";
+		}else{
+			for(var i=0; i < s!.Length; i++){
+				sb.Append(G.toJson(s[i]));
+				if(i < s!.Length-1){
+					sb.Append(" ");
+				}
+			}
+			ans = sb.ToString();
+		}
+		G.log(ans);
+		return ans;
+		
+	}
+
+	public static T Pop<T>(this IList<T> li){
+		var pos = li.Count-1;
+		var ans = li[pos];
+		li.RemoveAt(pos);
+		return ans;
 	}
 
 

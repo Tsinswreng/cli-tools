@@ -7,6 +7,19 @@ using Microsoft.EntityFrameworkCore;
 using db;
 namespace ctrler;
 
+
+/* 
+var adder = new ctrler.AddWordFreq(
+	"c:/Users/lenovo/AppData/Roaming/plum/package/rime/essay/essay.txt"
+	, Encoding.UTF8
+);
+
+await adder.Add();
+G.log("done");
+
+ */
+
+
 // temp
 class AddWordFreq{
 	public AddWordFreq(str path, Encoding encoding){
