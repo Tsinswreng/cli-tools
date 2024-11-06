@@ -4,6 +4,8 @@ using model.consts;
 
 namespace service;
 
+
+
 public class ReverseLookup: I_seekCode{
 
 	protected RimeDbContext _dbContext = new RimeDbContext();
@@ -14,10 +16,22 @@ public class ReverseLookup: I_seekCode{
 // $@"select * from {nameof(KV)} where 
 // 	{nameof(KV.kStr)} = @dzvs
 // ";
-		return (IList<I_KV>)ctx.KV
-			.Where(e=>e.kStr==dzvs && e.vDesc == VDesc.text.ToString())
+		var ans = ctx.KV
+			.Where(
+				e=>e.kStr==dzvs 
+				&& e.vDesc == VDesc.text.ToString()
+				&& e.bl == "dict.yaml:dks_v" //TODO 勿硬編碼
+			)
+			.Cast<I_KV>()
 			.ToList()
 		;
+		for(var i = 0; i < ans.Count; i++){
+			var e = ans[i];
+			if(e?.vStr?.Length == 5){
+				e.vStr = e.vStr.Substring(0,3); // dks_v取前三字
+			}
+		}
+		return ans;
 	}
 
 	/// <summary>
@@ -39,13 +53,27 @@ public class ReverseLookup: I_seekCode{
 	}
 
 	/// @IF_FN
+	/// <summary>
+	/// 由單字尋碼 fn("車") -> ["che1","ju1"] ; fn("輛") -> ["liang4"]
+	/// </summary>
+	/// <param name="dzvs"></param>
+	/// <returns></returns>
 	public IList<str> seekCode(str dzvs){
 		var kvs = seekCode_KV(dzvs);
 		return kvsToStrs(kvs);
 	}
 
+	/// @IF_FN
+	/// <summary>
+	/// 由多字尋碼 fn(["車", "輛"]) -> 
+	/// [ ["che1","liang4"], ["ju1", "liang4"] ]
+	/// </summary>
+	/// <param name="tshvq"></param>
+	/// <returns></returns>
 	public IList< IList<str> > seekCode(IList<str> tshvq){
-		//TODO
-		return [];
+		var list2d = tshvq.Select(e=>seekCode(e)).ToList();
+		var ans = tools.Tools.cartesianProduct(list2d);
+		return ans;
 	}
 }
+

@@ -7,13 +7,14 @@ namespace service.phraseMker;
 public class PhraseMker_HeadEtTail : I_mkPhrase{
 
 	protected str _handleCode(str code){
-		return $"{code[0]}...{code[code.Length - 1]}";
+		return $"{code[0]}{code[code.Length - 1]}";
 	}
 
 	public IList<str> mkPhrase(IList<str> codes){
 		var ans = new List<str>();
 		if(codes.Count != 2){
-			throw new ArgumentException("PhraseMker_HeadEtTail can only handle two-word phrases.");
+			//throw new ArgumentException("PhraseMker_HeadEtTail can only handle two-word phrases.");
+			return ans;
 		}
 		for(var i = 0; i < codes.Count; i++){
 			var code = codes[i];

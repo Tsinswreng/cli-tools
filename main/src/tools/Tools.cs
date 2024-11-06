@@ -9,7 +9,7 @@ public static class Tools{
 	/// <typeparam name="T"></typeparam>
 	/// <param name="arr"></param>
 	/// <returns></returns>
-	public static List<List<T>> cartesianProduct<T>(List<List<T>> arr){
+	public static IList<IList<T>> cartesianProduct<T>(IList<IList<T>> arr){
 		if(arr.Count == 0){return [];}
 		var pos = new List<i32>(arr.Count);
 		for(var i = 0; i < arr.Count; i++){
@@ -18,7 +18,7 @@ public static class Tools{
 			pos.Add(0);
 		}
 		var stack = new List<T>();
-		var ans = new List<List<T>>();
+		IList<IList<T>> ans = [];
 		var cnt = 0;
 		var ipp = false;
 		for(var i = 0;;cnt++){

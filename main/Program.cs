@@ -1,7 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using ctrler;
+
 Console.OutputEncoding = std.Text.Encoding.UTF8;
 
+new MkPhrase().mkPhrase();
 
 /* 
 in Person.d.ts:
