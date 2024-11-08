@@ -1,5 +1,11 @@
 namespace service.phraseMker;
 
+/* 
+bug: 剝奪 只有pklt 無 pkdt
+
+正式 正ˋ無去聲
+ */
+
 /// <summary>
 /// 造詞策略: 取每字之首末兩碼
 /// 只用于二字詞

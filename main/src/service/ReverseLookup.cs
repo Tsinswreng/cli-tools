@@ -5,7 +5,9 @@ using model.consts;
 namespace service;
 
 
-
+/// <summary>
+/// temp
+/// </summary>
 public class ReverseLookup: I_seekCode{
 
 	protected RimeDbContext _dbContext = new RimeDbContext();
