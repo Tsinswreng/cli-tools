@@ -7,6 +7,4 @@ public class TsvParser: ParserBase{
 	public TsvParser(I_getNext<u8> byteReader): base(byteReader){
 		
 	}
-
-	
 }

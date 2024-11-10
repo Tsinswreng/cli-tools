@@ -1,3 +1,15 @@
+= c++ call c\# dll
+[2024-11-09T15:50:08.507+08:00]
+```cs
+	[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })] // 使用 __cdecl
+	public static int add(int a, int b){
+		return a + b;
+	}
+```
+以上代碼用AOT編譯後生成了`E:/_code/rime-tools/aot/bin/Release/net9.0/win-x64/aot.dll`、
+如何在c++中調用add函數? 我的c++項目用的是cmake
+==
+
 =
 [2024-11-04T22:11:09.693+08:00]
 
