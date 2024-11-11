@@ -105,3 +105,11 @@ dotnet ef database update
 
 
 记住替换占位符 `<你的EF Core版本>` 和 `<MigrationName>` 为你的实际值。  如果遇到问题，请提供更多细节，我会尽力帮助你。
+
+
+=
+[2024-11-10T23:23:05.608+08:00]
+
+我的c\#程序是AOT編譯的、我想在c\#代碼中調用`lua.lib`(這是靜態庫、不是dll)中的`lua_pushstring`函數、應該怎麼配置?
+
+==
