@@ -9,3 +9,4 @@ public interface I_mkPhrase{
 	/// <returns></returns>
 	IList<str> mkPhrase(IList<str> codes);
 }
+
