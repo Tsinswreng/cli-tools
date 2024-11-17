@@ -40,6 +40,7 @@ rime之lua與獨立lua皆能調`C:/Windows/System32/kernel32.dll`
 
 ==
 ```bash
+dotnet new sln -n cli-tools
 dotnet sln add aot/aot.csproj
 ```
 
