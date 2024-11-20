@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Lua_State = System.IntPtr;
 
 using static Lua.Lua_5_4;
+using System.Globalization;
 namespace Lua;
 
 unsafe public static class LuaExt_5_4{
@@ -25,6 +26,15 @@ unsafe public static class LuaExt_5_4{
 	public static int getUnixTimeMillis(Lua_State L){
 		i64 ans = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
 		lua_pushinteger(L, ans);
+		return 1;
+	}
+
+	[UnmanagedCallersOnly(EntryPoint = nameof(getWeekOfYear), CallConvs = new[] { typeof(CallConvCdecl) })]
+	public static i32 getWeekOfYear(Lua_State L){
+		var today =  DateTime.Today;
+		var isoWeek = ISOWeek.GetWeekOfYear(today);
+		//var isoYear = ISOWeek.GetYear(today);
+		lua_pushinteger(L, isoWeek);
 		return 1;
 	}
 

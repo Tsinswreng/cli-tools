@@ -1,9 +1,9 @@
 **/bin/
 **/obj/
-aot/RimeLuaAot/obj/
 .vs/
 main/db/db.sqlite-shm
 main/db/db.sqlite-wal
 cc/build
 _cc/
 _c/
+.sln
