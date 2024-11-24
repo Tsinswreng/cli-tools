@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //dotnet publish -c Release -r win-x86
+//dotnet publish -c Release -r android-arm64
 //dumpbin /EXPORTS "e:/_code/rime-tools/aot/bin/Release/net9.0/win-x64/publish/aot.dll"
 //dumpbin /EXPORTS "e:/_code/rime-tools/aot/bin/Release/net9.0/win-x64/native/aot.dll"
 // dumpbin /EXPORTS "E:/_code/rime-tools/aot/lib/librime-lua5.4/dist/lib/rime.dll"
