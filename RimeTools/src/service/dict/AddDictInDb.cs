@@ -5,7 +5,7 @@ using service;
 using service.parser;
 using service.parser.dictYamlParser;
 
-namespace ctrler;
+namespace service;
 
 //TODO 製 專加KV之adder
 public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
