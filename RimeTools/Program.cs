@@ -4,8 +4,9 @@ using ctrler;
 
 Console.OutputEncoding = std.Text.Encoding.UTF8;
 
-new MkPhrase().mkPhrase();
-
+//new MkPhrase().mkPhrase();
+await new DictManager().ReaddDict("dks_v", "D:/Program Files/Rime/User_Data/dks_v.dict.yaml");
+System.Console.WriteLine("Done!");
 /* 
 in Person.d.ts:
 export interface Person{

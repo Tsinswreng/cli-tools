@@ -51,7 +51,7 @@ public class RimeDbContext : DbContext{
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder){
 		// 在這裡配置您的數據庫連接字符串
-		var path = G.getBaseDir()+"/"+G.main+"/db/db.sqlite";
+		var path = G.getBaseDir()+"/"+"RimeTools"+"/db/db.sqlite";
 		optionsBuilder.UseSqlite($"Data Source={path}");
 	}
 

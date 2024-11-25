@@ -16,7 +16,7 @@ public class PhraseMker_HeadEtTail : I_mkPhrase{
 		return $"{code[0]}{code[code.Length - 1]}";
 	}
 
-	public IList<str> mkPhrase(IList<str> codes){
+	public IList<str> mkPhrase(IList<str> codes, IList<str>? chars){
 		var ans = new List<str>();
 		if(codes.Count != 2){
 			//throw new ArgumentException("PhraseMker_HeadEtTail can only handle two-word phrases.");

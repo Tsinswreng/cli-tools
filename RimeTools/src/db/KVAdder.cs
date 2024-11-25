@@ -47,12 +47,12 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 	public void Dispose(){
 		dbCtx.Dispose();
 		conn.Dispose();
-		cmd_add.Dispose();
+		_cmd_add.Dispose();
 		cmd_lastId.Dispose();
 		trans.Dispose();
 	}
 
-	public System.Data.Common.DbCommand cmd_add{get;set;}
+	protected System.Data.Common.DbCommand _cmd_add{get;set;}
 	public System.Data.Common.DbCommand cmd_lastId{get;set;}
 
 	public IDbContextTransaction trans{get; set;}
@@ -66,9 +66,9 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 	public async Task<code> Begin(){
 		conn = dbCtx.Database.GetDbConnection();
 		await conn.OpenAsync();
-		cmd_add = conn.CreateCommand();
-		cmd_add.CommandText = sql_add;
-		cmd_add.CommandType = System.Data.CommandType.Text;
+		_cmd_add = conn.CreateCommand();
+		_cmd_add.CommandText = sql_add;
+		_cmd_add.CommandType = System.Data.CommandType.Text;
 
 		cmd_lastId = conn.CreateCommand();
 		cmd_lastId.CommandText = sql_lastId;
@@ -76,19 +76,19 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 
 		trans = await dbCtx.BeginTrans();
 
-		cmd_add.Transaction = trans.GetDbTransaction();
+		_cmd_add.Transaction = trans.GetDbTransaction();
 		cmd_lastId.Transaction = trans.GetDbTransaction();
 
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.bl)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kType)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kStr)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kI64)}", DbType.Int64));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kDesc)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vType)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vStr)}", DbType.String));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vI64)}", DbType.Int64));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vF64)}", DbType.Single));
-		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vDesc)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.bl)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kType)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kStr)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kI64)}", DbType.Int64));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kDesc)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vType)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vStr)}", DbType.String));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vI64)}", DbType.Int64));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vF64)}", DbType.Single));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vDesc)}", DbType.String));
 		return 0;
 	}
 
@@ -126,18 +126,18 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 		// 	return null;//t
 		// }
 
-		cmd_add.Parameters[$"@{nameof(KV.bl)}"].Value = nc(e.bl);
-		cmd_add.Parameters[$"@{nameof(KV.kType)}"].Value = nc(e.kType);
-		cmd_add.Parameters[$"@{nameof(KV.kStr)}"].Value = nc(e.kStr);
-		cmd_add.Parameters[$"@{nameof(KV.kI64)}"].Value = nc(e.kI64);
-		cmd_add.Parameters[$"@{nameof(KV.kDesc)}"].Value = nc(e.kDesc);
-		cmd_add.Parameters[$"@{nameof(KV.vType)}"].Value = nc(e.vType);
-		cmd_add.Parameters[$"@{nameof(KV.vStr)}"].Value = nc(e.vStr);
-		cmd_add.Parameters[$"@{nameof(KV.vI64)}"].Value = nc(e.vI64);
-		cmd_add.Parameters[$"@{nameof(KV.vF64)}"].Value = nc(e.vF64);
-		cmd_add.Parameters[$"@{nameof(KV.vDesc)}"].Value = nc(e.vDesc);
+		_cmd_add.Parameters[$"@{nameof(KV.bl)}"].Value = nc(e.bl);
+		_cmd_add.Parameters[$"@{nameof(KV.kType)}"].Value = nc(e.kType);
+		_cmd_add.Parameters[$"@{nameof(KV.kStr)}"].Value = nc(e.kStr);
+		_cmd_add.Parameters[$"@{nameof(KV.kI64)}"].Value = nc(e.kI64);
+		_cmd_add.Parameters[$"@{nameof(KV.kDesc)}"].Value = nc(e.kDesc);
+		_cmd_add.Parameters[$"@{nameof(KV.vType)}"].Value = nc(e.vType);
+		_cmd_add.Parameters[$"@{nameof(KV.vStr)}"].Value = nc(e.vStr);
+		_cmd_add.Parameters[$"@{nameof(KV.vI64)}"].Value = nc(e.vI64);
+		_cmd_add.Parameters[$"@{nameof(KV.vF64)}"].Value = nc(e.vF64);
+		_cmd_add.Parameters[$"@{nameof(KV.vDesc)}"].Value = nc(e.vDesc);
 
-		await cmd_add.ExecuteNonQueryAsync(); // 执行命令
+		await _cmd_add.ExecuteNonQueryAsync(); // 执行命令
 		var result = await cmd_lastId.ExecuteScalarAsync(); // 獲取lastId
 
 		var ans = new RunResult{lastId = (i64)result};
