@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "main", "main\main.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaterMark", "WaterMark\WaterMark.csproj", "{4E42CA8E-E782-4CBA-AC36-ECC8E129B8C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RimeTools", "RimeTools\RimeTools.csproj", "{47EF099B-7FF9-4758-801E-C7C129A2043D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{4E42CA8E-E782-4CBA-AC36-ECC8E129B8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E42CA8E-E782-4CBA-AC36-ECC8E129B8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E42CA8E-E782-4CBA-AC36-ECC8E129B8C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47EF099B-7FF9-4758-801E-C7C129A2043D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47EF099B-7FF9-4758-801E-C7C129A2043D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47EF099B-7FF9-4758-801E-C7C129A2043D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47EF099B-7FF9-4758-801E-C7C129A2043D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F9618978-B4E5-437B-8E43-5E92735F520D} = {8C73DDF9-CF35-47EA-B1DF-7B0BE7268C16}

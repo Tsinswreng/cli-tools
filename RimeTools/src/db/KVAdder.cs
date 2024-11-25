@@ -9,7 +9,7 @@ using System.Data;
 
 namespace db;
 
-public class KVAdder : I_Adder<KV>, IDisposable{
+public class KVAdder : I_AdderAsync<KV>, IDisposable{
 
 	public str sql_add = 
 @$"INSERT INTO {nameof(KV)} (

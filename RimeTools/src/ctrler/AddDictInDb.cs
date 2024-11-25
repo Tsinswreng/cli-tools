@@ -8,8 +8,8 @@ using service.parser.dictYamlParser;
 namespace ctrler;
 
 //TODO 製 專加KV之adder
-public class DictLineKVsAdder : I_Adder<DictLineKVs>{
-	public I_Adder<KV> kvAdder {get;set;} = new KVAdder();
+public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
+	public I_AdderAsync<KV> kvAdder {get;set;} = new KVAdder();
 	//public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans{get;set;}
 
 	public DictLineKVsAdder(){

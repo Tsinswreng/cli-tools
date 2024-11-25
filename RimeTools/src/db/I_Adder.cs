@@ -1,6 +1,6 @@
 namespace db;
 
-public interface I_Adder<T>{
+public interface I_AdderAsync<T>{
 
 	Task Begin();
 
