@@ -48,14 +48,14 @@ public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
 	}
 }
 
-public class AddDictInDb{
-	protected DictMetadata? metadata {get;set;}
+public class AddDictInDb : I_AddFromPath{
+	protected DictMetadata? _metadata {get;set;}
 	protected I_lineStrToKVs? lineStrToKVs;
 
 	protected DictLineKVsAdder dictLineKVsAdder {get;set;} = new DictLineKVsAdder();
 
 	protected i32 _initDeps(DictMetadata metadata){
-		this.metadata = metadata;
+		this._metadata = metadata;
 		lineStrToKVs = new DictLineParser(metadata);
 		return 0;
 	}
@@ -69,7 +69,7 @@ public class AddDictInDb{
 		await dictLineKVsAdder.Add(kvs);
 	}
 
-	public async Task AddFromPath(string dictPath){
+	public async Task<code> AddFromPath(string dictPath){
 		I_ReadLine lineReader = new LineReader(dictPath);
 		var tasks = new List<Task>();
 		var dictYamlParser = new DictYamlParser(
@@ -101,7 +101,7 @@ public class AddDictInDb{
 				}
 				return 0;
 			}
-		);
+		);//~var dictYamlParser = new DictYamlParser
 
 		dictYamlParser.onMetadata = (meta) => {
 			_initDeps(meta);
@@ -111,6 +111,7 @@ public class AddDictInDb{
 		await dictYamlParser.Parse();
 		await Task.WhenAll(tasks);
 		await dictLineKVsAdder.Commit();
+		return 0;
 	}
 
 }
