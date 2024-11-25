@@ -2,6 +2,9 @@ using service.dict;
 
 namespace service;
 
-public class DictManager: I_dropDict{
+public class DictManager
+	: I_dropDict
+	, I_AddFromPath
+{
 
 }

@@ -5,7 +5,7 @@ using service;
 using service.parser;
 using service.parser.dictYamlParser;
 
-namespace service;
+namespace service.dict;
 
 //TODO 製 專加KV之adder
 public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
@@ -16,12 +16,14 @@ public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
 
 	}
 
-	public async Task Begin(){
+	public async Task<code> Begin(){
 		await kvAdder.Begin();
+		return 0;
 	}
 
-	public async Task Commit(){
+	public async Task<code> Commit(){
 		await kvAdder.Commit();
+		return 0;
 	}
 
 	public async Task<I_lastId?> Add(DictLineKVs kvs){

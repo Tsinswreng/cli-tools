@@ -63,7 +63,7 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 	
 
 
-	public async Task Begin(){
+	public async Task<code> Begin(){
 		conn = dbCtx.Database.GetDbConnection();
 		await conn.OpenAsync();
 		cmd_add = conn.CreateCommand();
@@ -89,7 +89,7 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vI64)}", DbType.Int64));
 		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vF64)}", DbType.Single));
 		cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vDesc)}", DbType.String));
-
+		return 0;
 	}
 
 	
@@ -146,8 +146,9 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 		// return (I_lastId)t;
 	}
 
-	public async Task Commit(){
+	public async Task<code> Commit(){
 		trans.Commit();
+		return 0;
 	}
 }
 
