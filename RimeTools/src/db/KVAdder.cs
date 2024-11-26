@@ -52,7 +52,7 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 		trans.Dispose();
 	}
 
-	protected System.Data.Common.DbCommand _cmd_add{get;set;}
+	protected System.Data.Common.DbCommand _cmd_add;
 	public System.Data.Common.DbCommand cmd_lastId{get;set;}
 
 	public IDbContextTransaction trans{get; set;}

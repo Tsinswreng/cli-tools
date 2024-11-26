@@ -5,7 +5,7 @@ using ctrler;
 Console.OutputEncoding = std.Text.Encoding.UTF8;
 
 //new MkPhrase().mkPhrase();
-await new DictManager().ReaddDict("dks_v", "D:/Program Files/Rime/User_Data/dks_v.dict.yaml");
+await new DictManager().AddDictFromPath("D:/Program Files/Rime/User_Data/dks.dict.yaml");
 System.Console.WriteLine("Done!");
 /* 
 in Person.d.ts:

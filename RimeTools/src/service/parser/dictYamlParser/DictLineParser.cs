@@ -122,9 +122,9 @@ public class DictLineParser
 			throw new NotImplementedException();
 		}
 		var ans = new DictLine();
-		ans.text = items[0]??"";
-		ans.code = items[1]??"";
-		ans.weight = items[2]??"";
+		ans.text = items.ElementAtOrDefault(0)??"";
+		ans.code = items.ElementAtOrDefault(1)??"";
+		ans.weight = items.ElementAtOrDefault(2)??"";
 		return ans;
 	}
 
