@@ -10,29 +10,32 @@ namespace service;
 /// </summary>
 public class ReverseLookup: I_seekCode{
 
+	public ReverseLookup(str dictName){
+		this.dictName = dictName;
+	}
+
 	protected RimeDbContext _dbContext = new RimeDbContext();
 
+	public str dictName{get;set;}
+
 	public IList<I_KV> seekCode_KV(str dzvs){
+		var bl = BlPrefix.parse(BlPrefix.dictYaml, dictName);
 		var ctx = _dbContext;
-// 		var sql = 
-// $@"select * from {nameof(KV)} where 
-// 	{nameof(KV.kStr)} = @dzvs
-// ";
 		var ans = ctx.KV
 			.Where(
 				e=>e.kStr==dzvs 
 				&& e.vDesc == VDesc.text.ToString()
-				&& e.bl == "dict.yaml:dks" //TODO 勿硬編碼
+				&& e.bl == bl
 			)
 			.Cast<I_KV>()
 			.ToList()
 		;
-		for(var i = 0; i < ans.Count; i++){
-			var e = ans[i];
-			if(e?.vStr?.Length == 5){
-				e.vStr = e.vStr.Substring(0,3); // dks_v取前三字
-			}
-		}
+		// for(var i = 0; i < ans.Count; i++){
+		// 	var e = ans[i];
+		// 	// if(e?.vStr?.Length == 5){
+		// 	// 	e.vStr = e.vStr.Substring(0,3); // dks_v取前三字
+		// 	// }
+		// }
 		return ans;
 	}
 
@@ -41,7 +44,7 @@ public class ReverseLookup: I_seekCode{
 	/// </summary>
 	/// <param name="kvs"></param>
 	/// <returns></returns>
-	public IList<str> kvsToStrs(IList<I_KV> kvs){
+	protected IList<str> kvsToStrs(IList<I_KV> kvs){
 		var ans = new List<str>();
 		foreach(var kv in kvs){
 			if(

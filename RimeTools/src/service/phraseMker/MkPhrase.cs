@@ -19,14 +19,18 @@ class Splitter: I_SplitByCodePoint{
 
 public class MkPhrase: I_PhraseMkr{
 
-	public MkPhrase(Func<DictLine, code> dictLineHandler){
+	public MkPhrase(Func<DictLine, code> dictLineHandler, string dictName){
 		this.dictLineHandler = dictLineHandler;
+		this.dictName = dictName;
+		this.codeSeeker = new ReverseLookup(dictName);
 	}
 
 	public I_getNext<I_KV> wordFreqReader{get;set;} = (I_getNext<I_KV>)new WordFreqReader();
 	public I_mkPhrase phraseMkr{get;set;} = new PhraseMker_HeadEtTail();
-	//temp
-	public I_seekCode codeSeeker{get;set;} = new ReverseLookup();
+
+	public str dictName{get;set;}
+	
+	public I_seekCode codeSeeker{get;set;}
 
 	public Func<DictLine, code> dictLineHandler{get;set;}
 

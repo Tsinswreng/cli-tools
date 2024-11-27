@@ -43,4 +43,6 @@ public interface I_PhraseMkr{
 
 	public code start();
 
+	public str dictName{get;set;}
+
 }

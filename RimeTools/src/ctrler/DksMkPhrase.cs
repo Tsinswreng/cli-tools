@@ -14,7 +14,7 @@ public class DksMkPhrase: IDisposable {
 			exput("\t");
 			exput(line.weight);
 			return 0;
-		});
+		}, "dks");
 	}
 
 	~DksMkPhrase(){
