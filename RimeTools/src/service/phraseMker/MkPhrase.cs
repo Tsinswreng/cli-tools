@@ -16,22 +16,21 @@ class Splitter: I_SplitByCodePoint{
 	}
 }
 
-/// <summary>
-/// temp 
-/// </summary>
-public class MkPhrase{
 
-	public MkPhrase(){
+public class MkPhrase: I_PhraseMkr{
 
+	public MkPhrase(Func<DictLine, code> dictLineHandler){
+		this.dictLineHandler = dictLineHandler;
 	}
 
 	public I_getNext<I_KV> wordFreqReader{get;set;} = (I_getNext<I_KV>)new WordFreqReader();
 	public I_mkPhrase phraseMkr{get;set;} = new PhraseMker_HeadEtTail();
 	public I_seekCode codeSeeker{get;set;} = new ReverseLookup();
 
+	public Func<DictLine, code> dictLineHandler{get;set;}
+
 	protected I_SplitByCodePoint _splitter = new Splitter();
 
-	//TODO 改成流式處理
 	public code mkPhrase(){
 		var word__code__freq_s = new List< List<str> >();// [str, str, str][]
 		for(var i = 0;wordFreqReader.hasNext();i++){
@@ -54,19 +53,25 @@ public class MkPhrase{
 				}
 				var joinedPhraseCode = string.Join("", phraseCode); // "che1liang4"
 				var ua = new List<str>(){word??"", joinedPhraseCode, freq?.ToString()??""};// ["車輛", "che1liang4", "1000"]
-				u_word__code__freq.Add(string.Join("\t", ua));
+				var uDictLine = new DictLine(){
+					text = word??""
+					,code = joinedPhraseCode
+					,weight = freq?.ToString()??""
+				};
+				dictLineHandler(uDictLine);
+				//u_word__code__freq.Add(string.Join("\t", ua));
 			}
-			word__code__freq_s.Add(u_word__code__freq);
+			//word__code__freq_s.Add(u_word__code__freq);
 		}
 		
 		// output
-		for(var i = 0;i<word__code__freq_s.Count;i++){
-			var u_word__code__freq = word__code__freq_s[i];
-			for(var j = 0;j<u_word__code__freq.Count;j++){
-				var line = u_word__code__freq[j];
-				Console.WriteLine(u_word__code__freq[j]);
-			}
-		}
+		// for(var i = 0;i<word__code__freq_s.Count;i++){
+		// 	var u_word__code__freq = word__code__freq_s[i];
+		// 	for(var j = 0;j<u_word__code__freq.Count;j++){
+		// 		var line = u_word__code__freq[j];
+		// 		Console.WriteLine(u_word__code__freq[j]);
+		// 	}
+		// }
 		return 0;
 	}
 }
