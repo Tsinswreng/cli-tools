@@ -32,7 +32,7 @@ public class MkPhrase{
 	protected I_SplitByCodePoint _splitter = new Splitter();
 
 	public code mkPhrase(){
-		var word__code__freq_s = new List< List<str> >();
+		var word__code__freq_s = new List< List<str> >();// [str, str, str][]
 		for(var i = 0;_wordFreqReader.hasNext();i++){
 			var wordFreq = _wordFreqReader.getNext();
 			if(wordFreq == null){break;}

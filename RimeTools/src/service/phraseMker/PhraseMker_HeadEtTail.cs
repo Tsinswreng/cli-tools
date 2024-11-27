@@ -17,6 +17,9 @@ public class PhraseMker_HeadEtTail : I_mkPhrase{
 	/// <param name="code"></param>
 	/// <returns></returns>
 	protected str _handleCode(str code){
+		if(code==""){
+			return "";
+		}
 		return $"{code[0]}{code[code.Length - 1]}";
 	}
 

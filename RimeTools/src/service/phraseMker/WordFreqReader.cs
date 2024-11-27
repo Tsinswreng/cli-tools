@@ -4,6 +4,7 @@ using model;
 namespace service;
 
 /// <summary>
+/// 從數據庫讀八股文
 /// temp 當改成流式
 /// </summary>
 public class WordFreqReader : tools.I_getNext<WordFreq>, IDisposable{
