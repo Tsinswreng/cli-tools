@@ -25,13 +25,14 @@ public class MkPhrase: I_PhraseMkr{
 
 	public I_getNext<I_KV> wordFreqReader{get;set;} = (I_getNext<I_KV>)new WordFreqReader();
 	public I_mkPhrase phraseMkr{get;set;} = new PhraseMker_HeadEtTail();
+	//temp
 	public I_seekCode codeSeeker{get;set;} = new ReverseLookup();
 
 	public Func<DictLine, code> dictLineHandler{get;set;}
 
 	protected I_SplitByCodePoint _splitter = new Splitter();
 
-	public code mkPhrase(){
+	public code start(){
 		var word__code__freq_s = new List< List<str> >();// [str, str, str][]
 		for(var i = 0;wordFreqReader.hasNext();i++){
 			var wordFreq = wordFreqReader.getNext();
@@ -58,20 +59,14 @@ public class MkPhrase: I_PhraseMkr{
 					,code = joinedPhraseCode
 					,weight = freq?.ToString()??""
 				};
-				dictLineHandler(uDictLine);
+				var ans = dictLineHandler(uDictLine);
+				if(ans!=0){
+					return ans;
+				}
 				//u_word__code__freq.Add(string.Join("\t", ua));
 			}
 			//word__code__freq_s.Add(u_word__code__freq);
 		}
-		
-		// output
-		// for(var i = 0;i<word__code__freq_s.Count;i++){
-		// 	var u_word__code__freq = word__code__freq_s[i];
-		// 	for(var j = 0;j<u_word__code__freq.Count;j++){
-		// 		var line = u_word__code__freq[j];
-		// 		Console.WriteLine(u_word__code__freq[j]);
-		// 	}
-		// }
 		return 0;
 	}
 }

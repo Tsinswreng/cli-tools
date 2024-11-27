@@ -22,7 +22,7 @@ public class ReverseLookup: I_seekCode{
 			.Where(
 				e=>e.kStr==dzvs 
 				&& e.vDesc == VDesc.text.ToString()
-				&& e.bl == "dict.yaml:dks_v" //TODO 勿硬編碼
+				&& e.bl == "dict.yaml:dks" //TODO 勿硬編碼
 			)
 			.Cast<I_KV>()
 			.ToList()

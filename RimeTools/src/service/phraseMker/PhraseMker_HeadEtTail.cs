@@ -29,6 +29,9 @@ public class PhraseMker_HeadEtTail : I_mkPhrase{
 		// 	//throw new ArgumentException("PhraseMker_HeadEtTail can only handle two-word phrases.");
 		// 	return ans;
 		// }
+		if(codes.Count <= 1){ // 只有一個字的詞不用處理
+			return ans;
+		}
 		for(var i = 0; i < codes.Count; i++){
 			var code = codes[i];
 			if(code == null || code.Length == 0){

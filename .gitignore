@@ -7,3 +7,5 @@ cc/build
 _cc/
 _c/
 .sln
+*-wal
+*-shm

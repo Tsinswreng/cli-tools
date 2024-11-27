@@ -39,5 +39,8 @@ public interface I_PhraseMkr{
 	/// 流式處理結果
 	/// </summary>
 
-	Func<DictLine, code> dictLineHandler{get;set;}
+	public Func<DictLine, code> dictLineHandler{get;set;}
+
+	public code start();
+
 }
