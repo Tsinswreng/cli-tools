@@ -5,14 +5,14 @@ using System.Text;
 
 namespace db;
 
-public class LevelDbReader: IDisposable, I_LevelDbProcessor {
-	public LevelDbReader(str path, Func<(str,str), code> process) {
+public class LevelDbProcessor: IDisposable, I_LevelDbProcessor {
+	public LevelDbProcessor(str path, Func<(str,str), code> process) {
 		_path = path;
 		this._db = new DB(options, _path);
 		this.process = process;
 	}
 
-	~LevelDbReader(){
+	~LevelDbProcessor(){
 		Dispose();
 	}
 	public void Dispose() {

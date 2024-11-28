@@ -1,6 +1,7 @@
 namespace service.parser.base_;
+
+using IF;
 using System.Text;
-using tools;
 
 public interface I_ParseState{
 
