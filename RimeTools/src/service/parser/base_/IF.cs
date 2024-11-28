@@ -20,7 +20,7 @@ public interface I_Status{
 	IList<u8> buffer{get;set;}
 }
 
-public interface I_Parser: I_getNext<u8>{
+public interface I_Parser: I_Iter<u8>{
 	I_Status status{get;set;}
 	Encoding encoding{get;set;}
 	//bool eq(u8 ch1, unknown ch2);

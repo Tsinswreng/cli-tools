@@ -9,6 +9,6 @@ namespace service.parser;
 // }
 
 
-public interface I_ByteReader : I_getNext<byte>{
+public interface I_ByteReader : I_Iter<byte>{
 	
 }

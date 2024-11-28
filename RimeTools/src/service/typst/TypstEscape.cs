@@ -6,7 +6,7 @@ namespace service.typst;
 public class TypstEscape{
 
 
-	public TypstEscape(I_getNext<u8> byteReader){
+	public TypstEscape(I_Iter<u8> byteReader){
 		this.byteReader = byteReader;
 	}
 	//除了數字和字母外的所有可打印ascii字符
@@ -15,7 +15,7 @@ public class TypstEscape{
 		':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
 	];
 
-	public I_getNext<u8> byteReader{get;set;}
+	public I_Iter<u8> byteReader{get;set;}
 
 	public u8 escaper {get;set;} = (u8)'\\';
 

@@ -25,7 +25,7 @@ public class MkPhrase: I_PhraseMkr{
 		this.codeSeeker = new ReverseLookup(dictName);
 	}
 
-	public I_getNext<I_KV> wordFreqReader{get;set;} = (I_getNext<I_KV>)new WordFreqReader();
+	public I_Iter<I_KV> wordFreqReader{get;set;} = (I_Iter<I_KV>)new WordFreqReader();
 	public I_mkPhrase phraseMkr{get;set;} = new PhraseMker_HeadEtTail();
 
 	public str dictName{get;set;}

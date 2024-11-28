@@ -26,7 +26,7 @@ public interface I_PhraseMkr{
 	/// <summary>
 	/// 流式讀八股文
 	/// </summary>
-	public I_getNext<I_KV> wordFreqReader{get;set;}
+	public I_Iter<I_KV> wordFreqReader{get;set;}
 	/// <summary>
 	/// 造詞策略
 	/// </summary>

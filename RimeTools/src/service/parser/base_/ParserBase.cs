@@ -4,13 +4,13 @@ namespace service.parser.base_;
 
 public class ParserBase: I_Parser{
 
-	public ParserBase(I_getNext<u8> byteReader){
+	public ParserBase(I_Iter<u8> byteReader){
 		this.byteReader = byteReader;
 	}
 
 	public I_Status status{get;set;} = new StatusBase();
 	public Encoding encoding{get;set;} = Encoding.UTF8;
-	public I_getNext<u8> byteReader{get;set;}
+	public I_Iter<u8> byteReader{get;set;}
 
 	public u8 getNext(){
 		return byteReader.getNext();

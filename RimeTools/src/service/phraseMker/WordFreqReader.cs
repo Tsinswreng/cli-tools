@@ -7,7 +7,7 @@ namespace service;
 /// 從數據庫讀八股文
 /// temp 當改成流式
 /// </summary>
-public class WordFreqReader : tools.I_getNext<WordFreq>, IDisposable{
+public class WordFreqReader : tools.I_Iter<WordFreq>, IDisposable{
 
 	protected RimeDbContext _dbCtx = new RimeDbContext();
 
