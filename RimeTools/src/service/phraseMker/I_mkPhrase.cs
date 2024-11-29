@@ -22,7 +22,7 @@ public interface I_mkPhrase{
 /// <summary>
 /// 造詞器
 /// </summary>
-public interface I_PhraseMkr{
+public interface I_PhraseMkr: IF.I_process<DictLine>{
 	/// <summary>
 	/// 流式讀八股文
 	/// </summary>
@@ -39,7 +39,7 @@ public interface I_PhraseMkr{
 	/// 流式處理結果
 	/// </summary>
 
-	public Func<DictLine, code> dictLineHandler{get;set;}
+	//public Func<DictLine, code> process{get;set;}
 
 	public code start();
 

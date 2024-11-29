@@ -6,7 +6,14 @@ Console.OutputEncoding = std.Text.Encoding.UTF8;
 
 //new MkPhrase().mkPhrase();
 //await new DictManager().AddDictFromPath("D:/Program Files/Rime/User_Data/dks.dict.yaml");
-test.TestLevelDb._Main();
+//test.TestLevelDb._Main();
+
+//new DksMkPhrase12().start();
+
+//await new DictManager().AddDictFromPath("D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml");
+
+
+
 /* 
 in Person.d.ts:
 export interface Person{

@@ -106,7 +106,7 @@ public class KVAdder : I_AdderAsync<KV>, IDisposable{
 		return v;
 	}
 
-	public async Task<I_lastId?> Add(KV e){
+	public async Task<I_lastId?> TxAdd(KV e){
 
 		//t
 		// Serialize to JSON string

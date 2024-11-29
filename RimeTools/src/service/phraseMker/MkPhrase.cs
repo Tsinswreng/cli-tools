@@ -2,7 +2,9 @@ using IF;
 using model;
 using service;
 using service.phraseMker;
-namespace ctrler;
+
+//TODO 遷至service下
+namespace service;
 
 
 class Splitter: I_SplitByCodePoint{
@@ -20,7 +22,7 @@ class Splitter: I_SplitByCodePoint{
 public class MkPhrase: I_PhraseMkr{
 
 	public MkPhrase(Func<DictLine, code> dictLineHandler, string dictName){
-		this.dictLineHandler = dictLineHandler;
+		this.process = dictLineHandler;
 		this.dictName = dictName;
 		this.codeSeeker = new ReverseLookup(dictName);
 	}
@@ -32,7 +34,7 @@ public class MkPhrase: I_PhraseMkr{
 	
 	public I_seekCode codeSeeker{get;set;}
 
-	public Func<DictLine, code> dictLineHandler{get;set;}
+	public Func<DictLine, code> process{get;set;}
 
 	protected I_SplitByCodePoint _splitter = new Splitter();
 
@@ -63,7 +65,7 @@ public class MkPhrase: I_PhraseMkr{
 					,code = joinedPhraseCode
 					,weight = freq?.ToString()??""
 				};
-				var ans = dictLineHandler(uDictLine);
+				var ans = process(uDictLine);
 				if(ans!=0){
 					return ans;
 				}

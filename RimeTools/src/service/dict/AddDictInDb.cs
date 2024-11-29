@@ -26,11 +26,11 @@ public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
 		return 0;
 	}
 
-	public async Task<I_lastId?> Add(DictLineKVs kvs){
+	public async Task<I_lastId?> TxAdd(DictLineKVs kvs){
 		var text__code = kvs.text__code;
 
 		var fKey__weight = kvs.fKey__weight;
-		var ua = await kvAdder.Add(text__code);
+		var ua = await kvAdder.TxAdd(text__code);
 		//var lastId = text__code.id;
 		if(ua == null){
 			return null;
@@ -40,7 +40,7 @@ public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
 			return ua;
 		}
 		fKey__weight.kI64 = lastId;
-		return await kvAdder.Add(fKey__weight);
+		return await kvAdder.TxAdd(fKey__weight);
 		// await dbCtx.KVEntities.AddAsync(fKey__weight);
 		// await dbCtx.SaveChangesAsync();
 	}
@@ -68,7 +68,7 @@ public class AddDictInDb : I_AddFromPath{
 
 	public async Task AddLineStr(str line){
 		var kvs = lineStrToKVs!.lineStrToKVs(line);
-		await dictLineKVsAdder.Add(kvs);
+		await dictLineKVsAdder.TxAdd(kvs);
 	}
 
 	public async Task<code> AddFromPath(string dictPath){
