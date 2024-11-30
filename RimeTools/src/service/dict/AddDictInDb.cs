@@ -8,8 +8,8 @@ using service.parser.dictYamlParser;
 namespace service.dict;
 
 //TODO 製 專加KV之adder
-public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
-	public I_AdderAsync<KV> kvAdder {get;set;} = new KVAdder();
+public class DictLineKVsAdder : I_TxAdderAsync<DictLineKVs>{
+	public I_TxAdderAsync<KV> kvAdder {get;set;} = new KVAdder();
 	//public Microsoft.EntityFrameworkCore.Storage.IDbContextTransaction? trans{get;set;}
 
 	public DictLineKVsAdder(){
@@ -52,7 +52,7 @@ public class DictLineKVsAdder : I_AdderAsync<DictLineKVs>{
 
 public class AddDictInDb : I_AddFromPath{
 	protected DictMetadata? _metadata {get;set;}
-	protected I_lineStrToKVs? lineStrToKVs;
+	protected I_lineStrToDictLineKVs? lineStrToKVs;
 
 	protected DictLineKVsAdder dictLineKVsAdder {get;set;} = new DictLineKVsAdder();
 
@@ -63,11 +63,11 @@ public class AddDictInDb : I_AddFromPath{
 	}
 
 	public DictLineKVs lineStrToModel(str line){
-		return G.nn(lineStrToKVs).lineStrToKVs(line);
+		return G.nn(lineStrToKVs).lineStrToDictLineKVs(line);
 	}
 
 	public async Task AddLineStr(str line){
-		var kvs = lineStrToKVs!.lineStrToKVs(line);
+		var kvs = lineStrToKVs!.lineStrToDictLineKVs(line);
 		await dictLineKVsAdder.TxAdd(kvs);
 	}
 

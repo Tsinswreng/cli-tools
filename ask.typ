@@ -570,3 +570,23 @@ public void ProcessData()
 ```
 
 记住，这只是一个简单的示例，实际应用中可能需要考虑更多的因素，例如错误处理、并发处理、性能优化等。  选择哪种方案取决于你的具体需求和权衡。
+
+
+=
+[2024-11-29T23:01:47.561+08:00_W48-5]
+
+```cs
+public interface I1<T>{
+	int process(T data);
+}
+
+
+public interface I2<T>{
+	Func<T,int> process{get;set;}
+}
+```
+
+當我的接口中只有一個函數時、用哪種寫法好?
+
+==
+

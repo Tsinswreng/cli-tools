@@ -6,15 +6,17 @@ namespace service.parser.dictYamlParser;
 
 
 public class DictLineParser
-: I_parseLineStr, I_parseLineObj, I_lineStrToKVs{
+: I_lineStrToDictLine, I_dictLineToDictLineKVs, I_lineStrToDictLineKVs{
 	//需要 metadata
 
+	public DictLineParser(){}
+	
 	public DictLineParser(DictMetadata metadata){
 		this.metadata = metadata;
 	}
 
 
-	public DictMetadata metadata {get;set;}
+	public DictMetadata? metadata {get;set;}
 
 	public i32 setMetadata(DictMetadata metadata){
 		this.metadata = metadata;
@@ -94,19 +96,8 @@ public class DictLineParser
 	}
 
 
-
-	// public List<KV> convert(DictLine line) {
-	// 	var weight = new KV();
-	// 	if(i64.TryParse(line.weight, out i64 weightInt)){ //整數weight 作i64
-	// 		weight.vI64 = weightInt;
-	// 	}else{ //帶百分號之weight (ex: 10%) 作字串
-	// 		weight.vStr = line.weight;
-	// 	}
-	// 	return null;//TODO
-	// }
-
 	//ref readonly 
-	public DictLineKVs parseLineObj(in DictLine line){
+	public DictLineKVs dictLineToDictLineKVs(in DictLine line){
 		var text__code = toText__codeKV(line);
 		var fKey__weight = toFKey__WeightKV(line);
 		if(fKey__weight == null){
@@ -115,7 +106,7 @@ public class DictLineParser
 		return new DictLineKVs(text__code, fKey__weight);
 	}
 
-	public DictLine parseLineStr(str line){
+	public DictLine lineStrToDictLine(str line){
 		var items = line.Split("\t");
 		if(metadata?.columns != null){
 			//TODO
@@ -128,9 +119,9 @@ public class DictLineParser
 		return ans;
 	}
 
-	public DictLineKVs lineStrToKVs(str line){
-		var lineObj = parseLineStr(line);
-		var kvs = parseLineObj(lineObj);
+	public DictLineKVs lineStrToDictLineKVs(str line){
+		var lineObj = lineStrToDictLine(line);
+		var kvs = dictLineToDictLineKVs(lineObj);
 		return kvs;
 	}
 
