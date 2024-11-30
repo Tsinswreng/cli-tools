@@ -1,21 +1,17 @@
 using db;
 using IF;
 using model;
-using service;
 using service.dict;
 using service.parser.dictYamlParser;
-using service.phraseMker;
-using tools;
 
-namespace ctrler.mkPhrase;
-
-
-public class MkEtAddPhraseInDb: IDisposable, I_Transaction{
-	public MkEtAddPhraseInDb() {
+namespace service.phraseMker;
+public class MkEtAddPhraseInDb: IDisposable, I_Transaction, I_dictName{
+	public MkEtAddPhraseInDb(str dictName) {
+		this.dictName = dictName;
 		phraseMkr = new service.MkPhrase(line=>{
-
+			
 			return 0;
-		},"dks");
+		},dictName);
 
 		phraseMkr.phraseMkr = new PhraseMker_HeadEtSecond();
 	}
@@ -32,6 +28,8 @@ public class MkEtAddPhraseInDb: IDisposable, I_Transaction{
 	public I_TxAdderAsync<DictLineKVs> dictLineKVsAdder{get;set;} = new DictLineKVsAdder();
 
 	public I_dictLineToDictLineKVs dictLineToDictLineKVs{get;set;} = new DictLineParser();
+
+	public str dictName{get;set;} = "dks";
 
 	public async Task<code> Begin(){
 		await dictLineKVsAdder.Begin();

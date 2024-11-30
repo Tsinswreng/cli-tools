@@ -4,7 +4,28 @@ namespace ctrler;
 
 
 
-public class DksMkPhrase: IDisposable {
+public class DksMkPhrase: IDisposable{
+
+
+	public str yamlHead{get;set;} = 
+"""
+---
+name: dks_phrase
+version: ""
+sort: by_weight
+columns:
+  - text
+  - code
+  - weight
+use_preset_vocabulary: false
+...
+""";
+
+	public str dstPath{get;set;} = "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml";
+	public str srcPath{get;set;} = "D:/Program Files/Rime/User_Data/dks.dict.yaml";
+
+	public str dictName{get;set;} = "dks";
+
 	public DksMkPhrase() {
 		phraseMkr = new MkPhrase(line=>{
 			exput("\n");
@@ -32,8 +53,12 @@ public class DksMkPhrase: IDisposable {
 	}
 
 	//new DksMkPhrase().start();
-	// dotnet run -c Release > dks_phrase.txt
-	public code start(){
+//dotnet publish -c Release 
+// ./myexe > "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml"
+	public async Task<code> start(){
+		await new DictManager().ReaddDict(dictName, srcPath);
+		exput(yamlHead);
+		exput("\n");
 		return phraseMkr.start();
 	}
 
@@ -44,6 +69,7 @@ public class DksMkPhrase: IDisposable {
 /// <summary>
 /// 用只取首碼與次碼之造詞策略
 /// </summary>
+[Obsolete]
 public class DksMkPhrase12: IDisposable {
 	public DksMkPhrase12() {
 		phraseMkr = new MkPhrase(line=>{
