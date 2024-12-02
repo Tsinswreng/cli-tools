@@ -1,5 +1,4 @@
-﻿//dotnet sln add aot/aot.csproj
-//dotnet publish -c Release -r win-x86
+﻿//dotnet publish -c Release -r win-x86
 //dotnet publish -c Release -r android-arm64
 //dotnet publish -c Release -r linux-bionic-arm64
 //dumpbin /EXPORTS "e:/_code/rime-tools/aot/bin/Release/net9.0/win-x64/publish/aot.dll"
