@@ -19,8 +19,8 @@
 	<ItemGroup>
 		<!-- <NativeLibrary Include="lib/librime-lua5.4/dist/lib/rime.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))" /> -->
 		<!-- <LinkerArg Include="-Wl,\-\-gc-sections,-Wl,-s"/> -->
-		<ProjectReference Include="../../main/main.csproj" />
-		<Compile Include="../../shared/GlobalUsing.cs" />
+		<!-- <ProjectReference Include="../../main/main.csproj" /> -->
+		<Compile Include="../shared/GlobalUsing.cs" />
 	</ItemGroup>
 
 
