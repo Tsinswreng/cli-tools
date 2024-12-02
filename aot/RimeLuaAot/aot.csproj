@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>   <!-- Exe, WinExe, Library -->
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -11,6 +11,7 @@
 		<!-- <RuntimeIdentifier>win-x64</RuntimeIdentifier> -->
 		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
 		<RuntimeIdentifier>android-arm64</RuntimeIdentifier>
+		<RuntimeIdentifier>linux-bionic-arm64</RuntimeIdentifier>
 		<!-- 指定目标运行时环境，例如 linux-x64, linux-arm64, osx-x64 等 -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
