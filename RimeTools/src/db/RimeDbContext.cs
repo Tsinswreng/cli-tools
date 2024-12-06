@@ -64,7 +64,7 @@ public class RimeDbContext : DbContext{
 
 //dotnet ef migrations add InitialCreate
 //dotnet ef database update
-;
+
 // 創建遷移
 // dotnet ef migrations add _20241104214647_add_WordFreq
 

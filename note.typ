@@ -44,3 +44,20 @@ dotnet new sln -n cli-tools
 dotnet sln add aot/aot.csproj
 ```
 
+
+
+= efcore 遷移
+[2024-12-06T21:09:22.901+08:00_W49-5]
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+創建遷移
+dotnet ef migrations add _20241104214647_add_WordFreq
+
+移除未使用的遷移
+dotnet ef migrations remove
+
+回滾到指定遷移
+dotnet ef database update InitialCreate
+```
