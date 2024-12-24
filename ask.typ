@@ -590,3 +590,58 @@ public interface I2<T>{
 
 ==
 
+
+=
+[2024-12-15T15:04:33.259+08:00_W50-7]
+
+```
+
+    /home/tsinswreng/.nuget/packages/microsoft.dotnet.ilcompiler/9.0.0/build/Microsoft.NETCore.Native.Publish.targets(77,5): error : The PrivateSdkAssemblies ItemGroup is required for _ComputeAssembliesToCompileToNative
+
+Build failed with 1 error(s) and 6 warning(s) in 13.5s
+
+tsinswreng@Y7000P:/mnt/e/_code/cli-tools/RimeLuaAot$
+
+```
+;
+
+用中文解释
+
+==
+
+这个错误信息是在使用 .NET 9.0.0 版本的 Microsoft.DotNet.ILCompiler 包进行构建时出现的。
+
+具体错误信息如下:
+
+```
+/home/tsinswreng/.nuget/packages/microsoft.dotnet.ilcompiler/9.0.0/build/Microsoft.NETCore.Native.Publish.targets(77,5): error : The PrivateSdkAssemblies ItemGroup is required for _ComputeAssembliesToCompileToNative
+```
+
+这个错误表示构建过程中缺少一个名为 `PrivateSdkAssemblies` 的 ItemGroup,这个 ItemGroup 是 .NET 9.0.0 版本的 Microsoft.DotNet.ILCompiler 包所需要的。
+
+造成这个问题的可能原因有:
+
+1. 项目配置或引用存在问题,缺少必要的设置或引用。
+2. 使用的 .NET SDK 版本与 Microsoft.DotNet.ILCompiler 包的版本不匹配。
+3. 项目文件或构建脚本中可能存在问题。
+
+要解决这个问题,可以尝试以下步骤:
+
+1. 检查项目配置和引用,确保正确引用了所需的包和 SDK。
+2. 尝试更新 .NET SDK 到最新版本,或使用与 Microsoft.DotNet.ILCompiler 包版本匹配的 SDK。
+3. 检查项目文件或构建脚本,确保没有其他问题。
+4. 如果问题仍然存在,可以尝试在网上搜索相关的解决方案,或者向相关的社区寻求帮助。
+
+总之,这个错误是由于缺少 .NET 9.0.0 版本的 Microsoft.DotNet.ILCompiler 包所需的 `PrivateSdkAssemblies` ItemGroup 导致的。需要检查项目配置和引用,确保正确使用了匹配的 SDK 和包版本。
+
+
+
+=
+[2024-12-24T19:45:55.743+08:00_W52-2]
+
+我的c\#項目中有
+`global using Str = System.String;`
+
+並且我在代碼中大量使用了Str作爲類型別名。現在我想把Str改成str、應該怎麼做?
+
+==

@@ -16,12 +16,12 @@ public class DictLineKVsAdder : I_TxAdderAsync<DictLineKVs>{
 
 	}
 
-	public async Task<code> Begin(){
+	public async Task<zero> Begin(){
 		await kvAdder.Begin();
 		return 0;
 	}
 
-	public async Task<code> Commit(){
+	public async Task<zero> Commit(){
 		await kvAdder.Commit();
 		return 0;
 	}

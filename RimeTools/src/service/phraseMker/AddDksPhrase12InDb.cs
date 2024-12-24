@@ -31,12 +31,12 @@ public class MkEtAddPhraseInDb: IDisposable, I_Transaction, I_dictName{
 
 	public str dictName{get;set;} = "dks";
 
-	public async Task<code> Begin(){
+	public async Task<zero> Begin(){
 		await dictLineKVsAdder.Begin();
 		return 0;
 	}
 
-	public async Task<code> Commit(){
+	public async Task<zero> Commit(){
 		await dictLineKVsAdder.Commit();
 		return 0;
 	}

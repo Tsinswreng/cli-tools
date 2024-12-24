@@ -3,6 +3,12 @@ using System.Text;
 using tools;
 namespace service.parser.base_;
 
+
+public class ParseStatus{
+
+	
+}
+
 public class ParserBase: I_Parser{
 
 	public ParserBase(I_Iter<u8> byteReader){

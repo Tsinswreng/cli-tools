@@ -14,7 +14,7 @@ public class DictManager
 		return dictAdder.AddFromPath(path);
 	}
 
-	public async Task<int> DropDict(string dictName){
+	public async Task<zero> DropDict(string dictName){
 		await dictDropper.Begin();
 		await dictDropper.TxDropDict(dictName);
 		return await dictDropper.Commit();

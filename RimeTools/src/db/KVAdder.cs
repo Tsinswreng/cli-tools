@@ -48,14 +48,14 @@ public class KVAdder : I_TxAdderAsync<KV>, IDisposable{
 		dbCtx.Dispose();
 		conn.Dispose();
 		_cmd_add.Dispose();
-		cmd_lastId.Dispose();
-		trans.Dispose();
+		_cmd_lastId.Dispose();
+		_tx.Dispose();
 	}
 
 	protected System.Data.Common.DbCommand _cmd_add;
-	public System.Data.Common.DbCommand cmd_lastId{get;set;}
+	protected System.Data.Common.DbCommand _cmd_lastId{get;set;}
 
-	public IDbContextTransaction trans{get; set;}
+	protected IDbContextTransaction _tx{get; set;}
 
 	public RimeDbContext dbCtx{get; set;} = new();
 	public System.Data.Common.DbConnection conn{get; set;}
@@ -63,21 +63,21 @@ public class KVAdder : I_TxAdderAsync<KV>, IDisposable{
 	
 
 
-	public async Task<code> Begin(){
+	public async Task<zero> Begin(){
 		conn = dbCtx.Database.GetDbConnection();
 		await conn.OpenAsync();
 		_cmd_add = conn.CreateCommand();
 		_cmd_add.CommandText = sql_add;
 		_cmd_add.CommandType = System.Data.CommandType.Text;
 
-		cmd_lastId = conn.CreateCommand();
-		cmd_lastId.CommandText = sql_lastId;
-		cmd_lastId.CommandType = System.Data.CommandType.Text;
+		_cmd_lastId = conn.CreateCommand();
+		_cmd_lastId.CommandText = sql_lastId;
+		_cmd_lastId.CommandType = System.Data.CommandType.Text;
 
-		trans = await dbCtx.BeginTrans();
+		_tx = await dbCtx.BeginTrans();
 
-		_cmd_add.Transaction = trans.GetDbTransaction();
-		cmd_lastId.Transaction = trans.GetDbTransaction();
+		_cmd_add.Transaction = _tx.GetDbTransaction();
+		_cmd_lastId.Transaction = _tx.GetDbTransaction();
 
 		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.bl)}", DbType.String));
 		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.kType)}", DbType.String));
@@ -87,7 +87,7 @@ public class KVAdder : I_TxAdderAsync<KV>, IDisposable{
 		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vType)}", DbType.String));
 		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vStr)}", DbType.String));
 		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vI64)}", DbType.Int64));
-		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vF64)}", DbType.Single));
+		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vF64)}", DbType.Double));
 		_cmd_add.Parameters.Add(new SqliteParameter($"@{nameof(KV.vDesc)}", DbType.String));
 		return 0;
 	}
@@ -138,7 +138,7 @@ public class KVAdder : I_TxAdderAsync<KV>, IDisposable{
 		_cmd_add.Parameters[$"@{nameof(KV.vDesc)}"].Value = nc(e.vDesc);
 
 		await _cmd_add.ExecuteNonQueryAsync(); // 执行命令
-		var result = await cmd_lastId.ExecuteScalarAsync(); // 獲取lastId
+		var result = await _cmd_lastId.ExecuteScalarAsync(); // 獲取lastId
 
 		var ans = new RunResult{lastId = (i64)result};
 		return ans;
@@ -146,8 +146,8 @@ public class KVAdder : I_TxAdderAsync<KV>, IDisposable{
 		// return (I_lastId)t;
 	}
 
-	public async Task<code> Commit(){
-		trans.Commit();
+	public async Task<zero> Commit(){
+		_tx.Commit();
 		return 0;
 	}
 }

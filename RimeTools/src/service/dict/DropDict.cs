@@ -44,7 +44,7 @@ WHERE {nameof(KV.bl)} = @{nameof(KV.bl)}
 		return v;
 	}
 
-	public async Task<code> Begin(){
+	public async Task<zero> Begin(){
 		_conn = _dbCtx.Database.GetDbConnection();
 		await _conn.OpenAsync();
 		_cmd = _conn.CreateCommand();
@@ -56,12 +56,12 @@ WHERE {nameof(KV.bl)} = @{nameof(KV.bl)}
 		return 0;
 	}
 
-	public async Task<code> Commit(){
+	public async Task<zero> Commit(){
 		_trans.Commit();
 		return 0;
 	}
 
-	public async Task<code> TxDropDict(str name){
+	public async Task<zero> TxDropDict(str name){
 		var bl = parseBl(name);
 		_cmd.Parameters[$"@{nameof(KV.bl)}"].Value = nc(bl);
 		await _cmd.ExecuteNonQueryAsync();
