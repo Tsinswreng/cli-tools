@@ -1,4 +1,4 @@
-namespace tools.parser;
+namespace Shr.parser;
 
 public class ParserBase{
 	

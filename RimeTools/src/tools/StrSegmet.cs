@@ -1,4 +1,4 @@
-namespace tools;
+namespace Shr;
 
 public interface I_StrSegment{
 	str text{get;set;}

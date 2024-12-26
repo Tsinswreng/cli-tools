@@ -1,4 +1,4 @@
-namespace tools;
+namespace Shr;
 
 public static class Tools{
 

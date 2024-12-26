@@ -77,7 +77,7 @@ public class ReverseLookup: I_seekCode{
 	/// <returns></returns>
 	public IList< IList<str> > seekCode(IList<str> tshvq){
 		var list2d = tshvq.Select(e=>seekCode(e)).ToList();
-		var ans = tools.Tools.cartesianProduct(list2d);
+		var ans = Shr.Tools.cartesianProduct(list2d);
 		return ans;
 	}
 }

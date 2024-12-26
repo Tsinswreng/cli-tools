@@ -645,3 +645,22 @@ tsinswreng@Y7000P:/mnt/e/_code/cli-tools/RimeLuaAot$
 並且我在代碼中大量使用了Str作爲類型別名。現在我想把Str改成str、應該怎麼做?
 
 ==
+
+
+
+=
+[2024-12-24T20:24:00.400+08:00_W52-2]
+
+c\#中、我想表示函數沒有返回值、用甚麼方案好?
+
+1. 直接用void表示沒有返回值
+2. 起一個類型別名叫zero, global using zero = System.Byte; 然後return 0;
+3. 起一個類型別名叫zero, global using zero = System.Int32; 然後return 0;
+4. 做一個全局唯一對象Unit, 然後返回Unit
+5. 返回值類型聲明爲Object, 然後return null;
+6. 其他。由你補充
+
+由于void 不能作泛型參數、所以我不是很傾向用void。
+幫我出出主意
+
+==

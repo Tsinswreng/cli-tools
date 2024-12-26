@@ -1,4 +1,4 @@
-namespace tools.parser.IF;
+namespace Shr.parser.IF;
 
 public interface I_LineCol{
 	/// <summary>
