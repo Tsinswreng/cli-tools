@@ -1,7 +1,7 @@
-using IF;
 using model;
 using service;
 using service.phraseMker;
+using Shr.IF;
 
 //TODO 遷至service下
 namespace service;

@@ -1,6 +1,6 @@
 namespace service.parser.base_;
 
-using IF;
+using Shr.IF;
 using System.Text;
 
 public interface I_ParseState{
