@@ -15,10 +15,10 @@ public interface I_IdBlCtUt{
 
 public class IdBlCtUt: I_IdBlCtUt{
 	[Key]
-	
+
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public i64 id {get; set;}
-	
+
 	public str? bl {get; set;}
 	//註解不可被子類繼承
 	[DefaultValue("(strftime('%s', 'now') || substr(strftime('%f', 'now'), 4))")]

@@ -15,13 +15,13 @@ public class DictMetadata{
 
 
 
-/* 
+/*
 name: "n"
 Name: "N"
 
 public class Config
 {
-    
+
     public string name { get; set; }
 
     public string Name { get; set; }
