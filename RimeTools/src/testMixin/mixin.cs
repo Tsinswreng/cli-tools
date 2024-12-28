@@ -1,3 +1,5 @@
+// using System.Runtime.CompilerServices;
+
 // interface I_Env{
 // 	str schema_id{get;set;}
 // }
@@ -29,7 +31,7 @@
 
 // class ModIniterProp{
 // 	public static ModIniterProp inst = new ModIniterProp();
-// 	public Dictionary<Object, ModIniter> inst__modIniter = new();
+// 	public ConditionalWeakTable<Object, ModIniter> inst__modIniter = new();
 
 // }
 
@@ -37,14 +39,17 @@
 // 	//public ModIniter modIniter{get;set;} = new ModIniter();//接口中的实例属性不能具有初始值设定项。
 // 	public ModIniter modIniter{
 // 		get{
-// 			var inst = ModIniterProp.inst.inst__modIniter.GetValueOrDefault(this);
-// 			if(inst == null){
+// 			//var inst = ModIniterProp.inst.inst__modIniter.GetValueOrDefault(this);
+// 			var wMap = ModIniterProp.inst.inst__modIniter;
+// 			if(  !wMap.TryGetValue(this, out var inst)  ){
 // 				inst = new ModIniter();
 // 				ModIniterProp.inst.inst__modIniter.Add(this, inst);
 // 			}
 // 			return inst;
 // 		}set{
-// 			ModIniterProp.inst.inst__modIniter[this] = value;
+// 			//ModIniterProp.inst.inst__modIniter[this] = value;
+// 			var wMap = ModIniterProp.inst.inst__modIniter;
+// 			wMap.AddOrUpdate(this, value);
 // 		}
 // 	}
 // 	public ModIniter modIniter_(){
@@ -72,7 +77,7 @@
 
 // class Mod : ModBase, MixinI_isTimeToInit, IDisposable{
 // 	public void Dispose(){
-// 		ModIniterProp.inst.inst__modIniter.Remove(this);
+
 // 	}
 // 	~Mod(){
 // 		Dispose();
