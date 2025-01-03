@@ -6,7 +6,7 @@ namespace service.parser.base_;
 
 public class ParseStatus{
 
-	
+
 }
 
 public class ParserBase: I_Parser{

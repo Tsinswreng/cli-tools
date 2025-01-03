@@ -9,3 +9,4 @@ _c/
 .sln
 *-wal
 *-shm
+*.sqlite

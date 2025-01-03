@@ -1,5 +1,15 @@
 namespace Shr;
 
+
+static class IListExt{
+	public static T Pop<T>(this IList<T> z){
+		if(z.Count == 0){throw new InvalidOperationException("List is empty");}
+		var last = z[z.Count-1];
+		z.RemoveAt(z.Count-1);
+		return last;
+	}
+}
+
 public static class Tools{
 
 	/// <summary>
