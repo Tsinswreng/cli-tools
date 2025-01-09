@@ -1,7 +1,7 @@
 using model;
 using service;
 using service.phraseMker;
-using Shr.IF;
+using Shr.Stream.IF;
 
 //TODO 遷至service下
 namespace service;

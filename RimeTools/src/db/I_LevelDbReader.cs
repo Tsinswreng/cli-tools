@@ -1,5 +1,5 @@
 using Shr;
-using Shr.IF;
+using Shr.Stream.IF;
 
 namespace db;
 

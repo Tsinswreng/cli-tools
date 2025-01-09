@@ -1,6 +1,6 @@
 using System.Text;
 using Shr;
-using Shr.IF;
+using Shr.Stream.IF;
 namespace service.parser.base_;
 
 

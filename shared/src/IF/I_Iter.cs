@@ -1,10 +1,8 @@
-namespace Shr.IF;
-
+namespace Shr.Stream.IF;
 public interface I_Iter<out T> {
 	T getNext();
 	bool hasNext();
 }
-
 
 
 public interface I_process<T> {
@@ -13,3 +11,5 @@ public interface I_process<T> {
 	/// </summary>
 	Func<T, code> process { get; set; }
 }
+
+

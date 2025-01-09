@@ -1,5 +1,5 @@
 using service.parser.base_;
-using Shr.IF;
+using Shr.Stream.IF;
 
 namespace service.parser;
 
