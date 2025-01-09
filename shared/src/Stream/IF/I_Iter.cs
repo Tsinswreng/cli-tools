@@ -12,4 +12,3 @@ public interface I_process<T> {
 	Func<T, code> process { get; set; }
 }
 
-
