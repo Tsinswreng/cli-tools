@@ -1,3 +1,4 @@
+#pragma warning disable CS8981
 global using std = System;
 global using code = System.Int32;
 global using u8 = System.Byte;
@@ -14,20 +15,4 @@ global using str = System.String;
 global using unknown = System.Object;
 global using any = System.Dynamic.ExpandoObject;
 global using zero = System.Byte;
-//global using Map = System.Collections.Generic.Dictionary;
-//global using Map<K,V> = System.Collections.Generic.Dictionary<K,V>;
-
-
-
-
-/* 
-用str表示相當于js之string
-用String表示相當於js之String
-勿用new String()、須用字面量
- */
-
-
-/* 
-我的c++程序中嵌入了一個lua運行環境、可以在lua中調用c++程序中的接口。
-能不能讓lua調用c#的函數??
- */
+#pragma warning restore CS8981

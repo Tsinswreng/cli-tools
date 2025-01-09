@@ -1,4 +1,4 @@
-namespace Shr.parser.IF;
+namespace Shr.Text.IF;
 
 public interface I_LineCol{
 	/// <summary>
