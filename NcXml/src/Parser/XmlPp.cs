@@ -1,5 +1,6 @@
 namespace NcXml.Parser;
 
+using NcXml.Parser.IF;
 using System.Diagnostics.Contracts;
 using System.Text;
 using state_t = i32;
@@ -71,7 +72,7 @@ public class XmlPp{
 	}
 
 	protected word getNextU8Unchecked(){
-		var ans = nextU8.getNext();
+		var ans = nextU8.GetNext();
 		_status.pos++;
 		_status.curChar = ans;
 		return ans;
@@ -90,7 +91,7 @@ public class XmlPp{
 	}
 
 	protected bool hasNext(){
-		return nextU8.hasNext();
+		return nextU8.HasNext();
 	}
 
 

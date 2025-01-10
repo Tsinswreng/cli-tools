@@ -1,9 +1,9 @@
 namespace Shr.Parser;
 
 
-interface I_ParserExt{
+// interface I_ParserExt{
 
-}
+// }
 
 // static class ParserExt{
 // 	public static zero facio(this I_ParserExt parser){

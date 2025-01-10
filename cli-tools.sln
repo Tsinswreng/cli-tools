@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RimeTools", "RimeTools\Rime
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RimeLuaAot", "RimeLuaAot\RimeLuaAot.csproj", "{2E792B3E-A8AB-4244-8EDA-5ECFF583F190}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shared", "shared\shared.csproj", "{215EE03C-824A-4634-9D27-D212C7DEA107}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{2E792B3E-A8AB-4244-8EDA-5ECFF583F190}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E792B3E-A8AB-4244-8EDA-5ECFF583F190}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E792B3E-A8AB-4244-8EDA-5ECFF583F190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{215EE03C-824A-4634-9D27-D212C7DEA107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{215EE03C-824A-4634-9D27-D212C7DEA107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{215EE03C-824A-4634-9D27-D212C7DEA107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{215EE03C-824A-4634-9D27-D212C7DEA107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
