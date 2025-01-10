@@ -74,7 +74,7 @@ public class RimeDbContext : DbContext{
 // 回滾到指定遷移
 // dotnet ef database update InitialCreate
 
-/* 
+/*
 ts的class-transformer庫是直接把轉換邏輯函數寫進裝飾器裏的
 如
 class User {
@@ -87,7 +87,7 @@ c#的映射庫是怎麼做的?
 
 //AutoMapper:
 
-/* 
+/*
 using AutoMapper;
 
 public class User
@@ -122,7 +122,7 @@ var userDto = mapper.Map<UserDto>(user);
 */
 
 
-/* 
+/*
 using Newtonsoft.Json;
 using System;
 
