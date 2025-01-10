@@ -15,4 +15,4 @@ global using str = System.String;
 global using unknown = System.Object;
 global using any = System.Dynamic.ExpandoObject;
 global using zero = System.Byte;
-#pragma warning restore CS8981
+//#pragma warning restore CS8981
