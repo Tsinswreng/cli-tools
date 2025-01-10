@@ -1,4 +1,4 @@
-using Shr.IF;
+using Shr.Stream.IF;
 
 
 namespace NcXml.Parser;
