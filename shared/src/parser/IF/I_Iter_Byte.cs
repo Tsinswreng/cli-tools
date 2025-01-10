@@ -1,5 +1,5 @@
 using Shr.Stream.IF;
-namespace Shr.parser.IF;
+namespace Shr.Parser.IF;
 
 public interface I_Iter_Byte: I_Iter<u8>{
 

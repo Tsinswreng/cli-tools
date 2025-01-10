@@ -1,4 +1,4 @@
-namespace NcXml.parser;
+namespace NcXml.Parser;
 
 using S = i32;
 
@@ -13,7 +13,7 @@ public class ParseState{
 
 	protected static i32 i = 0;
 
-	
+
 	// public S TopSpace = i++;
 	// public S PropertyStr = i++;
 	// public S Tag = i++;
