@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:vm="clr-namespace:ngaq.ViewModels"
+		x:Class="ngaq.Views.Word.WordInfoView"
+		x:DataType="vm:Word.WordInfoViewModel"
+		Loaded="LoginView_Loaded"
+>
+
+	<UserControl.Styles>
+		<Style Selector="Grid.WordInfo > TextBox">
+			<Setter Property="BorderThickness" Value="0" />
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="Margin" Value="0" />
+		</Style>
+
+		<Style Selector="Grid.WordInfo > TextBlock.WordText">
+			<Setter Property="FontSize" Value="32" />
+		</Style>
+	</UserControl.Styles>
+	<Grid Classes="WordInfo">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<TextBlock Text="lang_id"/>
+		<TextBlock Text="{Binding Text}" Classes="WordText" />
+		<Border/>
+		<TextBlock Text="{Binding Mean}" />
+		<!-- <TextBox x:Name="TextBoxA" Grid.Row="1" Margin="10" Text="" /> -->
+		<Button Content="Button" Click="Button_Click"/>
+	</Grid>
+
+	<ItemsControl>
+		<ItemsControl.ItemsPanel>
+			<ItemsPanelTemplate>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+				</Grid>
+			</ItemsPanelTemplate>
+		</ItemsControl.ItemsPanel>
+		<ItemsControl.Items>
+
+
+
+		</ItemsControl.Items>
+	</ItemsControl>
+
+
+</UserControl>
