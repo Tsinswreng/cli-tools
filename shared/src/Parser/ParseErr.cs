@@ -1,6 +1,6 @@
 using Shr.Text.IF;
-using Shr.Parser.IF;
-namespace Shr.Parser;
+using Shr.Tokenizer.IF;
+namespace Shr.Tokenizer;
 
 public class ParseError :
 	Exception

@@ -1,4 +1,4 @@
-namespace Shr.Parser;
+namespace Shr.Tokenizer;
 
 
 // interface I_ParserExt{

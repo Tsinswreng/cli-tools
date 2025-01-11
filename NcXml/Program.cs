@@ -5,7 +5,7 @@
 using System;
 using System.IO;
 using NcXml;
-using Shr.Parser;
+using Shr.Tokenizer;
 
 
 static void ensureFile(string filePath){

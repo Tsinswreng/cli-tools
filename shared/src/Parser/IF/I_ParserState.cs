@@ -1,4 +1,4 @@
-namespace Shr.Parser.IF;
+namespace Shr.Tokenizer.IF;
 using status_t = u64;
 using word = u8;
 public interface I_ParserState{

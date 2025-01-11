@@ -1,5 +1,5 @@
-// 
-namespace Shr.Parser;
+//
+namespace Shr.Tokenizer;
 
 public static class ParserUtil{
 	public static bool Eq(u8 a, u8 b){

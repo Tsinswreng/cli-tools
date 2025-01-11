@@ -1,5 +1,5 @@
 using Shr.Text.IF;
-namespace Shr.Parser.IF;
+namespace Shr.Tokenizer.IF;
 
 public interface I_ParseErr{
 	public u64? Pos{get;set;}

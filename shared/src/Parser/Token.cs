@@ -1,6 +1,6 @@
-using Shr.Parser.IF;
+using Shr.Tokenizer.IF;
 
-namespace Shr.Parser;
+namespace Shr.Tokenizer;
 
 public struct Token:I_Token_u8Buf{
 	public u64 Code{get;set;}

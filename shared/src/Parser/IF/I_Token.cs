@@ -1,6 +1,6 @@
 using Shr.IF;
 
-namespace Shr.Parser.IF;
+namespace Shr.Tokenizer.IF;
 
 public interface I_Token_u8Buf:
 	I_Segment<IList<u8>>

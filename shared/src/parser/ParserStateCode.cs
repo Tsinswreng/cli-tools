@@ -1,12 +1,12 @@
-namespace NcXml.Parser;
+namespace Shr.Tokenizer;
 
 using S = i32;
 
-public class ParseState{
-	static protected ParseState _inst = null!;
-	public static ParseState getInst(){
+public class TokenizerStateCode{
+	static protected TokenizerStateCode _inst = null!;
+	public static TokenizerStateCode getInst(){
 		if(_inst == null){
-			_inst = new ParseState();
+			_inst = new TokenizerStateCode();
 		}
 		return _inst;
 	}

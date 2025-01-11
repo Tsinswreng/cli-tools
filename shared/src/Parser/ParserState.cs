@@ -1,6 +1,6 @@
-using Shr.Parser.IF;
+using Shr.Tokenizer.IF;
 
-namespace Shr.Parser;
+namespace Shr.Tokenizer;
 using status_t = u64;
 using word = u8;
 
