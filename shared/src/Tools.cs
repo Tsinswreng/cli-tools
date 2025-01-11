@@ -2,7 +2,7 @@ namespace Shr;
 
 
 static class IListExt{
-	public static T Pop<T>(this IList<T> z){
+	public static T pop<T>(this IList<T> z){
 		if(z.Count == 0){throw new InvalidOperationException("List is empty");}
 		var last = z[z.Count-1];
 		z.RemoveAt(z.Count-1);
@@ -11,7 +11,6 @@ static class IListExt{
 }
 
 public static class Tools{
-
 	/// <summary>
 	/// [[1], [2,3], [4,5]]// -> [[1,2,4],[1,2,5],[1,3,4],[1,3,5]]
 	/// [[1,2],[3],[4,5],[6]] // -> 1346,1356,2346,2356
@@ -39,7 +38,7 @@ public static class Tools{
 			if(stack.Count == arr.Count){
 				ans.Add(new List<T>(stack));
 				if(stack.Count == 0){return ans;}
-				stack.Pop();
+				stack.pop();
 				pos[i]++;
 				ipp=false;
 			}
@@ -49,7 +48,7 @@ public static class Tools{
 						pos[i] = 0;
 						i--;
 						if(stack.Count == 0){return ans;}
-						stack.Pop();
+						stack.pop();
 					}else{
 						pos[i] += 1;
 						break;

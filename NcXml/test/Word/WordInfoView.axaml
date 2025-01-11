@@ -8,6 +8,7 @@
 		x:DataType="vm:Word.WordInfoViewModel"
 		Loaded="LoginView_Loaded"
 >
+<!-- test -->
 
 	<UserControl.Styles>
 		<Style Selector="Grid.WordInfo > TextBox">

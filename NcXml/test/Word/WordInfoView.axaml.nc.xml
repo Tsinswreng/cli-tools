@@ -6,9 +6,10 @@
 		xmlns:vm="clr-namespace:ngaq.ViewModels"
 		x:Class="ngaq.Views.Word.WordInfoView"
 		x:DataType="vm:Word.WordInfoViewModel"
-		Loaded="LoginView_Loaded"
+		Loaded="LoginView_Loaded" ` load
 >
-
+<!-- test -->
+`test line comment
 	<UserControl.Styles>
 		<Style Selector="Grid.WordInfo > TextBox">
 			<Setter Property="BorderThickness" Value="0" />

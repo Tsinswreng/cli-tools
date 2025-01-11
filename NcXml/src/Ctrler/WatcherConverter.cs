@@ -40,9 +40,7 @@ public class WatcherConverter
 		return 0;
 	}
 
-
-
-	public zero Watch(){
+	public zero start(){
 		var watcher = this.watcher;
 		watcher.Changed += (a,b)=>{
 			//System.Console.WriteLine("File changed: " + b.FullPath);
