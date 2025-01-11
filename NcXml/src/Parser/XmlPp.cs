@@ -72,7 +72,7 @@ public class XmlPp{
 	}
 
 	protected word getNextU8Unchecked(){
-		var ans = nextU8.GetNext();
+		var ans = nextU8.getNext();
 		_status.pos++;
 		_status.curChar = ans;
 		return ans;
@@ -91,7 +91,7 @@ public class XmlPp{
 	}
 
 	protected bool hasNext(){
-		return nextU8.HasNext();
+		return nextU8.hasNext();
 	}
 
 

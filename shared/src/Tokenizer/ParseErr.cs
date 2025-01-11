@@ -11,6 +11,6 @@ public class ParseErr :
 	{
 	}
 
-	public u64? Pos{get;set;}
-	public I_LineCol? LineCol{get;set;}
+	public u64? pos{get;set;}
+	public I_LineCol? lineCol{get;set;}
 }

@@ -5,15 +5,15 @@ public interface I_TokenizerState{
 	/// <summary>
 	/// from 0
 	/// </summary>
-	public u64 Pos{get;set;}
-	public word CurChar{get;set;}
-	public status_t StatusCode{get;set;}
-	public IList<status_t> StatusStack{get;set;}
+	public u64 pos{get;set;}
+	public word curChar{get;set;}
+	public status_t statusCode{get;set;}
+	public IList<status_t> statusStack{get;set;}
 	/// <summary>
 	/// 臨時存放
 	/// </summary>
-	public IList<word> Buffer{get;set;}
+	public IList<word> buffer{get;set;}
 
-	public IList<I_Token> Tokens{get;set;}
+	public IList<I_Token> tokens{get;set;}
 
 }

@@ -14,40 +14,40 @@ public class NcXmlTokenizer
 	:I_Tokenizer
 {
 
-	public I_Iter_Byte ByteIter{get;set;}
-	public I_TokenizerState State{get;set;} = new TokenizerState();
+	public I_Iter_Byte byteIter{get;set;}
+	public I_TokenizerState state{get;set;} = new TokenizerState();
 
 	public NcXmlTokenizer(I_Iter_Byte iter){
-		ByteIter = iter;
+		byteIter = iter;
 	}
 
-	public IList<u8> LineComment{get;set;} = [(u8)'`']; // temp
-	public IList<u8> Trope{get;set;} = [(u8)'\\'];
+	public IList<u8> lineComment{get;set;} = [(u8)'`']; // temp
+	public IList<u8> trope{get;set;} = [(u8)'\\'];
 
-	public zero AddToken(I_Token token){
-		(State)
-			.Tokens.Add(token);
+	public zero addToken(I_Token token){
+		(state)
+			.tokens.Add(token);
 		return 0;
 	}
 
-	public zero AddWhite(){
+	public zero addWhite(){
 		var z = this;
-		var token = z.ReadWhite();
-		z.AddToken(token);
+		var token = z.readWhite();
+		z.addToken(token);
 		return 0;
 	}
 
 	public zero Start(){
 		var z = this;
-		z.AddWhite();
-		var cur = (char)z.State.CurChar;
+		z.addWhite();
+		var cur = (char)z.state.curChar;
 		switch(cur){
 			case '<':
 
 			break;
 			//case 單行註釋首字
 			default:
-				z.Error("Unexpected character: " + cur);
+				z.error("Unexpected character: " + cur);
 			break;
 		}
 		return 0;
@@ -62,12 +62,12 @@ public class NcXmlTokenizer
 	public zero HandleLAngleBracket(){
 		var z = this;
 		var lAngleBracket = new Token();
-		lAngleBracket.Data.Add(z.State.CurChar);
-		z.AddToken(lAngleBracket);
+		lAngleBracket.data.Add(z.state.curChar);
+		z.addToken(lAngleBracket);
 
-		var white = z.ReadWhite();
-		z.AddToken(white);
-		var cur = (char)z.State.CurChar;
+		var white = z.readWhite();
+		z.addToken(white);
+		var cur = (char)z.state.curChar;
 		switch(cur){
 			//case '!':
 		}

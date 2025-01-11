@@ -7,10 +7,10 @@ public class ByteStreamReader
 {
 
 	#region impl
-	public bool HasNext(){
+	public bool hasNext(){
 		return Pos < ByteSize;
 	}
-	public u8 GetNext() {
+	public u8 getNext() {
 		if(ChunkPos >= CurChunk.Count){
 			CurChunk = ReadNextChunkAsy().Result;
 			ChunkPos = 0;
