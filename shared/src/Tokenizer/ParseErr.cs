@@ -2,11 +2,11 @@ using Shr.Text.IF;
 using Shr.Tokenizer.IF;
 namespace Shr.Tokenizer;
 
-public class ParseError :
+public class ParseErr :
 	Exception
 	,I_ParseErr
 {
-	public ParseError(string message) :
+	public ParseErr(string message) :
 		base(message)
 	{
 	}

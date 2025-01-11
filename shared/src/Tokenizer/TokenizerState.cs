@@ -4,8 +4,8 @@ namespace Shr.Tokenizer;
 using status_t = u64;
 using word = u8;
 
-public class ParserState:
-	I_ParserState
+public class TokenizerState:
+	I_TokenizerState
 {
 	/// <summary>
 	/// from 0
@@ -18,5 +18,7 @@ public class ParserState:
 	/// 臨時存放
 	/// </summary>
 	public IList<word> Buffer{get;set;} = new List<word>();
+
+	public IList<I_Token> Tokens{get;set;} = new List<I_Token>();
 
 }

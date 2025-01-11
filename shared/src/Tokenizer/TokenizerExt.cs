@@ -35,7 +35,12 @@ public static class Ext_Tokenizer{
 	// 	}
 	// }
 
-	public static I_Token_u8Buf ReadWhite(this I_Tokenizer z){
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="z"></param>
+	/// <returns></returns>
+	public static I_Token ReadWhite(this I_Tokenizer z){
 		var ans = new Token();
 		ans.Code = 0;
 		ans.Start = z.State.Pos;
@@ -49,6 +54,16 @@ public static class Ext_Tokenizer{
 		}
 		ans.End = z.State.Pos;
 		return ans;
+	}
+
+	public static Exception MkErr(this I_Tokenizer z, str msg){
+		var err = new ParseErr(msg);
+		err.Pos = z.State.Pos;
+		return err;
+	}
+
+	public static zero Error(this I_Tokenizer z, str msg){
+		throw z.MkErr(msg);
 	}
 
 
