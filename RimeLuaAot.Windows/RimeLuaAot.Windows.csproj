@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>   <!-- Exe, WinExe, Library -->
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+		<PublishAot>true</PublishAot>
+		<SelfContained>true</SelfContained>
+		<!-- 建议设置为 true，生成独立的可执行文件 -->
+		<!-- <RuntimeIdentifier>win-x64</RuntimeIdentifier> -->
+		<RuntimeIdentifier>win-x86</RuntimeIdentifier>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<!--  dotnet publish -c Release -r linux-bionic-arm64  -->
+		<!-- 指定目标运行时环境，例如 linux-x64, linux-arm64, osx-x64 等 -->
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<!-- <NativeLibrary Include="lib/librime-lua5.4/dist/lib/rime.lib" Condition="$(RuntimeIdentifier.StartsWith('win'))" /> -->
+		<!-- <LinkerArg Include="-Wl,\-\-gc-sections,-Wl,-s"/> -->
+		<!-- <ProjectReference Include="../../main/main.csproj" /> -->
+		<Compile Include="../shared/GlobalUsing.cs" />
+	</ItemGroup>
+
+<!-- 2024-12-15T15:06:11.644+08:00_W50-7 -->
+	<ItemGroup>
+		<PrivateSdkAssemblies Include="$(MSBuildThisFileDirectory)..\tools\Microsoft.DotNet.ILCompiler\lib\netstandard2.0\*.dll" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.2" />
+	</ItemGroup>
+
+
+</Project>
