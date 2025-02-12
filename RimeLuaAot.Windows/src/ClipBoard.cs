@@ -56,5 +56,5 @@ class ClipBoard
 	}
 }
 
-System.Console.WriteLine("Hello World!");
-ClipBoard.Main();
+// System.Console.WriteLine("Hello World!");
+// ClipBoard.Main();
