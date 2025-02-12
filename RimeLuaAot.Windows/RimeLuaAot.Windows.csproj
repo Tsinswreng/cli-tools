@@ -22,7 +22,7 @@
 		<!-- <LinkerArg Include="-Wl,\-\-gc-sections,-Wl,-s"/> -->
 		<!-- <ProjectReference Include="../../main/main.csproj" /> -->
 		<Compile Include="../shared/GlobalUsing.cs" />
-		<ProjectReference Include="../RimeLuaAot/RimeLuaAot.csproj" />
+		<ProjectReference Include="../RimeLuaAot/RimeLuaAot.csproj"/>
 	</ItemGroup>
 
 <!-- 2024-12-15T15:06:11.644+08:00_W50-7 -->

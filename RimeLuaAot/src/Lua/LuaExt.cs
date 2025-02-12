@@ -6,7 +6,7 @@ using static Lua.Lua_5_4;
 using System.Globalization;
 namespace Lua;
 
-unsafe public static class LuaExt_5_4{
+unsafe public partial class LuaExt_5_4{
 	/// <summary>
 	/// setTimeout(fn:Function, delay:number):void
 	/// </summary>
@@ -40,6 +40,6 @@ unsafe public static class LuaExt_5_4{
 
 }
 
-/* 
+/*
 lua能不能把多個函數傳給c++、然後不阻塞線程繼續執行後面的內容。c++先不執行它、等到合適的時機再執行lua傳入的函數?
  */

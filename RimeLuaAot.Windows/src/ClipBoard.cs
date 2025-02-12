@@ -80,7 +80,7 @@ namespace RimeLuaAot.Windows
 			CloseClipboard();
 		}
 
-		public static string GetText()
+		public static string? GetText()
 		{
 			// 打開剪貼板
 			if (!OpenClipboard(IntPtr.Zero))

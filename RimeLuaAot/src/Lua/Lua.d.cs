@@ -23,7 +23,7 @@ unsafe public class Lua_5_4{
 	public static extern void lua_pushboolean(Lua_State L, int b);
 
 	[DllImport(DllPath, EntryPoint = nameof(lua_pushstring), CallingConvention = CallingConvention.Cdecl)]
-	public static extern void lua_pushstring(Lua_State L, string s);
+	public static extern void lua_pushstring(Lua_State L, byte* s);
 
 	[DllImport(DllPath, EntryPoint = nameof(lua_pushlightuserdata), CallingConvention = CallingConvention.Cdecl)]
 	public static extern void lua_pushlightuserdata(Lua_State L, IntPtr p);
@@ -52,7 +52,7 @@ unsafe public class Lua_5_4{
 	/// 取 傳ʹ參ʹ數
 	/// </summary>
 	/// <param name="L"></param>
-	/// <returns></returns>	
+	/// <returns></returns>
 	[DllImport(DllPath, EntryPoint = nameof(lua_gettop), CallingConvention = CallingConvention.Cdecl)]
 	public static extern int lua_gettop(Lua_State L);
 
@@ -99,6 +99,6 @@ unsafe public class Lua_5_4{
 
 }
 
-/* 
+/*
 請你根據lua5.4的lua.h中 導出的函數、補充此代碼。用c#寫一遍lua函數的類型聲明
 */

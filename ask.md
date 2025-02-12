@@ -219,3 +219,41 @@ namespace RimeLuaAot.Windows
 	}
 }
 ```
+
+
+#
+[2025-02-12T22:14:02.664+08:00_W7-3]
+c 調用lua api push_string、把自己的堆上的字串傳給lua後、要不要釋放指針?
+##
+在使用Lua API將字符串從C傳遞到Lua時，一般需要注意內存管理的問題。對於使用`lua_pushstring`或`lua_pushlstring`等函數將字符串推送到Lua的情況，Lua會處理這些字符串的內存。
+
+### 具體情況如下：
+
+1. **使用`lua_pushstring`**：
+   - 當你使用`lua_pushstring`將字符串推入Lua堆棧時，Lua會將這個字符串的副本存儲在自己的內部結構中。這意味著你可以在推送字符串後安全地釋放原始字符串指針，因為Lua會處理這些字符串的內存管理。
+   - 例如：
+     ```c
+     const char* myString = "Hello, World!";
+     lua_pushstring(L, myString);
+     // 這裡可以安全釋放myString，因為Lua已經獲取了它的副本。
+     ```
+
+2. **使用`lua_pushlstring`**：
+   - 當使用`lua_pushlstring`時，你也同樣可以釋放傳遞的指針，因為Lua會複製指定長度的字符串並將其存儲到堆中。
+   - 例如：
+     ```c
+     const char* myString = "Hello, Lua!";
+     lua_pushlstring(L, myString, strlen(myString));
+     // 這裡同樣可以釋放myString。
+     ```
+
+### 總結：
+- 對於使用Lua API的`lua_pushstring`或`lua_pushlstring`，在成功推送字符串後，可以安全地釋放原始字符串的指針。Lua會在其內部保存這些字符串的副本，不會影響原始的內存。
+
+
+
+#
+[2025-02-12T22:32:02.554+08:00_W7-3]
+
+c#中 項目B通過ProjectReference Include引用項目A、兩個項目輸出類型都是lib、都用AOT編譯。
+兩個項目中都有UnmanagedCallersOnly導出的符號。我在項目B中執行dotnet publish ... 編譯、但是分別產出了A.dll和B.dll。能不能把兩個項目的導出的符號放到一個dll裏?
