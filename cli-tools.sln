@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RimeLuaAot", "RimeLuaAot\Ri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shared", "shared\shared.csproj", "{215EE03C-824A-4634-9D27-D212C7DEA107}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RimeLuaAot.Windows", "RimeLuaAot.Windows\RimeLuaAot.Windows.csproj", "{51BAA6AD-0878-4E39-B646-8B4177E6BC3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RimeLuaAot.Test", "RimeLuaAot.Test\RimeLuaAot.Test.csproj", "{72A2E2D9-7491-4C35-9F90-6D3130AB2D39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{215EE03C-824A-4634-9D27-D212C7DEA107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{215EE03C-824A-4634-9D27-D212C7DEA107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{215EE03C-824A-4634-9D27-D212C7DEA107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51BAA6AD-0878-4E39-B646-8B4177E6BC3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BAA6AD-0878-4E39-B646-8B4177E6BC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BAA6AD-0878-4E39-B646-8B4177E6BC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BAA6AD-0878-4E39-B646-8B4177E6BC3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A2E2D9-7491-4C35-9F90-6D3130AB2D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A2E2D9-7491-4C35-9F90-6D3130AB2D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A2E2D9-7491-4C35-9F90-6D3130AB2D39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A2E2D9-7491-4C35-9F90-6D3130AB2D39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
