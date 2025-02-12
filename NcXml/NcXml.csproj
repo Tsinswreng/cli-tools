@@ -1,4 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!-- TODO
+=
+多 擴展名ˇʹ支持、 *.nc.* 如 .nc.axaml
+=
+雙向監聽 㕥配合LSP插件之改
+如 緟命名旹、LSP蜮將axaml中之引用 一並ᵈ緟命名。肰此操作不及.nc.axaml中
+ -->
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>

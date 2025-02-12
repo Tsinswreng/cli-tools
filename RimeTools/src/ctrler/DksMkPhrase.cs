@@ -7,7 +7,7 @@ namespace ctrler;
 public class DksMkPhrase: IDisposable{
 
 
-	public str yamlHead{get;set;} = 
+	public str yamlHead{get;set;} =
 """
 ---
 name: dks_phrase
@@ -42,7 +42,7 @@ use_preset_vocabulary: false
 		Dispose();
 	}
 	public void Dispose() {
-	
+
 	}
 
 	public I_PhraseMkr phraseMkr{get;set;}
@@ -53,7 +53,7 @@ use_preset_vocabulary: false
 	}
 
 	//new DksMkPhrase().start();
-//dotnet publish -c Release 
+//dotnet publish -c Release
 // ./bin/Release/net8.0/RimeTools.exe > "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml"
 	public async Task<code> start(){
 		await new DictManager().ReaddDict(dictName, srcPath);
@@ -90,7 +90,7 @@ public class DksMkPhrase12: IDisposable {
 		Dispose();
 	}
 	public void Dispose() {
-	
+
 	}
 
 	public I_PhraseMkr phraseMkr{get;set;}

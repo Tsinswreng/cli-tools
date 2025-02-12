@@ -13,6 +13,7 @@ public class WatcherConverter
 		_initWatcher();
 		ncXmlConverter = _ncXmlConverterImpl;
 		ncXmlFileNameConverter = _ncXmlConverterImpl;
+		searchPattern = "*"+Conf.getInst().suffix;
 	}
 
 	public void Dispose(){
@@ -31,16 +32,27 @@ public class WatcherConverter
 
 	public I_convertNcXmlFile ncXmlConverter{get;set;}
 	public I_convertNcXmlFileName ncXmlFileNameConverter{get;set;}
+	public str searchPattern{get;set;}
 
 	protected zero _initWatcher(){
 		watcher.Path = path;
-		watcher.Filter = "*"+Conf.getInst().suffix; // "*.nc.xml";
+		watcher.Filter = searchPattern; // "*.nc.xml";
 		watcher.IncludeSubdirectories = true;
 		watcher.NotifyFilter = NotifyFilters.LastWrite;
 		return 0;
 	}
 
+	public zero initCompile(){
+		var srcFiles = Directory.GetFiles(path, searchPattern, SearchOption.AllDirectories);
+		foreach (var srcFile in srcFiles){
+			var targetPath = ncXmlFileNameConverter.convertFileName(srcFile);
+			ncXmlConverter.convertFile(srcFile, targetPath);
+		}
+		return 0;
+	}
+
 	public zero start(){
+		initCompile();
 		var watcher = this.watcher;
 		watcher.Changed += (a,b)=>{
 			//System.Console.WriteLine("File changed: " + b.FullPath);

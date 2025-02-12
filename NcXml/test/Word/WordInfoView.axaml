@@ -6,7 +6,7 @@
 		xmlns:vm="clr-namespace:ngaq.ViewModels"
 		x:Class="ngaq.Views.Word.WordInfoView"
 		x:DataType="vm:Word.WordInfoViewModel"
-		Loaded="LoginView_Loaded"
+		Loaded="LoginView_Loaded" 
 >
 <!-- test -->
 

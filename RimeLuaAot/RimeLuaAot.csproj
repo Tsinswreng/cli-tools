@@ -29,6 +29,9 @@
 	<ItemGroup>
 		<PrivateSdkAssemblies Include="$(MSBuildThisFileDirectory)..\tools\Microsoft.DotNet.ILCompiler\lib\netstandard2.0\*.dll" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.2" />
+	</ItemGroup>
 
 
 </Project>
