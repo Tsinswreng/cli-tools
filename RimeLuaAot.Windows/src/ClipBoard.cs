@@ -2,114 +2,122 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-public class WinClipBoard
+namespace RimeLuaAot.Windows
 {
-	[DllImport("user32.dll")]
-	public static extern bool OpenClipboard(IntPtr hWndNewOwner);
-
-	[DllImport("user32.dll")]
-	public static extern bool CloseClipboard();
-
-	[DllImport("user32.dll")]
-	public static extern IntPtr GetClipboardData(uint uFormat);
-
-	[DllImport("user32.dll")]
-	public static extern bool IsClipboardFormatAvailable(uint format);
-
-	[DllImport("user32.dll")]
-	public static extern IntPtr GlobalLock(IntPtr hGlobal);
-
-	[DllImport("user32.dll")]
-	public static extern bool GlobalUnlock(IntPtr hGlobal);
-
-	[DllImport("kernel32.dll")]
-	public static extern int GlobalSize(IntPtr hGlobal);
-
-	[DllImport("user32.dll")]
-	public static extern bool EmptyClipboard();
-
-	[DllImport("kernel32.dll")]
-	public static extern IntPtr GlobalAlloc(uint uFlags, UIntPtr dwBytes);
-
-	[DllImport("kernel32.dll")]
-	public static extern IntPtr GlobalFree(IntPtr hGlobal);
-
-	const uint CF_TEXT = 1; // 文本格式
-	const uint CF_UNICODETEXT = 13; // Unicode 文本格式
-	const uint GMEM_MOVEABLE = 0x0002;
-
-	public static void Main()
+	public unsafe class WinClipBoard
 	{
-		// 讀取剪貼板內容
-		ReadFromClipboard();
+		[DllImport("user32.dll")]
+		private static extern bool OpenClipboard(IntPtr hWndNewOwner);
 
-		// 寫入剪貼板內容
-		string textToWrite = "這是一個測試的剪貼板內容。";
-		WriteToClipboard(textToWrite);
-		Console.WriteLine("已將內容寫入剪貼板。");
+		[DllImport("user32.dll")]
+		private static extern bool CloseClipboard();
 
-		// 再次讀取剪貼板內容
-		ReadFromClipboard();
-	}
+		[DllImport("user32.dll")]
+		private static extern bool EmptyClipboard();
 
-	public static void ReadFromClipboard()
-	{
-		if (OpenClipboard(IntPtr.Zero))
+		[DllImport("user32.dll")]
+		private static extern IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
+
+		[DllImport("user32.dll")]
+		private static extern IntPtr GetClipboardData(uint uFormat);
+
+		[DllImport("user32.dll")]
+		private static extern bool IsClipboardFormatAvailable(uint format);
+
+		[DllImport("kernel32.dll")]
+		private static extern IntPtr GlobalAlloc(uint uFlags, UIntPtr dwBytes);
+
+		[DllImport("kernel32.dll")]
+		private static extern IntPtr GlobalLock(IntPtr hMem);
+
+		[DllImport("kernel32.dll")]
+		private static extern bool GlobalUnlock(IntPtr hMem);
+
+		private const uint CF_UNICODETEXT = 13; // Unicode 文本格式
+		private const uint GMEM_MOVEABLE = 0x0002;
+
+		public static void SetText(string text)
 		{
-			// 檢查是否有文本格式的內容
-			if (IsClipboardFormatAvailable(CF_UNICODETEXT))
-			{
-				IntPtr hGlobal = GetClipboardData(CF_UNICODETEXT);
-				IntPtr lockedData = GlobalLock(hGlobal);
-				int size = GlobalSize(hGlobal);
-				string clipboardText = Marshal.PtrToStringUni(lockedData, size / 2); // 由於是 Unicode
+			if (text == null)
+				return;
 
-				GlobalUnlock(hGlobal);
-				Console.WriteLine("剪貼板內容: " + clipboardText);
-			}
-			else
+			// 打開剪貼板
+			if (!OpenClipboard(IntPtr.Zero))
+				return;
+
+			// 清空剪貼板
+			EmptyClipboard();
+
+			// 將字符串轉換為 UTF-16（Unicode）
+			int size = (text.Length + 1) * sizeof(char); // +1 是為了結尾的空字符
+			IntPtr hGlobal = GlobalAlloc(GMEM_MOVEABLE, (UIntPtr)size);
+			if (hGlobal == IntPtr.Zero)
 			{
-				Console.WriteLine("剪貼板中沒有可用的文本內容。");
+				CloseClipboard();
+				return;
 			}
+
+			IntPtr pGlobal = GlobalLock(hGlobal);
+			if (pGlobal == IntPtr.Zero)
+			{
+				GlobalUnlock(hGlobal);
+				CloseClipboard();
+				return;
+			}
+
+			// 複製字符串到內存
+			Marshal.Copy(text.ToCharArray(), 0, pGlobal, text.Length);
+			// 添加結尾空字符
+			Marshal.WriteInt16(pGlobal, text.Length * sizeof(char), 0);
+
+			// 解鎖內存
+			GlobalUnlock(hGlobal);
+
+			// 將內存句柄設置到剪貼板
+			SetClipboardData(CF_UNICODETEXT, hGlobal);
+
+			// 關閉剪貼板
 			CloseClipboard();
 		}
-		else
+
+		public static string GetText()
 		{
-			Console.WriteLine("無法打開剪貼板。");
+			// 打開剪貼板
+			if (!OpenClipboard(IntPtr.Zero))
+				return null;
+
+			// 檢查剪貼板是否包含 Unicode 格式
+			if (!IsClipboardFormatAvailable(CF_UNICODETEXT))
+			{
+				CloseClipboard();
+				return null;
+			}
+
+			// 獲取剪貼板數據
+			IntPtr hGlobal = GetClipboardData(CF_UNICODETEXT);
+			if (hGlobal == IntPtr.Zero)
+			{
+				CloseClipboard();
+				return null;
+			}
+
+			IntPtr pGlobal = GlobalLock(hGlobal);
+			if (pGlobal == IntPtr.Zero)
+			{
+				CloseClipboard();
+				return null;
+			}
+
+			// 讀取字符數量
+			string result = Marshal.PtrToStringUni(pGlobal);
+
+			// 解鎖內存
+			GlobalUnlock(hGlobal);
+
+			// 關閉剪貼板
+			CloseClipboard();
+
+			return result;
 		}
 	}
-
-	public static void WriteToClipboard(string text)
-	{
-		IntPtr hGlobal = IntPtr.Zero;
-
-		try
-		{
-			// 將文本轉換為 Unicode 字符數組
-			byte[] bytes = Encoding.Unicode.GetBytes(text);
-			IntPtr hGlobalAlloc = GlobalAlloc(GMEM_MOVEABLE, (UIntPtr)(bytes.Length + 2));
-			hGlobal = GlobalLock(hGlobalAlloc);
-
-			Marshal.Copy(bytes, 0, hGlobal, bytes.Length);
-			Marshal.WriteByte(hGlobal, bytes.Length, 0); // 最後加上空字節
-
-			GlobalUnlock(hGlobalAlloc);
-
-			if (OpenClipboard(IntPtr.Zero))
-			{
-				EmptyClipboard();
-				SetClipboardData(CF_UNICODETEXT, hGlobalAlloc);
-			}
-		}
-		finally
-		{
-			if (hGlobal != IntPtr.Zero)
-			{
-				GlobalFree(hGlobal);
-			}
-		}
-	}
-
-	[DllImport("user32.dll")]
-	public static extern IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
 }
