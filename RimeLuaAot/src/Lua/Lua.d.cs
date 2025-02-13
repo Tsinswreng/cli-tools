@@ -6,7 +6,8 @@ namespace Lua;
 using Lua_State = System.IntPtr;
 
 unsafe public class Lua_5_4{
-	public const string DllPath = "D:/ENV/Rime/weasel-0.15.0/rime.dll";
+	//public const string DllPath = "D:/ENV/Rime/weasel-0.15.0/rime.dll";
+	public const string DllPath = "rime.dll";
 
 	[DllImport(DllPath,EntryPoint = nameof(lua_pushnumber),CallingConvention = CallingConvention.Cdecl)]
 	public static extern void lua_pushnumber(Lua_State L, double n);
