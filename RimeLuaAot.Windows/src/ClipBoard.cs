@@ -109,7 +109,7 @@ namespace RimeLuaAot.Windows
 			}
 
 			// 讀取字符數量
-			string result = Marshal.PtrToStringUni(pGlobal);
+			var result = Marshal.PtrToStringUni(pGlobal);
 
 			// 解鎖內存
 			GlobalUnlock(hGlobal);

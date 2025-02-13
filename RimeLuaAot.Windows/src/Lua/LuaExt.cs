@@ -21,11 +21,20 @@ unsafe public partial class LuaExt_5_4_Win : LuaExt_5_4{
 
 	[UnmanagedCallersOnly(EntryPoint = nameof(WriteClipBoard_Win), CallConvs = new[] { typeof(CallConvCdecl) })]
 	public static i32 WriteClipBoard_Win(Lua_State L){
-		var cStr = (byte*)Lua_5_4.lua_tostring(L, 1);
+		u64 len = 0;
+		byte* cStr = (byte*)Lua_5_4.luaL_checklstring(L, 1, &len);
+		if(cStr == null){
+			return 0;
+		}
 		var text = CStrUtil.cStrToCsStr(cStr);
 		if(text != null){
 			WinClipBoard.SetText(text);
 		}
+		return 0;
+	}
+
+	static zero log(object info){
+		File.AppendAllText("D:/Program Files/Rime/User_Data/TswG_log1", info+"\n");
 		return 0;
 	}
 }
