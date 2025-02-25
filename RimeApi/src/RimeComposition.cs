@@ -4,9 +4,9 @@ namespace Rime.Api;
 
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeComposition{
-	int length;
-	int cursor_pos; // 光標 遊標
-	int sel_start; //select?
-	int sel_end;
-	byte* preedit;
+	public int length;
+	public int cursor_pos; // 光標 遊標
+	public int sel_start; //select?
+	public int sel_end;
+	public byte* preedit;
 }

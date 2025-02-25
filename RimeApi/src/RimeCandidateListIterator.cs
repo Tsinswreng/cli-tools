@@ -4,7 +4,7 @@ namespace Rime.Api;
 
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeCandidateListIterator{
-	void* ptr;
-	int index;
-	RimeCandidate candidate;
+	public void* ptr;
+	public int index;
+	public RimeCandidate candidate;
 }

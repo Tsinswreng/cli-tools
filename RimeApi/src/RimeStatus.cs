@@ -6,15 +6,15 @@ namespace Rime.Api;
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeStatus{
-	int data_size;
+	public int data_size;
 	// v0.9
-	byte* schema_id;
-	byte* schema_name;
-	Bool is_disabled;
-	Bool is_composing;
-	Bool is_ascii_mode;
-	Bool is_full_shape;
-	Bool is_simplified;
-	Bool is_traditional;
-	Bool is_ascii_punct;
+	public byte* schema_id;
+	public byte* schema_name;
+	public Bool is_disabled;
+	public Bool is_composing;
+	public Bool is_ascii_mode;
+	public Bool is_full_shape;
+	public Bool is_simplified;
+	public Bool is_traditional;
+	public Bool is_ascii_punct;
 }

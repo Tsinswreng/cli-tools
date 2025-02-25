@@ -4,5 +4,5 @@ namespace Rime.Api;
 
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeConfig{
-	void* ptr;
+	public void* ptr;
 }

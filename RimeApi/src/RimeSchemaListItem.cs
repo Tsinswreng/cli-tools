@@ -4,7 +4,7 @@ namespace Rime.Api;
 
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeSchemaListItem{
-	byte* schema_id;
-	byte* name;
-	void* reserved;
+	public byte* schema_id;
+	public byte* name;
+	public void* reserved;
 }

@@ -4,7 +4,7 @@ namespace Rime.Api;
 
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeCandidate{
-	byte* text; //char*
-	byte* comment; //char*
-	void* reserved;
+	public byte* text; //char*
+	public byte* comment; //char*
+	public void* reserved;
 }

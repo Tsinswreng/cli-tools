@@ -7,7 +7,7 @@ namespace Rime.Api;
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeCommit{
-	int data_size;
+	public int data_size;
 	// v0.9
-	byte* text;
+	public byte* text;
 }

@@ -4,9 +4,9 @@ namespace Rime.Api;
 
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeConfigIterator{
-	void* list;
-	void* map;
-	int index;
-	byte* key; //const char*
-	byte* path; //const char*
+	public void* list;
+	public void* map;
+	public int index;
+	public byte* key; //const char*
+	public byte* path; //const char*
 }
