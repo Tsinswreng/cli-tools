@@ -10,3 +10,4 @@ _c/
 *-wal
 *-shm
 *.sqlite
+_private/

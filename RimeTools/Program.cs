@@ -7,6 +7,9 @@ Console.OutputEncoding = std.Text.Encoding.UTF8;
 
 await new DksMkPhrase().start();
 
+
+
+// 簡碼詞方案 測試
 // dotnet run -c Release < "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml"  470983
 //dotnet run -c Release < "E:/_code/cli-tools/RimeTools/dks_phrase12.txt" 398814
 // var map = new Dictionary<str, u64>();

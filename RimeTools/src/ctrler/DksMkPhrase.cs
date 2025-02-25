@@ -54,14 +54,13 @@ use_preset_vocabulary: false
 
 	//new DksMkPhrase().start();
 //dotnet publish -c Release
-// ./bin/Release/net8.0/RimeTools.exe > "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml"
+// ./bin/Release/net9.0/RimeTools.exe > "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml"
 	public async Task<code> start(){
 		await new DictManager().ReaddDict(dictName, srcPath);
 		exput(yamlHead);
 		exput("\n");
 		return phraseMkr.start();
 	}
-
 }
 
 
