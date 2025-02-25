@@ -10,5 +10,4 @@ unsafe public delegate void RimeNotificationHandler(
 	// [MarshalAs(UnmanagedType.LPStr)] string message_value    // 同上
 	,byte* message_type // const char*
 	,byte* message_value // const char*
-
 );
