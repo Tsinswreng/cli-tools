@@ -2,18 +2,18 @@
 using static System.Runtime.InteropServices.NativeMemory;
 using Rime.Api;
 using Rime.Api.FnPtr;
+using Shr.Interop;
 
+unsafe static u8* cStr(str? csStr){
+	//return (byte*)Marshal.StringToCoTaskMemUTF8(csStr);
+	return Shr.Interop.CStrUtil.csStrToCStr(csStr);
+}
 
 unsafe zero test(){
 
 	int size = Marshal.SizeOf<RimeTraits>();
 	var rimeTraits = (RimeTraits*)AllocZeroed((nuint)size);
-
 	rimeTraits->data_size = size - Marshal.SizeOf<int>();
-
-	var cStr=(str csStr)=>{
-		return (byte*)Marshal.StringToCoTaskMemUTF8(csStr);
-	};
 
 	rimeTraits->shared_data_dir = cStr("D:/Program Files/Rime/User_Data");
 	rimeTraits->user_data_dir = cStr("D:/Program Files/Rime/User_Data");
@@ -27,10 +27,146 @@ unsafe zero test(){
 	return 0;
 }
 
+// unsafe static void on_message(
+// 	void* context_object
+// 	,IntPtr session_id
+// 	,u8* message_type
+// 	,u8* message_value
+// ){
+// 	System.Console.WriteLine(
+// 		session_id.ToString()
+// 		,Shr.Interop.CStrUtil.cStrToCsStr(message_type)
+// 		,Shr.Interop.CStrUtil.cStrToCsStr(message_value)
+// 	);
+// }
+
+const i32 True = 1;
+const i32 False = 0;
+
+
+unsafe bool printCands(UIntPtr session_id){
+	var rime = Rime.Api.RimeApiFn.rime_get_api();
+	RimeCandidateListIterator iterator = new RimeCandidateListIterator();
+	var candidate_list_begin = rime->candidate_list_begin.asFn<candidate_list_begin>();
+	if(candidate_list_begin(session_id, &iterator) != True){
+		System.Console.WriteLine("no candidates.");
+		return true;
+	}
+	var candidate_list_next = rime->candidate_list_next.asFn<candidate_list_next>();
+	for(;candidate_list_next(&iterator)==True;){
+		var cStr_text = iterator.candidate.text;
+		var text = Shr.Interop.CStrUtil.cStrToCsStr(cStr_text);
+		System.Console.Write(iterator.index.ToString(), text);
+		if(iterator.candidate.comment != (byte*)0){
+			var cStr_comment = iterator.candidate.comment;
+			var comment = Shr.Interop.CStrUtil.cStrToCsStr(cStr_comment);
+			System.Console.Write(" ", comment);
+		}
+		System.Console.Write("\n");
+	}
+
+	return true;
+}
+
 //sample_console.cc
 unsafe i32 main(){
+
+	var rime = Rime.Api.RimeApiFn.rime_get_api();
+	// int size = Marshal.SizeOf<RimeTraits>();
+	// var traits = (RimeTraits*)AllocZeroed((nuint)size);
+	// traits->data_size = size - Marshal.SizeOf<int>();
+	var traits = new RimeTraits();
+	traits.data_size = Marshal.SizeOf<RimeTraits>() - Marshal.SizeOf<int>();
+	traits.app_name = cStr("sample.console");
+
+	traits.shared_data_dir = cStr("D:/Program Files/Rime/User_Data");
+	traits.user_data_dir = cStr("D:/Program Files/Rime/User_Data");
+
+	var sample_modules = stackalloc byte*[3];
+	sample_modules[0] = cStr("default");
+	sample_modules[1] = cStr("sample");
+	sample_modules[2] = (u8*)0;
+	traits.modules = sample_modules;
+	//rime->setup(&traits);
+	var setup = Marshal.GetDelegateForFunctionPointer<setup>(rime->setup);
+	setup(&traits);
+
+	RimeNotificationHandler on_message = (
+		void* context_object
+		,UIntPtr session_id
+		,u8* message_type
+		,u8* message_value
+	)=>{
+		System.Console.WriteLine(
+			session_id.ToString()
+			,Shr.Interop.CStrUtil.cStrToCsStr(message_type)
+			,Shr.Interop.CStrUtil.cStrToCsStr(message_value)
+		);
+	};
+
+	//rime->set_notification_handler(on_message, (void*)0);
+	// var set_notification_handler =
+	// 	Marshal.GetDelegateForFunctionPointer<Rime.Api.FnPtr.set_notification_handler>(
+	// 		rime->set_notification_handler
+	// 	);
+	var set_notification_handler
+		= rime->set_notification_handler.asFn<Rime.Api.FnPtr.set_notification_handler>();
+	set_notification_handler(on_message, (void*)0);
+	System.Console.WriteLine("init...");
+
+	var initialize = rime->initialize.asFn<initialize>();
+	initialize(&traits);
+
+	int full_check = 1;
+	var start_maintenance = rime->start_maintenance.asFn<start_maintenance>();
+	var join_maintenance_thread = rime->join_maintenance_thread.asFn<join_maintenance_thread>();
+	if(start_maintenance(full_check)==1){
+		join_maintenance_thread();
+	}
+	System.Console.WriteLine("ready.");
+
+	var create_session = rime->create_session.asFn<create_session>();
+	var session_id = create_session();
+	if(session_id == 0){
+		System.Console.WriteLine("create session failed.");
+		return 1;
+	}
+	int kMaxLength = 99;
+	var simulate_key_sequence = rime->simulate_key_sequence.asFn<simulate_key_sequence>();
+	for(;;){
+		var line = System.Console.ReadLine();
+		if(line == "exit"){break;}
+		simulate_key_sequence(session_id, cStr(line));
+		printCands(session_id);
+
+
+	}
+
+
+
+    // if (execute_special_command(line, session_id))
+    //   continue;
+    // if (rime->simulate_key_sequence(session_id, line)) {
+    //   print(session_id);
+    // } else {
+    //   fprintf(stderr, "Error processing key sequence: %s\n", line);
+    // }
+
+	//
+	for(var i = 0; ;i++){
+		var ele = sample_modules[i];
+		if(ele == (u8*)0){break;}
+		Free(ele);
+	}
+
+	var destroy_session = rime->destroy_session.asFn<destroy_session>();
+	destroy_session(session_id);
+
+	var finalize = rime->finalize.asFn<finalize>();
+	finalize();
 
 	return 0;
 }
 
 main();
+

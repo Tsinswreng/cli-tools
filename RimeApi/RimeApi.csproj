@@ -13,7 +13,7 @@
 
 	<ItemGroup>
 		<Compile Include="../CsShared/GlobalUsing.cs" />
-		<PackageReference Include="../CsShared/CsShared.csproj" />
+		<ProjectReference Include="../CsShared/CsShared.csproj" />
 	</ItemGroup>
 
 </Project>

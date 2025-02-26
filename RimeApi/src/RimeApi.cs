@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using Bool = System.Int32;
+
 namespace Rime.Api;
 
 /// <summary>
@@ -13,7 +14,14 @@ unsafe public struct RimeApi{
 	/// <summary>
 	/// Call this function before accessing any other API functions.
 	/// </summary>
+
 	public IntPtr setup;
+	// public delegate* unmanaged[Cdecl]<
+	// 	RimeTraits* // traits
+	// 	,void
+	// > setup;
+
+
   /*! Set up the notification callbacks
    *  Receive notifications
    *  - on loading schema:
@@ -30,6 +38,11 @@ unsafe public struct RimeApi{
    *  every time an event occurs in librime, until RimeFinalize() is called.
    *  when handler is NULL, notification is disabled.
    */
+	// public delegate* unmanaged[Cdecl]<
+	// 		RimeNotificationHandler // handler
+	// 		, void* // context_object
+	// 		,void
+	// 	> set_notification_handler;
 	public IntPtr set_notification_handler;
 	#endregion  setup
 

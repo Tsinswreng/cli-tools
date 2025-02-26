@@ -1,9 +1,9 @@
 using System.Runtime.InteropServices;
-using RimeSessionId = System.IntPtr;
+using RimeSessionId = System.UIntPtr;
 using Bool = System.Int32;
 namespace Rime.Api;
 
-unsafe public partial class Fn{
+unsafe public partial class RimeApiFn{
 	public const string DllPath = "rime.dll";
 
 
@@ -135,6 +135,11 @@ unsafe public partial class Fn{
 
 	#region Accessing candidate list
 	#endregion Accessing candidate list
+
+
+
+	[DllImport(DllPath,EntryPoint = nameof(rime_get_api),CallingConvention = CallingConvention.Cdecl)]
+	public static extern RimeApi* rime_get_api();
 
 
 	// #region TODO

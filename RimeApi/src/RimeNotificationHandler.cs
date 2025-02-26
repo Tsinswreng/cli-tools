@@ -1,13 +1,14 @@
 using System.Runtime.InteropServices;
-
+using RimeSessionId = System.UIntPtr;
 namespace Rime.Api;
 
-[UnmanagedFunctionPointer(CallingConvention.Cdecl)] // 假设C++使用cdecl调用约定
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
 unsafe public delegate void RimeNotificationHandler(
-	IntPtr context_object      // C++的void* -> C#的IntPtr [[1,3]]
-	,uint session_id            // RimeSessionId假设为uint类型 [[1]]
+	void* context_object
+	,RimeSessionId session_id
 	// [MarshalAs(UnmanagedType.LPStr)] string message_type,    // const char* -> string（自动转换为LPStr）[[3]]
 	// [MarshalAs(UnmanagedType.LPStr)] string message_value    // 同上
 	,byte* message_type // const char*
 	,byte* message_value // const char*
 );
+
