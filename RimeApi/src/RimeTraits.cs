@@ -2,12 +2,21 @@ using System.Runtime.InteropServices;
 
 namespace Rime.Api;
 
+
+
+
+
 /// <summary>
+/// Should be initialized by calling RIME_STRUCT_INIT(Type, var)
 /// 所有byte* 于源c++中皆const char*
 /// </summary>
 [StructLayout(LayoutKind.Sequential)]
 unsafe public struct RimeTraits{
-	public int data_size; //# ?
+	/// <summary>
+/// #define RIME_STRUCT_INIT(Type, var) \
+///((var).data_size = sizeof(Type) - sizeof((var).data_size))
+	/// </summary>
+	public int data_size;
 	// v0.9
 	public byte* shared_data_dir;
 	public byte* user_data_dir;
