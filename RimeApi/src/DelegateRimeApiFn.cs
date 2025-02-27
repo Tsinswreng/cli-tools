@@ -90,9 +90,16 @@ unsafe public class DelegateRimeApiFn{
 		candidate_list_from_index = rime->candidate_list_from_index.asFn<FnPtr.candidate_list_from_index>();
 		get_prebuilt_data_dir = rime->get_prebuilt_data_dir.asFn<FnPtr.get_prebuilt_data_dir>();
 		get_staging_dir = rime->get_staging_dir.asFn<FnPtr.get_staging_dir>();
-		commit_proto = rime->commit_proto.asFn<FnPtr.commit_proto>();
-		context_proto = rime->context_proto.asFn<FnPtr.context_proto>();
-		status_proto = rime->status_proto.asFn<FnPtr.status_proto>();
+
+		if(rime->commit_proto != 0){
+			commit_proto = rime->commit_proto.asFn<FnPtr.commit_proto>();
+		}
+		if(rime->context_proto != 0){
+			context_proto = rime->context_proto.asFn<FnPtr.context_proto>();
+		}
+		if(rime->status_proto != 0){
+			status_proto = rime->status_proto.asFn<FnPtr.status_proto>();
+		}
 		delete_candidate = rime->delete_candidate.asFn<FnPtr.delete_candidate>();
 		delete_candidate_on_current_page = rime->delete_candidate_on_current_page.asFn<FnPtr.delete_candidate_on_current_page>();
 		get_state_label_abbreviated = rime->get_state_label_abbreviated.asFn<FnPtr.get_state_label_abbreviated>();

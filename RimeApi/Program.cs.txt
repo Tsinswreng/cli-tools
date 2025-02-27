@@ -9,6 +9,8 @@ unsafe static u8* cStr(str? csStr){
 	return Shr.Interop.CStrUtil.csStrToCStr(csStr);
 }
 
+
+
 unsafe zero test(){
 
 	int size = Marshal.SizeOf<RimeTraits>();
@@ -71,7 +73,9 @@ unsafe bool printCands(UIntPtr session_id){
 //sample_console.cc
 unsafe i32 main(){
 
-	var rime = Rime.Api.RimeApiFn.rime_get_api();
+	var rime = global::Rime.Api.RimeApiFn.rime_get_api();
+	var Rime = new DelegateRimeApiFn(rime);
+
 	// int size = Marshal.SizeOf<RimeTraits>();
 	// var traits = (RimeTraits*)AllocZeroed((nuint)size);
 	// traits->data_size = size - Marshal.SizeOf<int>();

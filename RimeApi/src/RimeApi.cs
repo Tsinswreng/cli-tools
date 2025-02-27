@@ -216,10 +216,18 @@ unsafe public struct RimeApi{
 	/// </summary>
 	public IntPtr get_staging_dir;
 
-
+	/// <summary>
+	/// 小狼毫0.15.0ʃ用ʹrime.dll中 此潙空指針
+	/// </summary>
 	[Obsolete("Deprecated: for capnproto API, use \"proto\" module from librime-proto")]
+	/// <summary>
+	/// 小狼毫0.15.0ʃ用ʹrime.dll中 此潙空指針
+	/// </summary>
 	public IntPtr commit_proto;
 	[Obsolete("Deprecated: for capnproto API, use \"proto\" module from librime-proto")]
+	/// <summary>
+	/// 小狼毫0.15.0ʃ用ʹrime.dll中 此潙空指針
+	/// </summary>
 	public IntPtr context_proto;
 	[Obsolete("Deprecated: for capnproto API, use \"proto\" module from librime-proto")]
 	public IntPtr status_proto;
