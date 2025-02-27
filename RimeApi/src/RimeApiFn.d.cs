@@ -1,6 +1,4 @@
 using System.Runtime.InteropServices;
-using RimeSessionId = System.UIntPtr;
-using Bool = System.Int32;
 namespace Rime.Api;
 
 unsafe public partial class RimeApiFn{

@@ -22,7 +22,10 @@ unsafe class RimeApiConsole {
 	}
 
 	public zero put(params object?[] obj){
-		System.Console.Write(obj);
+		foreach(var o in obj){
+			System.Console.Write(o);
+			System.Console.Write(" ");
+		}
 		return 0;
 	}
 
@@ -130,9 +133,30 @@ unsafe class RimeApiConsole {
 	public bool execute_special_command(str line, UIntPtr session_id){
 		if(line == "print schema list"){
 			var list = new RimeSchemaList();
-			if(rime.get_schema_list(&list) != RimeUtil.False){
+			// var listPtr = (RimeSchemaList*)NativeMemory.Alloc((nuint)Marshal.SizeOf<RimeSchemaList>());
+			// var list = *(listPtr);
+			// System.Console.WriteLine(rime);+
+			// System.Console.WriteLine(rime.get_schema_list);//+
+			System.Console.WriteLine("list.size before init:");
+			System.Console.WriteLine(list.size);//t
+			var ans_get_schema_list = rime.get_schema_list(&list);
+			System.Console.WriteLine("ans_get_schema_list: "+ans_get_schema_list);//t
+			//TODO rime.get_schema_list(&list)返1、肰list.size潙隨機數、且list.list潙空
+			if(ans_get_schema_list != RimeUtil.False){
+				//System.Console.WriteLine(&list == null); false
+				//System.Console.WriteLine(list); //+
+				put("schema list size:"+list.size+"\n");
 				put("schema list:\n");
+				//System.Console.WriteLine("a");+
+				//System.Console.WriteLine(list.size);//+
+
 				for(var i = 0uL; i < list.size; i++){
+					System.Console.WriteLine(i);//t
+					System.Console.WriteLine(list);
+					System.Console.WriteLine((int)list.list);
+					var cur = list.list[i];
+					System.Console.WriteLine(S(cur.name));
+
 					put(
 						i+1
 						+". "

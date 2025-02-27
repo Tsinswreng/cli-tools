@@ -90,7 +90,6 @@ unsafe public class DelegateRimeApiFn{
 		candidate_list_from_index = rime->candidate_list_from_index.asFn<FnPtr.candidate_list_from_index>();
 		get_prebuilt_data_dir = rime->get_prebuilt_data_dir.asFn<FnPtr.get_prebuilt_data_dir>();
 		get_staging_dir = rime->get_staging_dir.asFn<FnPtr.get_staging_dir>();
-
 		if(rime->commit_proto != 0){
 			commit_proto = rime->commit_proto.asFn<FnPtr.commit_proto>();
 		}

@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices;
-using Bool = int;
+
 namespace Rime.Api;
 /// <summary>
 /// Should be initialized by calling RIME_STRUCT_INIT(Type, var);

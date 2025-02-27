@@ -1,5 +1,5 @@
 using System.Runtime.InteropServices;
-using Bool = System.Int32;
+
 
 namespace Rime.Api;
 

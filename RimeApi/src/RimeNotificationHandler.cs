@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using RimeSessionId = System.UIntPtr;
 namespace Rime.Api;
 
 [UnmanagedFunctionPointer(CallingConvention.Cdecl)]

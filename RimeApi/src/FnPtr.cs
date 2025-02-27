@@ -1,13 +1,9 @@
-using RimeSessionId = System.UIntPtr;/*
+/*
 var setup = Marshal.GetDelegateForFunctionPointer<setup>(rime_api.setup);
 setup(traits);
  */
-using Bool = System.Int32;
-using size_t = System.UInt64;
 //#define RIME_PROTO_BUILDER void
 //using RIME_PROTO_BUILDER=System.Void;
-
-
 
 using System.Runtime.InteropServices;
 namespace Rime.Api.FnPtr;
