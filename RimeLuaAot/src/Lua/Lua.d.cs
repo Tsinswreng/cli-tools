@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 namespace Lua;
 
 using Lua_State = System.IntPtr;
-
+[Obsolete("改用NativeLibrary.Load()")]
 unsafe public class Lua_5_4{
 	//public const string DllPath = "D:/ENV/Rime/weasel-0.15.0/rime.dll";
 //#if WINDOWS

@@ -19,7 +19,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<Compile Include="../shared/GlobalUsing.cs" />
+		<Compile Include="../CsShared/GlobalUsing.cs" />
 	</ItemGroup>
 
 <!-- 2024-12-15T15:06:11.644+08:00_W50-7 -->
