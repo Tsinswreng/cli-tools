@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
+//./bin/Release/net9.0/RimeTools.exe > "D:/Program Files/Rime/User_Data/dks_phrase.dict.yaml"
 
 using ctrler;
 

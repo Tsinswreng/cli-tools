@@ -94,7 +94,7 @@ unsafe class RimeApiConsole {
 		return 0;
 	}
 
-	public zero print(UIntPtr session_id){
+	public zero print(RimeSessionId session_id){
 		var commit = new RimeCommit();
 		commit.data_size = RimeUtil.dataSize<RimeCommit>();
 
@@ -130,33 +130,15 @@ unsafe class RimeApiConsole {
 		return 0;
 	}
 
-	public bool execute_special_command(str line, UIntPtr session_id){
+	public bool execute_special_command(str line, RimeSessionId session_id){
 		if(line == "print schema list"){
 			var list = new RimeSchemaList();
-			// var listPtr = (RimeSchemaList*)NativeMemory.Alloc((nuint)Marshal.SizeOf<RimeSchemaList>());
-			// var list = *(listPtr);
-			// System.Console.WriteLine(rime);+
-			// System.Console.WriteLine(rime.get_schema_list);//+
-			System.Console.WriteLine("list.size before init:");
-			System.Console.WriteLine(list.size);//t
 			var ans_get_schema_list = rime.get_schema_list(&list);
-			System.Console.WriteLine("ans_get_schema_list: "+ans_get_schema_list);//t
-			//TODO rime.get_schema_list(&list)返1、肰list.size潙隨機數、且list.list潙空
 			if(ans_get_schema_list != RimeUtil.False){
-				//System.Console.WriteLine(&list == null); false
-				//System.Console.WriteLine(list); //+
 				put("schema list size:"+list.size+"\n");
 				put("schema list:\n");
-				//System.Console.WriteLine("a");+
-				//System.Console.WriteLine(list.size);//+
-
 				for(var i = 0uL; i < list.size; i++){
-					System.Console.WriteLine(i);//t
-					System.Console.WriteLine(list);
-					System.Console.WriteLine((int)list.list);
 					var cur = list.list[i];
-					System.Console.WriteLine(S(cur.name));
-
 					put(
 						i+1
 						+". "
@@ -168,11 +150,29 @@ unsafe class RimeApiConsole {
 			}
 			var len_current = 100;
 			var current = stackalloc byte[len_current];
-			if(rime.get_current_schema(session_id, current, (u64)len_current) != RimeUtil.False){
+			if(rime.get_current_schema(session_id, current, (size_t)len_current) != RimeUtil.False){
 				put("current schema: "+S(current)+"\n");
 			}
 			return true;
 		}//~if(line == "print schema list")
+		if(line == "print candidate list"){
+			var iterator = new RimeCandidateListIterator();
+			if(rime.candidate_list_begin(session_id, &iterator) != RimeUtil.True){
+				return true;
+			}
+			for(;rime.candidate_list_next(&iterator) != RimeUtil.False;){
+				put(
+					iterator.index+1+". "
+					+S(iterator.candidate.text)
+				);
+				if(iterator.candidate.comment != null){
+					put($"({S(iterator.candidate.comment)})");
+				}
+				put("\n");
+			}
+			rime.candidate_list_end(&iterator);
+			return true;
+		}
 		//TODO
 		return false;
 	}

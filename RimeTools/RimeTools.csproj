@@ -8,7 +8,7 @@
 
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="../shared/GlobalUsing.cs" />
+    <Compile Include="../CsShared/GlobalUsing.cs" />
 	<ProjectReference Include="../shared/shared.csproj" />
   </ItemGroup>
   <ItemGroup>
